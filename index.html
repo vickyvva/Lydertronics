@@ -7,11 +7,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ─── NAV ─────────────────────────────────────────────────── -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#hero" class="logo">Lyder<span>tronics</span></a>
@@ -29,7 +29,6 @@
     </div>
   </div>
 </nav>
-
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="closeMobile()">About</a>
   <a href="#services" onclick="closeMobile()">Services</a>
@@ -39,7 +38,7 @@
   <a href="#contact" onclick="closeMobile()">Contact</a>
 </div>
 
-<!-- HERO -->
+<!-- ─── HERO ─────────────────────────────────────────────────── -->
 <section id="hero">
   <div class="hero-bg">
     <div class="orb orb-1"></div>
@@ -49,7 +48,10 @@
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge">AI Data Services Platform</div>
-      <h1>Powering <span class="grad">Smarter AI</span><br>with Precision Data</h1>
+      <h1>
+        Powering <span class="grad">Smarter AI</span><br>
+        with Precision Data
+      </h1>
       <p class="hero-sub">
         Expert annotation, labeling, and dataset preparation for machine learning
         and robotics companies worldwide. From image bounding boxes to robotic
@@ -81,7 +83,7 @@
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ─── ABOUT ─────────────────────────────────────────────────── -->
 <section id="about">
   <div class="container">
     <div class="about-grid">
@@ -131,10 +133,52 @@
         </div>
       </div>
     </div>
+
+    <!-- ─── FOUNDERS ─────────────────────────────────────────── -->
+    <div class="founders-row">
+      <div class="section-label" style="justify-content:center; margin-bottom:40px;">Our Leadership</div>
+      <div class="founders-grid">
+
+        <div class="founder-card fade-up">
+          <div class="founder-avatar">
+            <div class="avatar-placeholder">KV</div>
+            <div class="founder-badge">Founder</div>
+          </div>
+          <div class="founder-info">
+            <h3>Kotagiri Vikram</h3>
+            <p class="founder-role">Founder &amp; CEO</p>
+            <p class="founder-bio">Visionary behind Lydertronics, driving AI data innovation and building precision annotation pipelines for ML and robotics teams worldwide.</p>
+            <div class="founder-tags">
+              <span>AI Strategy</span>
+              <span>ML Systems</span>
+              <span>Robotics</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="founder-card fade-up">
+          <div class="founder-avatar">
+            <div class="avatar-placeholder">VH</div>
+            <div class="founder-badge co">Co-Founder</div>
+          </div>
+          <div class="founder-info">
+            <h3>Variganti Harikrishna</h3>
+            <p class="founder-role">Co-Founder &amp; COO</p>
+            <p class="founder-bio">Operations and quality architect at Lydertronics, ensuring every dataset meets enterprise-grade accuracy standards for global AI clients.</p>
+            <div class="founder-tags">
+              <span>Data Quality</span>
+              <span>Operations</span>
+              <span>NLP &amp; ASR</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ─── SERVICES ───────────────────────────────────────────────── -->
 <section id="services">
   <div class="container">
     <div class="services-header fade-up">
@@ -182,7 +226,7 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- ─── PROJECTS ───────────────────────────────────────────────── -->
 <section id="projects">
   <div class="container">
     <div class="projects-header fade-up">
@@ -248,7 +292,7 @@
   </div>
 </section>
 
-<!-- WHY US -->
+<!-- ─── WHY US ─────────────────────────────────────────────────── -->
 <section id="why">
   <div class="container">
     <div class="why-header fade-up">
@@ -265,33 +309,33 @@
       <div class="why-card fade-up">
         <div class="why-num">02</div>
         <h3>Multi-Language Capability</h3>
-        <p>Native-level accuracy in English, Telugu, and other Indian languages for audio and text datasets.</p>
+        <p>Native-level accuracy in English, Telugu, and other Indian languages for audio and text datasets — rare and valuable for regional AI models.</p>
       </div>
       <div class="why-card fade-up">
         <div class="why-num">03</div>
         <h3>Rigorous Quality Control</h3>
-        <p>Multi-stage QA workflows with consensus scoring and senior review ensure annotation accuracy consistently above 99%.</p>
+        <p>Multi-stage QA workflows with consensus scoring and senior review ensure annotation accuracy consistently above 99% on every project.</p>
       </div>
       <div class="why-card fade-up">
         <div class="why-num">04</div>
         <h3>Robotics-Ready Analysis</h3>
-        <p>Specialized capability in evaluating robot motion data — grasp success rates, manipulation errors, and behavioral tagging.</p>
+        <p>Specialized capability in evaluating robot motion data — grasp success rates, manipulation errors, and behavioral tagging for simulation datasets.</p>
       </div>
       <div class="why-card fade-up">
         <div class="why-num">05</div>
         <h3>Scalable &amp; Fast Delivery</h3>
-        <p>Flexible team scaling from hundreds to millions of annotations, with turnaround times matching your ML sprint cycles.</p>
+        <p>Flexible team scaling to handle projects from hundreds to millions of annotations, with turnaround times designed to match your ML sprint cycles.</p>
       </div>
       <div class="why-card fade-up">
         <div class="why-num">06</div>
         <h3>Custom Format Support</h3>
-        <p>Deliverables in COCO, YOLO, Pascal VOC, CSV, JSON, or any custom schema your training pipeline requires.</p>
+        <p>Deliverables in COCO, YOLO, Pascal VOC, CSV, JSON, or any custom schema your training pipeline requires — no conversion overhead.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INDUSTRIES -->
+<!-- ─── INDUSTRIES ─────────────────────────────────────────────── -->
 <section id="industries">
   <div class="container">
     <div class="industries-header fade-up">
@@ -318,30 +362,33 @@
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ─── CONTACT ─────────────────────────────────────────────────── -->
 <section id="contact">
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info fade-up">
         <div class="section-label">Get in Touch</div>
         <h2>Ready to Build<br><span style="color:var(--cyan)">Better AI Data?</span></h2>
-        <p>Tell us about your project and we'll get back to you with a tailored data solution.</p>
+        <p>Tell us about your project and we'll get back to you with a tailored data solution — no generic quotes, just real answers.</p>
         <div class="contact-detail">
           <div class="contact-detail-icon">🌐</div>
           <div class="contact-detail-text">
-            <strong>Website</strong><span>trainbot.in</span>
+            <strong>Website</strong>
+            <span>trainbot.in</span>
           </div>
         </div>
         <div class="contact-detail">
           <div class="contact-detail-icon">📧</div>
           <div class="contact-detail-text">
-            <strong>Email</strong><span>contact@trainbot.in</span>
+            <strong>Email</strong>
+            <span>contact@trainbot.in</span>
           </div>
         </div>
         <div class="contact-detail">
           <div class="contact-detail-icon">📍</div>
           <div class="contact-detail-text">
-            <strong>Serving</strong><span>USA · Europe · India</span>
+            <strong>Serving</strong>
+            <span>USA · Europe · India</span>
           </div>
         </div>
       </div>
@@ -380,7 +427,7 @@
         </div>
         <div class="form-group">
           <label>Project Details</label>
-          <textarea placeholder="Describe your dataset requirements, volume, timeline..."></textarea>
+          <textarea placeholder="Describe your dataset requirements, volume, timeline, and any specific needs..."></textarea>
         </div>
         <button class="form-submit" onclick="handleSubmit(event)">Send Project Brief →</button>
         <p class="form-msg" id="formMsg">✅ Message sent! We'll respond within 24 hours.</p>
@@ -389,13 +436,13 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ─── FOOTER ─────────────────────────────────────────────────── -->
 <footer>
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="#hero" class="logo">Lyder<span>tronics</span></a>
-        <p>Expert AI data annotation and dataset preparation for machine learning and robotics systems worldwide.</p>
+        <p>Expert AI data annotation and dataset preparation services for machine learning and robotics systems worldwide.</p>
         <div class="footer-domain">🌐 trainbot.in</div>
       </div>
       <div class="footer-col">
@@ -437,5 +484,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-
