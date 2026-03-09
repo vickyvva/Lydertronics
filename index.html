@@ -1,420 +1,545 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lydertronics – AI Data Services | trainbot.in</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<!-- ===== EDIT: Page title & meta ===== -->
+<title>Lydertronics — Precision AI Data</title>
+<meta name="description" content="Lydertronics — AI data annotation, robotics analysis, and dataset preparation. trainbot.in"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- ─── NAV ─────────────────────────────────────────────────── -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="#hero" class="logo">Lyder<span>tronics</span></a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#why">Why Us</a></li>
-      <li><a href="#industries">Industries</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="#contact" class="nav-cta">Get a Quote</a>
-    <div class="hamburger" id="hamburger">
-      <span></span><span></span><span></span>
-    </div>
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Neural Canvas Background -->
+<canvas id="neural-canvas"></canvas>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav>
+  <div class="nav-bg"></div>
+  <!-- ===== EDIT: Logo ===== -->
+  <a href="#hero" class="logo">
+    <div class="logo-mark"></div>
+    Lyder<span>tronics</span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#industries">Industries</a></li>
+  </ul>
+  <a href="#contact" class="nav-contact-btn">Get Started</a>
+
+  <div class="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
   </div>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#about" onclick="closeMobile()">About</a>
-  <a href="#services" onclick="closeMobile()">Services</a>
-  <a href="#projects" onclick="closeMobile()">Projects</a>
-  <a href="#why" onclick="closeMobile()">Why Us</a>
-  <a href="#industries" onclick="closeMobile()">Industries</a>
-  <a href="#contact" onclick="closeMobile()">Contact</a>
-</div>
 
-<!-- ─── HERO ─────────────────────────────────────────────────── -->
+<!-- ============================================================
+     HERO SECTION
+     ===== EDIT: Headline, description, stats =====
+============================================================ -->
 <section id="hero">
-  <div class="hero-bg">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge">AI Data Services Platform</div>
-      <h1>
-        Powering <span class="grad">Smarter AI</span><br>
-        with Precision Data
+  <div class="hero-ring"></div>
+  <div class="hero-accent-bar"></div>
+
+  <div class="hero-inner">
+    <div>
+      <!-- ===== EDIT: Tag line ===== -->
+      <div class="hero-tag">trainbot.in &mdash; AI Data Services</div>
+
+      <!-- ===== EDIT: Main headline ===== -->
+      <h1 class="hero-title">
+        <span>TRAIN</span>
+        <span class="line-accent glitch" data-text="SMARTER">SMARTER</span>
+        <span class="line-lime">MACHINES.</span>
       </h1>
-      <p class="hero-sub">
-        Expert annotation, labeling, and dataset preparation for machine learning
-        and robotics companies worldwide. From image bounding boxes to robotic
-        movement analysis — we deliver data that trains intelligent systems.
+
+      <!-- ===== EDIT: Hero description ===== -->
+      <p class="hero-desc">
+        Lydertronics builds the data backbone that powers next-generation AI and robotics systems &mdash; from precise image annotation to multilingual audio transcription and robotic movement analysis.
       </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Start Your Project</a>
-        <a href="#projects" class="btn-outline">View Our Work</a>
+
+      <div class="hero-ctas">
+        <a href="#services" class="cta-primary">
+          View Services
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#projects" class="cta-secondary">See Our Work</a>
       </div>
+
+      <!-- ===== EDIT: Hero stats ===== -->
       <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">10K+</div>
-          <div class="stat-label">Datasets Labeled</div>
+        <div class="hstat">
+          <div class="hstat-num">7<span>+</span></div>
+          <div class="hstat-label">Services</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">99.2%</div>
-          <div class="stat-label">Annotation Accuracy</div>
+        <div class="hstat">
+          <div class="hstat-num">4<span>+</span></div>
+          <div class="hstat-label">Projects</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">4</div>
-          <div class="stat-label">Core Verticals</div>
+        <div class="hstat">
+          <div class="hstat-num">3</div>
+          <div class="hstat-label">Regions</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Global Regions</div>
+        <div class="hstat">
+          <div class="hstat-num">100<span>%</span></div>
+          <div class="hstat-label">Accuracy</div>
         </div>
+      </div>
+    </div>
+
+    <!-- Animated terminal card -->
+    <div class="hero-terminal rev-r">
+      <div class="terminal-bar">
+        <div class="t-dot"></div>
+        <div class="t-dot"></div>
+        <div class="t-dot"></div>
+        <!-- ===== EDIT: Terminal filename ===== -->
+        <div class="terminal-title">lydertronics_pipeline.sh</div>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">init dataset --type image_annotation</span></div>
+        <div class="t-line"><span class="t-out">&#10003; Dataset pipeline initialized</span></div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">run bounding_box --classes 48</span></div>
+        <div class="t-line"><span class="t-out">&#10003; 12,400 bounding boxes annotated</span></div>
+        <div class="t-line"><span class="t-out dim">&nbsp;&nbsp;accuracy: 98.7%&nbsp;&nbsp;format: YOLO</span></div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">transcribe audio --lang en,te</span></div>
+        <div class="t-line"><span class="t-out">&#10003; Speech-to-text complete</span></div>
+        <div class="t-line"><span class="t-out dim">&nbsp;&nbsp;segments: 8,220&nbsp;&nbsp;WER: 2.1%</span></div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">analyze robot --eval grasping</span></div>
+        <div class="t-line"><span class="t-out">&#10003; Movement analysis complete</span></div>
+        <div class="t-line"><span class="t-out dim">&nbsp;&nbsp;performance: 94.2%&nbsp;&nbsp;ready to export</span></div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cursor-blink"></span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── ABOUT ─────────────────────────────────────────────────── -->
+<!-- ============================================================
+     ABOUT SECTION
+     ===== EDIT: Company text, founder names/roles =====
+============================================================ -->
 <section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="fade-up">
-        <div class="data-diagram">
-          <div class="diagram-title">AI Data Pipeline</div>
-          <div class="pipeline">
-            <div class="pipe-step">
-              <div class="pipe-icon">📥</div>
-              <div class="pipe-text">Raw Data Ingestion</div>
-            </div>
-            <div class="pipe-arrow">↓</div>
-            <div class="pipe-step">
-              <div class="pipe-icon">🏷️</div>
-              <div class="pipe-text">Expert Annotation &amp; Labeling</div>
-            </div>
-            <div class="pipe-arrow">↓</div>
-            <div class="pipe-step">
-              <div class="pipe-icon">✅</div>
-              <div class="pipe-text">Quality Review &amp; Validation</div>
-            </div>
-            <div class="pipe-arrow">↓</div>
-            <div class="pipe-step">
-              <div class="pipe-icon">🚀</div>
-              <div class="pipe-text">ML-Ready Dataset Delivery</div>
-            </div>
+  <div class="s-inner">
+    <div class="about-layout">
+
+      <div class="about-visual rev-l">
+        <!-- ===== EDIT: Hex grid skill tiles ===== -->
+        <div class="about-hex-grid">
+          <div class="hex-card"><span class="hex-icon">&#128444;&#65039;</span><span class="hex-label">Image<br/>Annotation</span></div>
+          <div class="hex-card"><span class="hex-icon">&#128230;</span><span class="hex-label">Bounding<br/>Box</span></div>
+          <div class="hex-card"><span class="hex-icon">&#127991;&#65039;</span><span class="hex-label">Image<br/>Labeling</span></div>
+          <div class="hex-card"><span class="hex-icon">&#127916;</span><span class="hex-label">Video<br/>Annotation</span></div>
+          <div class="hex-card"><span class="hex-icon">&#129302;</span><span class="hex-label">Robot<br/>Analysis</span></div>
+          <div class="hex-card"><span class="hex-icon">&#127897;&#65039;</span><span class="hex-label">Audio<br/>Transcription</span></div>
+          <div class="hex-card"><span class="hex-icon">&#128451;&#65039;</span><span class="hex-label">Dataset<br/>Prep</span></div>
+          <div class="hex-card" style="background:rgba(0,210,255,.06);border-color:rgba(0,210,255,.3);">
+            <span class="hex-icon">&#9889;</span>
+            <span class="hex-label" style="color:var(--cyan);">AI<br/>Ready</span>
           </div>
-          <div class="domain-tags">
-            <span class="domain-tag">Computer Vision</span>
-            <span class="domain-tag">NLP / ASR</span>
-            <span class="domain-tag">Robotics</span>
-            <span class="domain-tag">Edge AI</span>
-          </div>
+          <div class="hex-card"><span class="hex-icon">&#127758;</span><span class="hex-label">Global<br/>Reach</span></div>
         </div>
       </div>
-      <div class="fade-up">
-        <div class="section-label">About Lydertronics</div>
-        <h2 class="section-title">Precision Data for <span>Intelligent Systems</span></h2>
-        <div class="about-panel">
-          <p>Lydertronics is a specialized AI data services company operating at <strong>trainbot.in</strong>, dedicated to building the training foundations that modern ML and robotics systems depend on.</p>
-          <p>We combine deep domain expertise in computer vision, speech processing, and robotic motion analysis with rigorous quality control to deliver datasets that make AI systems smarter, faster, and more reliable.</p>
-          <p>From early-stage AI startups to advanced robotics research labs across the USA, Europe, and India — we are the data backbone that powers breakthroughs.</p>
-          <div class="about-highlight">
-            <strong>🌐 Domain: trainbot.in</strong>
-            <p>Serving AI companies, robotics startups, research institutions, and technology firms globally with enterprise-grade annotation services.</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- ─── FOUNDERS ─────────────────────────────────────────── -->
-    <div class="founders-row">
-      <div class="section-label" style="justify-content:center; margin-bottom:40px;">Our Leadership</div>
-      <div class="founders-grid">
+      <div class="about-copy rev-r">
+        <div class="s-label" data-n="01">About the Company</div>
+        <h2 class="s-title" style="margin-bottom:28px;">
+          THE DATA ENGINE<br/>BEHIND AI<br/>INNOVATION.
+        </h2>
+        <!-- ===== EDIT: About text ===== -->
+        <p>
+          Lydertronics is a specialized AI data services company at <strong style="color:var(--cyan);">trainbot.in</strong>. We partner with AI companies, robotics firms, startups, and research laboratories to deliver the annotated, structured, and validated data that modern ML systems demand.
+        </p>
+        <p>
+          Our expert team operates at the intersection of precision labeling and domain expertise &mdash; ensuring every dataset we deliver is ready to power your models from day one. We serve clients across the USA, Europe, and India.
+        </p>
 
-        <div class="founder-card fade-up">
-          <div class="founder-avatar">
-            <div class="avatar-placeholder">KV</div>
-            <div class="founder-badge">Founder</div>
+        <!-- ===== EDIT: Founder / Co-Founder names ===== -->
+        <div class="founders-row">
+          <div class="founder-chip">
+            <div class="fc-av">KV</div>
+            <div class="fc-info">
+              <div class="fc-name">Kotagiri Vikram</div>
+              <div class="fc-role">Founder &amp; CEO</div>
+            </div>
           </div>
-          <div class="founder-info">
-            <h3>Kotagiri Vikram</h3>
-            <p class="founder-role">Founder &amp; CEO</p>
-            <p class="founder-bio">Visionary behind Lydertronics, driving AI data innovation and building precision annotation pipelines for ML and robotics teams worldwide.</p>
-            <div class="founder-tags">
-              <span>AI Strategy</span>
-              <span>ML Systems</span>
-              <span>Robotics</span>
+          <div class="founder-chip">
+            <div class="fc-av" style="background:linear-gradient(135deg,var(--lime),#408000);">VH</div>
+            <div class="fc-info">
+              <div class="fc-name">Variganti Harikrishna</div>
+              <div class="fc-role">Co-Founder &amp; CTO</div>
             </div>
           </div>
         </div>
-
-        <div class="founder-card fade-up">
-          <div class="founder-avatar">
-            <div class="avatar-placeholder">VH</div>
-            <div class="founder-badge co">Co-Founder</div>
-          </div>
-          <div class="founder-info">
-            <h3>Variganti Harikrishna</h3>
-            <p class="founder-role">Co-Founder &amp; COO</p>
-            <p class="founder-bio">Operations and quality architect at Lydertronics, ensuring every dataset meets enterprise-grade accuracy standards for global AI clients.</p>
-            <div class="founder-tags">
-              <span>Data Quality</span>
-              <span>Operations</span>
-              <span>NLP &amp; ASR</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── SERVICES ───────────────────────────────────────────────── -->
+<!-- ============================================================
+     SERVICES SECTION
+     ===== EDIT: Add/update service bento cards =====
+============================================================ -->
 <section id="services">
-  <div class="container">
-    <div class="services-header fade-up">
-      <div class="section-label">What We Do</div>
-      <h2 class="section-title">End-to-End AI <span>Data Services</span></h2>
-      <p class="section-sub">Comprehensive annotation and dataset preparation across images, video, audio, and robotic systems.</p>
+  <div class="s-inner">
+    <div class="services-header">
+      <div class="rev">
+        <div class="s-label" data-n="02">Services</div>
+        <h2 class="s-title">PRECISION<br/>DATA SERVICES.</h2>
+      </div>
+      <p class="rev d2">Every service is engineered to deliver clean, model-ready data that accelerates your AI and robotics development at any scale.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card fade-up">
-        <div class="service-icon">🖼️</div>
-        <h3>Image Annotation</h3>
-        <p>Precise pixel-level annotation for classification, segmentation, and detection tasks. Optimized for large-scale AI training pipelines.</p>
+
+    <div class="bento">
+      <!-- ===== EDIT: Service 1 (large card) ===== -->
+      <div class="bento-card b1 rev d1">
+        <div class="bcard-num">01</div>
+        <span class="bcard-icon">&#128444;&#65039;</span>
+        <div class="bcard-title">IMAGE ANNOTATION</div>
+        <p class="bcard-desc">Pixel-level and semantic annotation for computer vision. We support segmentation, object detection, and classification tasks with multi-stage quality validation built into every workflow.</p>
+        <div class="bcard-tag">Computer Vision</div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">📦</div>
-        <h3>Bounding Box Annotation</h3>
-        <p>Accurate 2D and 3D bounding box labeling for object detection models in autonomous vehicles, drones, and industrial vision systems.</p>
+      <!-- ===== EDIT: Service 2 ===== -->
+      <div class="bento-card b2 rev d2">
+        <div class="bcard-num">02</div>
+        <span class="bcard-icon">&#128230;</span>
+        <div class="bcard-title">BOUNDING BOX</div>
+        <p class="bcard-desc">Precise rectangular labeling for object detection. YOLO, Faster R-CNN, and SSD-ready outputs.</p>
+        <div class="bcard-tag">Object Detection</div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">🏷️</div>
-        <h3>Image Labeling</h3>
-        <p>Multi-class tagging and classification labeling for image datasets. Scalable workflows with rigorous inter-annotator agreement checks.</p>
+      <!-- ===== EDIT: Service 3 ===== -->
+      <div class="bento-card b3 rev d3">
+        <div class="bcard-num">03</div>
+        <span class="bcard-icon">&#127991;&#65039;</span>
+        <div class="bcard-title">IMAGE LABELING</div>
+        <p class="bcard-desc">Multi-label classification and tagging for high-volume visual recognition datasets.</p>
+        <div class="bcard-tag">Classification</div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">🎬</div>
-        <h3>Video Annotation</h3>
-        <p>Frame-by-frame video annotation including object tracking, action recognition, and temporal segmentation for dynamic scene understanding.</p>
+      <!-- ===== EDIT: Service 4 ===== -->
+      <div class="bento-card b4 rev d2">
+        <div class="bcard-num">04</div>
+        <span class="bcard-icon">&#127916;</span>
+        <div class="bcard-title">VIDEO ANNOTATION</div>
+        <p class="bcard-desc">Frame-by-frame temporal annotation for action recognition and tracking tasks.</p>
+        <div class="bcard-tag">Temporal Data</div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">🤖</div>
-        <h3>Robotic Movement Analysis</h3>
-        <p>Behavioral evaluation of robotic systems — grasping accuracy, path tracking, manipulation performance, and edge-case failure tagging.</p>
+      <!-- ===== EDIT: Service 5 ===== -->
+      <div class="bento-card b5 rev d3">
+        <div class="bcard-num">05</div>
+        <span class="bcard-icon">&#127897;&#65039;</span>
+        <div class="bcard-title">AUDIO TRANSCRIPTION</div>
+        <p class="bcard-desc">English and Telugu speech-to-text labeling with sub-3% WER for ASR and NLP model training.</p>
+        <div class="bcard-tag">Multilingual</div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">🎤</div>
-        <h3>Audio Transcription</h3>
-        <p>High-accuracy speech-to-text transcription across multiple languages including English and Telugu for ASR and NLP model training.</p>
+      <!-- ===== EDIT: Service 6 (large card) ===== -->
+      <div class="bento-card b6 rev d1">
+        <div class="bcard-num">06</div>
+        <span class="bcard-icon">&#129302;</span>
+        <div class="bcard-title">ROBOTIC MOVEMENT ANALYSIS</div>
+        <p class="bcard-desc">Expert evaluation of grasping ability, movement accuracy, and object handling from video datasets. We deliver structured performance metrics that directly feed robot training pipelines.</p>
+        <div class="bcard-tag">Robotics</div>
       </div>
-      <div class="service-card fade-up">
-        <div class="service-icon">🗄️</div>
-        <h3>AI Dataset Preparation</h3>
-        <p>End-to-end dataset curation: collection, cleaning, formatting, splitting, and validation in ML-ready formats like COCO, YOLO, and custom schemas.</p>
+      <!-- ===== EDIT: Service 7 ===== -->
+      <div class="bento-card b7 rev d2">
+        <div class="bcard-num">07</div>
+        <span class="bcard-icon">&#128451;&#65039;</span>
+        <div class="bcard-title">AI DATASET PREPARATION</div>
+        <p class="bcard-desc">End-to-end dataset curation, cleaning, formatting, and validation &mdash; producing structured, immediately training-ready data packages for any ML framework.</p>
+        <div class="bcard-tag">Full Pipeline</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── PROJECTS ───────────────────────────────────────────────── -->
+<!-- ============================================================
+     PROJECTS SECTION
+     ===== EDIT: Add/update project cards =====
+============================================================ -->
 <section id="projects">
-  <div class="container">
-    <div class="projects-header fade-up">
-      <div class="section-label">Portfolio</div>
-      <h2 class="section-title">Real <span>Projects Completed</span></h2>
-      <p class="section-sub">A selection of completed AI data projects delivered across multiple verticals.</p>
+  <div class="s-inner">
+    <div class="projects-header">
+      <div class="rev">
+        <div class="s-label" data-n="03">Portfolio</div>
+        <h2 class="s-title">REAL PROJECTS.<br/>REAL RESULTS.</h2>
+      </div>
+      <p class="rev d2">A selection of completed AI data projects delivered for clients building the future of machine learning and autonomous systems.</p>
     </div>
-    <div class="projects-grid">
-      <div class="project-card fade-up">
-        <div class="project-thumb"><span class="thumb-icon">🎙️</span></div>
-        <div class="project-body">
-          <div class="project-tag">Audio / ASR</div>
-          <h3>Audio Transcription Dataset</h3>
-          <p>English and Telugu speech transcription for AI dataset creation. Accurate speech-to-text labeling for ASR model fine-tuning with multilingual support.</p>
-          <div class="project-meta">
-            <span class="meta-chip">English</span>
-            <span class="meta-chip">Telugu</span>
-            <span class="meta-chip">ASR Training</span>
-            <span class="meta-chip">Multi-speaker</span>
-          </div>
+
+    <div class="proj-grid">
+      <!-- ===== EDIT: Project 1 ===== -->
+      <div class="proj-card rev d1">
+        <div class="proj-thumb">
+          <span class="proj-tag">Audio &middot; NLP</span>
+          <div class="proj-thumb-inner">&#127897;&#65039;</div>
+        </div>
+        <div class="proj-body">
+          <h3>AUDIO TRANSCRIPTION DATASET</h3>
+          <p>High-accuracy multilingual speech labeling pipeline for ASR model training datasets.</p>
+          <ul class="proj-bullets">
+            <li>English and Telugu speech transcription</li>
+            <li>Accurate speech-to-text labeling for AI training</li>
+            <li>8,000+ audio segments processed</li>
+          </ul>
         </div>
       </div>
-      <div class="project-card fade-up">
-        <div class="project-thumb"><span class="thumb-icon">🔲</span></div>
-        <div class="project-body">
-          <div class="project-tag">Computer Vision</div>
-          <h3>Image Bounding Box Dataset</h3>
-          <p>Large-scale object detection dataset using precise bounding box annotation across multiple object classes for real-time vision model training.</p>
-          <div class="project-meta">
-            <span class="meta-chip">YOLO Format</span>
-            <span class="meta-chip">COCO Format</span>
-            <span class="meta-chip">Object Detection</span>
-          </div>
+      <!-- ===== EDIT: Project 2 ===== -->
+      <div class="proj-card rev d2">
+        <div class="proj-thumb">
+          <span class="proj-tag">Vision &middot; Detection</span>
+          <div class="proj-thumb-inner">&#128230;</div>
+        </div>
+        <div class="proj-body">
+          <h3>IMAGE BOUNDING BOX DATASET</h3>
+          <p>Object detection dataset creation with precise multi-class bounding box annotation.</p>
+          <ul class="proj-bullets">
+            <li>12,400+ bounding boxes annotated</li>
+            <li>YOLO-compatible export format</li>
+            <li>98.7% labeling accuracy achieved</li>
+          </ul>
         </div>
       </div>
-      <div class="project-card fade-up">
-        <div class="project-thumb"><span class="thumb-icon">🦾</span></div>
-        <div class="project-body">
-          <div class="project-tag">Robotics</div>
-          <h3>Robot Performance Evaluation</h3>
-          <p>Comprehensive analysis of robotic movements and behavior in video datasets. Evaluated grasping precision, movement accuracy, and object handling outcomes.</p>
-          <div class="project-meta">
-            <span class="meta-chip">Motion Analysis</span>
-            <span class="meta-chip">Grasp Evaluation</span>
-            <span class="meta-chip">Video Dataset</span>
-          </div>
+      <!-- ===== EDIT: Project 3 ===== -->
+      <div class="proj-card rev d3">
+        <div class="proj-thumb">
+          <span class="proj-tag">Robotics &middot; Eval</span>
+          <div class="proj-thumb-inner">&#129302;</div>
+        </div>
+        <div class="proj-body">
+          <h3>ROBOT PERFORMANCE EVALUATION</h3>
+          <p>Behavioral analysis of robot systems from video datasets with structured performance scoring.</p>
+          <ul class="proj-bullets">
+            <li>Grasping ability assessment</li>
+            <li>Movement accuracy and precision scoring</li>
+            <li>Object handling performance metrics</li>
+          </ul>
         </div>
       </div>
-      <div class="project-card fade-up">
-        <div class="project-thumb"><span class="thumb-icon">🖼️</span></div>
-        <div class="project-body">
-          <div class="project-tag">Image Classification</div>
-          <h3>Image Labeling &amp; Classification</h3>
-          <p>Image classification and multi-label tagging for AI training datasets. Structured labeling workflows with quality reviews across thousands of images per batch.</p>
-          <div class="project-meta">
-            <span class="meta-chip">Multi-class</span>
-            <span class="meta-chip">Classification</span>
-            <span class="meta-chip">High Volume</span>
-          </div>
+      <!-- ===== EDIT: Project 4 ===== -->
+      <div class="proj-card rev d4">
+        <div class="proj-thumb">
+          <span class="proj-tag">ML &middot; Classification</span>
+          <div class="proj-thumb-inner">&#127991;&#65039;</div>
+        </div>
+        <div class="proj-body">
+          <h3>IMAGE CLASSIFICATION &amp; LABELING</h3>
+          <p>Systematic image classification and multi-label tagging at scale for AI training pipelines.</p>
+          <ul class="proj-bullets">
+            <li>Multi-label image classification taxonomy</li>
+            <li>Structured tagging for visual recognition</li>
+            <li>High-volume dataset throughput</li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── WHY US ─────────────────────────────────────────────────── -->
+<!-- ============================================================
+     WHY CHOOSE US
+     ===== EDIT: Value propositions =====
+============================================================ -->
 <section id="why">
-  <div class="container">
-    <div class="why-header fade-up">
-      <div class="section-label">Why Lydertronics</div>
-      <h2 class="section-title">Built for <span>AI-First Teams</span></h2>
-      <p class="section-sub">We don't just label data — we build the datasets that define AI performance.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card fade-up">
-        <div class="why-num">01</div>
-        <h3>Domain-Specific Expertise</h3>
-        <p>Our annotators are trained in computer vision, NLP, and robotics — not just general-purpose labeling. We understand your model's needs.</p>
+  <div class="s-inner">
+    <div class="why-layout">
+      <div>
+        <div class="s-label rev" data-n="04">Why Choose Us</div>
+        <h2 class="s-title rev" style="margin-bottom:48px;">THE LYDERTRONICS<br/>DIFFERENCE.</h2>
+        <div class="why-list">
+          <!-- ===== EDIT: Why items ===== -->
+          <div class="why-item rev d1">
+            <div class="wi-num">01</div>
+            <div class="wi-content">
+              <h3>PRECISION AT SCALE</h3>
+              <p>Multi-stage quality review on every annotation ensures training-ready accuracy, whether your dataset has 100 or 100,000 samples.</p>
+            </div>
+          </div>
+          <div class="why-item rev d2">
+            <div class="wi-num">02</div>
+            <div class="wi-content">
+              <h3>DOMAIN EXPERTISE</h3>
+              <p>Specialized knowledge in robotics and ML sets us apart. We understand your models, not just your labels.</p>
+            </div>
+          </div>
+          <div class="why-item rev d3">
+            <div class="wi-num">03</div>
+            <div class="wi-content">
+              <h3>FAST TURNAROUND</h3>
+              <p>Scalable workflows and dedicated teams deliver on deadlines. Speed without compromising quality.</p>
+            </div>
+          </div>
+          <div class="why-item rev d4">
+            <div class="wi-num">04</div>
+            <div class="wi-content">
+              <h3>SECURE &amp; CONFIDENTIAL</h3>
+              <p>NDA-protected, secure data handling protocols. Your intellectual property stays yours, always.</p>
+            </div>
+          </div>
+          <div class="why-item rev d5">
+            <div class="wi-num">05</div>
+            <div class="wi-content">
+              <h3>GLOBAL MULTILINGUAL</h3>
+              <p>English, Telugu, and growing &mdash; we annotate and transcribe across languages for global AI systems.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="why-card fade-up">
-        <div class="why-num">02</div>
-        <h3>Multi-Language Capability</h3>
-        <p>Native-level accuracy in English, Telugu, and other Indian languages for audio and text datasets — rare and valuable for regional AI models.</p>
-      </div>
-      <div class="why-card fade-up">
-        <div class="why-num">03</div>
-        <h3>Rigorous Quality Control</h3>
-        <p>Multi-stage QA workflows with consensus scoring and senior review ensure annotation accuracy consistently above 99% on every project.</p>
-      </div>
-      <div class="why-card fade-up">
-        <div class="why-num">04</div>
-        <h3>Robotics-Ready Analysis</h3>
-        <p>Specialized capability in evaluating robot motion data — grasp success rates, manipulation errors, and behavioral tagging for simulation datasets.</p>
-      </div>
-      <div class="why-card fade-up">
-        <div class="why-num">05</div>
-        <h3>Scalable &amp; Fast Delivery</h3>
-        <p>Flexible team scaling to handle projects from hundreds to millions of annotations, with turnaround times designed to match your ML sprint cycles.</p>
-      </div>
-      <div class="why-card fade-up">
-        <div class="why-num">06</div>
-        <h3>Custom Format Support</h3>
-        <p>Deliverables in COCO, YOLO, Pascal VOC, CSV, JSON, or any custom schema your training pipeline requires — no conversion overhead.</p>
+      <!-- Orbit visual -->
+      <div class="why-visual">
+        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+        <div class="orbit-ring">
+          <div class="orbit-dot orbit-dot-lime"></div>
+          <div class="orbit-label" style="top:-14px;left:50%;transform:translateX(-50%);">Annotation</div>
+        </div>
+        <div class="orbit-ring">
+          <div class="orbit-dot"></div>
+          <div class="orbit-label" style="bottom:-14px;left:50%;transform:translateX(-50%);">Robotics</div>
+        </div>
+        <div class="orbit-center">&#129302;</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── INDUSTRIES ─────────────────────────────────────────────── -->
+<!-- ============================================================
+     INDUSTRIES SECTION
+     ===== EDIT: Industry cards and region cards =====
+============================================================ -->
 <section id="industries">
-  <div class="container">
-    <div class="industries-header fade-up">
-      <div class="section-label">Who We Serve</div>
-      <h2 class="section-title">Industries &amp; <span>Clients</span></h2>
+  <div class="s-inner">
+    <div class="s-label rev" data-n="05">Industries</div>
+    <h2 class="s-title rev">WHO WE SERVE.</h2>
+
+    <div class="ind-grid">
+      <div class="ind-card rev d1"><span class="ind-icon">&#129302;</span><h3>ROBOTICS COMPANIES</h3><p>Training data for autonomous and industrial robot systems</p></div>
+      <div class="ind-card rev d2"><span class="ind-icon">&#129504;</span><h3>AI / ML COMPANIES</h3><p>High-quality datasets for model training and fine-tuning</p></div>
+      <div class="ind-card rev d3"><span class="ind-icon">&#128640;</span><h3>TECH STARTUPS</h3><p>Scalable data pipelines for fast-moving AI product teams</p></div>
+      <div class="ind-card rev d4"><span class="ind-icon">&#128300;</span><h3>RESEARCH LABS</h3><p>Precise, reproducible annotation for academic and R&amp;D projects</p></div>
+      <div class="ind-card rev d2"><span class="ind-icon">&#128663;</span><h3>AUTONOMOUS VEHICLES</h3><p>Camera, lidar, and sensor data annotation for AV systems</p></div>
+      <div class="ind-card rev d3"><span class="ind-icon">&#128138;</span><h3>HEALTHCARE AI</h3><p>Medical image labeling and clinical data annotation</p></div>
+      <div class="ind-card rev d4"><span class="ind-icon">&#127981;</span><h3>INDUSTRIAL AUTOMATION</h3><p>Vision and sensor data for factory automation systems</p></div>
+      <div class="ind-card rev d5"><span class="ind-icon">&#127970;</span><h3>ENTERPRISE TECH</h3><p>Large-scale dataset solutions for enterprise AI deployments</p></div>
     </div>
-    <div class="industries-row">
-      <div class="industry-pill fade-up"><span>🤖</span> Robotics Companies</div>
-      <div class="industry-pill fade-up"><span>🧠</span> AI Startups</div>
-      <div class="industry-pill fade-up"><span>🔬</span> Research Laboratories</div>
-      <div class="industry-pill fade-up"><span>🏭</span> Industrial Automation</div>
-      <div class="industry-pill fade-up"><span>🚗</span> Autonomous Vehicles</div>
-      <div class="industry-pill fade-up"><span>🏥</span> Medical Imaging AI</div>
-      <div class="industry-pill fade-up"><span>💻</span> Technology Firms</div>
-      <div class="industry-pill fade-up"><span>🛸</span> Drone &amp; Aerospace</div>
-      <div class="industry-pill fade-up"><span>🛍️</span> Retail &amp; E-commerce AI</div>
-      <div class="industry-pill fade-up"><span>🎓</span> Academic Institutions</div>
-    </div>
-    <div class="regions-row">
-      <div class="region-badge fade-up">🇺🇸 United States</div>
-      <div class="region-badge fade-up">🇪🇺 Europe</div>
-      <div class="region-badge fade-up">🇮🇳 India</div>
+
+    <!-- ===== EDIT: Target regions ===== -->
+    <div class="region-strip">
+      <div class="region-card rev d1">
+        <div class="rc-flag">&#127482;&#127480;</div>
+        <div class="rc-info">
+          <h4>United States</h4>
+          <p>Silicon Valley AI startups and enterprise tech firms</p>
+        </div>
+      </div>
+      <div class="region-card rev d2">
+        <div class="rc-flag">&#127466;&#127482;</div>
+        <div class="rc-info">
+          <h4>Europe</h4>
+          <p>Robotics and ML companies across Germany, UK &amp; more</p>
+        </div>
+      </div>
+      <div class="region-card rev d3">
+        <div class="rc-flag">&#127470;&#127475;</div>
+        <div class="rc-info">
+          <h4>India</h4>
+          <p>AI ecosystem leaders and research institutions</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ─── CONTACT ─────────────────────────────────────────────────── -->
+<!-- ============================================================
+     CONTACT SECTION
+     ===== EDIT: Contact info and form =====
+============================================================ -->
 <section id="contact">
-  <div class="container">
-    <div class="contact-grid">
-      <div class="contact-info fade-up">
-        <div class="section-label">Get in Touch</div>
-        <h2>Ready to Build<br><span style="color:var(--cyan)">Better AI Data?</span></h2>
-        <p>Tell us about your project and we'll get back to you with a tailored data solution — no generic quotes, just real answers.</p>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">🌐</div>
-          <div class="contact-detail-text">
-            <strong>Website</strong>
-            <span>trainbot.in</span>
+  <div class="s-inner">
+    <div class="contact-layout">
+
+      <div class="contact-info rev-l">
+        <div class="s-label" data-n="06">Contact</div>
+        <h2>
+          LET'S BUILD<br/>YOUR <em>DATASET</em><br/>TOGETHER.
+        </h2>
+        <p>Tell us about your project requirements and we'll respond within 24 hours with a tailored proposal and pricing.</p>
+
+        <div class="contact-items">
+          <!-- ===== EDIT: Email ===== -->
+          <div class="ci">
+            <div class="ci-icon">&#9993;&#65039;</div>
+            <div>
+              <div class="ci-lbl">Email</div>
+              <div class="ci-val"><a href="mailto:Kotagirivikram969@gmail.com">Kotagirivikram969@gmail.com</a></div>
+            </div>
           </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">📧</div>
-          <div class="contact-detail-text">
-            <strong>Email</strong>
-            <span>kotagirivikram969@gmail.com</span>
+          <!-- ===== EDIT: Phone ===== -->
+          <div class="ci">
+            <div class="ci-icon">&#128222;</div>
+            <div>
+              <div class="ci-lbl">Phone</div>
+              <div class="ci-val"><a href="tel:+917981520897">+91 7981520897</a></div>
+            </div>
           </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">📍</div>
-          <div class="contact-detail-text">
-            <strong>Serving</strong>
-            <span>USA · Europe · India</span>
+          <!-- ===== EDIT: Website ===== -->
+          <div class="ci">
+            <div class="ci-icon">&#127760;</div>
+            <div>
+              <div class="ci-lbl">Website</div>
+              <div class="ci-val">trainbot.in</div>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">&#9889;</div>
+            <div>
+              <div class="ci-lbl">Response Time</div>
+              <div class="ci-val">Within 24 hours</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="contact-form fade-up">
+
+      <!-- Contact Form -->
+      <div class="contact-form rev-r">
+        <div class="form-title">SEND A MESSAGE</div>
+
         <div class="form-row">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" placeholder="John" />
+          <div class="fg">
+            <label for="fn">First Name</label>
+            <input type="text" id="fn" placeholder="John"/>
           </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" placeholder="Doe" />
+          <div class="fg">
+            <label for="ln">Last Name</label>
+            <input type="text" id="ln" placeholder="Doe"/>
           </div>
         </div>
-        <div class="form-group">
-          <label>Company / Organization</label>
-          <input type="text" placeholder="Your company name" />
+
+        <div class="fg">
+          <label for="em">Email Address</label>
+          <input type="email" id="em" placeholder="john@company.com"/>
         </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" placeholder="you@company.com" />
+
+        <div class="fg">
+          <label for="co">Company / Organization</label>
+          <input type="text" id="co" placeholder="Your company name"/>
         </div>
-        <div class="form-group">
-          <label>Service Required</label>
-          <select>
-            <option value="" disabled selected>Select a service...</option>
+
+        <!-- ===== EDIT: Services dropdown ===== -->
+        <div class="fg">
+          <label for="sv">Service Required</label>
+          <select id="sv">
+            <option value="">Choose a service&hellip;</option>
             <option>Image Annotation</option>
             <option>Bounding Box Annotation</option>
             <option>Image Labeling</option>
@@ -425,64 +550,86 @@
             <option>Multiple / Custom</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Project Details</label>
-          <textarea placeholder="Describe your dataset requirements, volume, timeline, and any specific needs..."></textarea>
+
+        <div class="fg">
+          <label for="msg">Project Details</label>
+          <textarea id="msg" placeholder="Describe your project, dataset size, timeline, and requirements&hellip;"></textarea>
         </div>
-        <button class="form-submit" onclick="handleSubmit(event)">Send Project Brief →</button>
-        <p class="form-msg" id="formMsg">✅ Message sent! We'll respond within 24 hours.</p>
+
+        <button class="btn-send" onclick="sendMsg()">
+          Send Message <span>&#8594;</span>
+        </button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+<!-- ============================================================
+     FOOTER
+     ===== EDIT: Footer links and company info =====
+============================================================ -->
 <footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="#hero" class="logo">Lyder<span>tronics</span></a>
-        <p>Expert AI data annotation and dataset preparation services for machine learning and robotics systems worldwide.</p>
-        <div class="footer-domain">🌐 trainbot.in</div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="fb-logo">
+        <div class="flm"></div>
+        <!-- ===== EDIT: Company name ===== -->
+        Lydertronics
       </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#services">Image Annotation</a></li>
-          <li><a href="#services">Bounding Box</a></li>
-          <li><a href="#services">Video Annotation</a></li>
-          <li><a href="#services">Audio Transcription</a></li>
-          <li><a href="#services">Dataset Preparation</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#why">Why Us</a></li>
-          <li><a href="#industries">Industries</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Regions</h4>
-        <ul>
-          <li><a href="#contact">United States</a></li>
-          <li><a href="#contact">Europe</a></li>
-          <li><a href="#contact">India</a></li>
-        </ul>
-      </div>
+      <!-- ===== EDIT: Footer tagline ===== -->
+      <p>AI data annotation and dataset preparation services for machine learning and robotics companies worldwide.</p>
+      <!-- ===== EDIT: Domain ===== -->
+      <span class="footer-domain">&#9658; trainbot.in</span>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 Lydertronics. All rights reserved.</p>
-      <p>Powering AI with precision data 🔬</p>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Image Annotation</a></li>
+        <li><a href="#services">Bounding Box</a></li>
+        <li><a href="#services">Image Labeling</a></li>
+        <li><a href="#services">Video Annotation</a></li>
+        <li><a href="#services">Audio Transcription</a></li>
+        <li><a href="#services">Robot Analysis</a></li>
+        <li><a href="#services">Dataset Prep</a></li>
+      </ul>
     </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Reach Us</h4>
+      <ul>
+        <!-- ===== EDIT: Footer contact details ===== -->
+        <li><a href="mailto:Kotagirivikram969@gmail.com">Email Us</a></li>
+        <li><a href="tel:+917981520897">+91 7981520897</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Twitter / X</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <!-- ===== EDIT: Copyright ===== -->
+    <p>&copy; 2025 LYDERTRONICS &mdash; ALL RIGHTS RESERVED &mdash; TRAINBOT.IN</p>
+    <p>FOUNDER: KOTAGIRI VIKRAM &middot; CO-FOUNDER: VARIGANTI HARIKRISHNA</p>
   </div>
 </footer>
 
+<!-- Toast notification -->
+<div id="toast">&#10003; MESSAGE SENT &mdash; WE'LL RESPOND WITHIN 24H</div>
+
+<!-- ===== External JavaScript ===== -->
 <script src="script.js"></script>
+
 </body>
 </html>
-
-
