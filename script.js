@@ -3,25 +3,99 @@
    All interactive JavaScript for the website
 ============================================================ */
 
-/* ---- Custom Cursor ---- */
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
+/* ============================================================
+   CANVAS CURSOR
+   Drawn directly on a <canvas> with z-index 2147483647.
+   Canvas 2D drawing bypasses ALL CSS stacking contexts,
+   backdrop-filter, filter, and transform compositing —
+   it is always visually on top of everything.
+============================================================ */
+(function () {
+  /* Create the canvas and inject it as first child of body */
+  const cc = document.createElement('canvas');
+  cc.id = 'cursor-canvas';
+  cc.style.cssText = [
+    'position:fixed', 'top:0', 'left:0',
+    'width:100vw', 'height:100vh',
+    'z-index:2147483647',
+    'pointer-events:none'
+  ].join(';');
+  document.body.prepend(cc);
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-  // Move dot instantly — no lag so it never "falls behind" content
-  cur.style.left = mx + 'px';
-  cur.style.top  = my + 'px';
-}, { passive: true });
+  const ctx = cc.getContext('2d');
 
-(function animRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px';
-  ring.style.top  = ry + 'px';
-  requestAnimationFrame(animRing);
+  /* Resize canvas to match viewport */
+  function resize() {
+    cc.width  = window.innerWidth;
+    cc.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* State */
+  let mx = -100, my = -100;   // dot  position (instant)
+  let rx = -100, ry = -100;   // ring position (lagged)
+  let isHover = false;
+
+  /* Track mouse */
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+  }, { passive: true });
+
+  /* Detect hover over interactive elements */
+  document.addEventListener('mouseover', e => {
+    isHover = !!e.target.closest('a, button, .bento-card, .proj-card, .why-item, .ind-card');
+  });
+  document.addEventListener('mouseout', () => { isHover = false; });
+
+  /* Hide when leaving window */
+  document.addEventListener('mouseleave', () => { mx = -200; my = -200; });
+
+  /* Colours */
+  const CYAN = '#00d2ff';
+  const LIME = '#b3ff00';
+
+  /* Draw loop */
+  function draw() {
+    /* Lerp ring toward dot */
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+
+    ctx.clearRect(0, 0, cc.width, cc.height);
+
+    const dotR  = isHover ? 10 : 6;
+    const ringR = isHover ? 28 : 18;
+    const col   = isHover ? LIME : CYAN;
+
+    /* Outer ring */
+    ctx.beginPath();
+    ctx.arc(rx, ry, ringR, 0, Math.PI * 2);
+    ctx.strokeStyle = isHover ? 'rgba(179,255,0,0.6)' : 'rgba(0,210,255,0.55)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    /* Inner dot */
+    ctx.beginPath();
+    ctx.arc(mx, my, dotR, 0, Math.PI * 2);
+    ctx.fillStyle = col;
+    ctx.fill();
+
+    /* Subtle glow behind dot */
+    ctx.beginPath();
+    ctx.arc(mx, my, dotR + 6, 0, Math.PI * 2);
+    ctx.fillStyle = isHover ? 'rgba(179,255,0,0.12)' : 'rgba(0,210,255,0.12)';
+    ctx.fill();
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  /* Hide system cursor */
+  document.body.style.cursor = 'none';
+  const styleTag = document.createElement('style');
+  styleTag.textContent = '*, *::before, *::after { cursor: none !important; }';
+  document.head.appendChild(styleTag);
 })();
 
 /* ---- Bento card radial glow (mouse-tracking) ---- */
