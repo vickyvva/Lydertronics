@@ -32,26 +32,18 @@ body {
 /* =========================================================
    CUSTOM CURSOR
 ========================================================= */
-#cursor {
-  position: fixed; width: 12px; height: 12px;
-  background: var(--cyan); border-radius: 50%;
-  pointer-events: none; z-index: 999999;
-  transform: translate(-50%,-50%);
-  transition: width .2s, height .2s, background .2s;
-  will-change: left, top;
+/* =========================================================
+   CANVAS CURSOR — renders above ALL stacking contexts
+   backdrop-filter / filter on parent elements cannot
+   affect a canvas drawn with 2D context
+========================================================= */
+#cursor-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 2147483647;
+  pointer-events: none;
 }
-#cursor-ring {
-  position: fixed; width: 36px; height: 36px;
-  border: 1.5px solid rgba(0,210,255,0.6); border-radius: 50%;
-  pointer-events: none; z-index: 999998;
-  transform: translate(-50%,-50%);
-  transition: width .3s, height .3s, border-color .3s;
-  will-change: left, top;
-}
-body:has(a:hover) #cursor,
-body:has(button:hover) #cursor { width: 20px; height: 20px; background: var(--lime); }
-body:has(a:hover) #cursor-ring,
-body:has(button:hover) #cursor-ring { width: 56px; height: 56px; border-color: var(--lime); }
 
 /* =========================================================
    CANVAS BG
@@ -74,7 +66,6 @@ body::before {
   pointer-events: none; opacity: .6;
 }
 nav, section, footer { position: relative; z-index: 10; }
-#cursor, #cursor-ring { position: fixed; }
 
 /* =========================================================
    NAVIGATION
@@ -577,6 +568,5 @@ footer { background: var(--ink2); border-top: 1px solid var(--wire); padding: 60
   .hero-stats { flex-wrap: wrap; }
   .hstat { border-right: none; border-bottom: 1px solid var(--wire); }
   body { cursor: auto; }
-  #cursor { display: none; }
-  #cursor-ring { display: none; }
+  #cursor-canvas { display: none; }
 }
