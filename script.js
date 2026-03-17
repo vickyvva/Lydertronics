@@ -1,203 +1,167 @@
 /* ============================================================
-   LYDERTRONICS — script.js
-   All interactive JavaScript for the website
-============================================================ */
+   LYDERTRONICS v3 — script.js
+   Performance-first JavaScript
+   - Canvas cursor (bypasses all CSS stacking contexts)
+   - Lightweight scroll reveal (IntersectionObserver)
+   - No heavy libraries, no canvas particle network
+   ============================================================ */
 
 /* ============================================================
-   CANVAS CURSOR
-   Drawn directly on a <canvas> with z-index 2147483647.
-   Canvas 2D drawing bypasses ALL CSS stacking contexts,
-   backdrop-filter, filter, and transform compositing —
-   it is always visually on top of everything.
+   1. CANVAS CURSOR
+   Drawn on a full-viewport canvas with z-index 2147483647.
+   Cannot be occluded by backdrop-filter, filter, or transform
+   compositing layers — guaranteed always on top.
 ============================================================ */
 (function () {
-  /* Create the canvas and inject it as first child of body */
+  /* Create canvas */
   const cc = document.createElement('canvas');
-  cc.id = 'cursor-canvas';
-  cc.style.cssText = [
-    'position:fixed', 'top:0', 'left:0',
-    'width:100vw', 'height:100vh',
-    'z-index:2147483647',
-    'pointer-events:none'
-  ].join(';');
+  cc.id = 'cc';
   document.body.prepend(cc);
-
   const ctx = cc.getContext('2d');
 
-  /* Resize canvas to match viewport */
+  /* Resize to fill viewport */
   function resize() {
     cc.width  = window.innerWidth;
     cc.height = window.innerHeight;
   }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', resize, { passive: true });
 
   /* State */
-  let mx = -100, my = -100;   // dot  position (instant)
-  let rx = -100, ry = -100;   // ring position (lagged)
-  let isHover = false;
+  let mx = -200, my = -200; /* dot — instant */
+  let rx = -200, ry = -200; /* ring — lagged */
+  let hover = false;
+  let visible = false;
 
-  /* Track mouse */
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
+    visible = true;
   }, { passive: true });
 
-  /* Detect hover over interactive elements */
+  document.addEventListener('mouseleave', () => { visible = false; });
+
+  /* Detect interactive elements */
   document.addEventListener('mouseover', e => {
-    isHover = !!e.target.closest('a, button, .bento-card, .proj-card, .why-item, .ind-card');
-  });
-  document.addEventListener('mouseout', () => { isHover = false; });
+    hover = !!e.target.closest(
+      'a, button, .svc-card, .proj-card, .ind-card, .hc, .wi, .rc, .fc, .ap-row'
+    );
+  }, { passive: true });
 
-  /* Hide when leaving window */
-  document.addEventListener('mouseleave', () => { mx = -200; my = -200; });
+  /* Draw loop — only transform & opacity, no layout */
+  const CYAN   = '#ff5c00'; /* orange dot */
+  const LIME   = '#00b4a6'; /* teal on hover */
+  const SPEED  = 0.13;
 
-  /* Colours */
-  const CYAN = '#00d2ff';
-  const LIME = '#b3ff00';
-
-  /* Draw loop */
   function draw() {
-    /* Lerp ring toward dot */
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
+    rx += (mx - rx) * SPEED;
+    ry += (my - ry) * SPEED;
 
     ctx.clearRect(0, 0, cc.width, cc.height);
 
-    const dotR  = isHover ? 10 : 6;
-    const ringR = isHover ? 28 : 18;
-    const col   = isHover ? LIME : CYAN;
+    if (!visible) { requestAnimationFrame(draw); return; }
 
-    /* Outer ring */
+    const col   = hover ? LIME   : CYAN;
+    const dotR  = hover ? 9      : 5;
+    const ringR = hover ? 26     : 16;
+    const alpha = hover ? 0.55   : 0.45;
+
+    /* Ring */
     ctx.beginPath();
     ctx.arc(rx, ry, ringR, 0, Math.PI * 2);
-    ctx.strokeStyle = isHover ? 'rgba(179,255,0,0.6)' : 'rgba(0,210,255,0.55)';
+    ctx.strokeStyle = col.replace(')', `, ${alpha})`).replace('rgb', 'rgba').replace('#', 'rgba(').replace('rgba(ff5c00', 'rgba(255,92,0').replace('rgba(00b4a6', 'rgba(0,180,166');
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
-    /* Inner dot */
+    /* Dot */
     ctx.beginPath();
     ctx.arc(mx, my, dotR, 0, Math.PI * 2);
     ctx.fillStyle = col;
     ctx.fill();
 
-    /* Subtle glow behind dot */
+    requestAnimationFrame(draw);
+  }
+
+  /* Simpler color handling */
+  function drawFrame() {
+    rx += (mx - rx) * SPEED;
+    ry += (my - ry) * SPEED;
+    ctx.clearRect(0, 0, cc.width, cc.height);
+
+    if (!visible) { requestAnimationFrame(drawFrame); return; }
+
+    const isHover = hover;
+    const dotR    = isHover ? 9  : 5;
+    const ringR   = isHover ? 26 : 16;
+    const dotCol  = isHover ? 'rgba(0,180,166,1)'     : 'rgba(255,92,0,1)';
+    const ringCol = isHover ? 'rgba(0,180,166,0.5)'   : 'rgba(255,92,0,0.45)';
+
+    /* Outer ring */
     ctx.beginPath();
-    ctx.arc(mx, my, dotR + 6, 0, Math.PI * 2);
-    ctx.fillStyle = isHover ? 'rgba(179,255,0,0.12)' : 'rgba(0,210,255,0.12)';
+    ctx.arc(rx, ry, ringR, 0, Math.PI * 2);
+    ctx.strokeStyle = ringCol;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    /* Dot */
+    ctx.beginPath();
+    ctx.arc(mx, my, dotR, 0, Math.PI * 2);
+    ctx.fillStyle = dotCol;
     ctx.fill();
 
-    requestAnimationFrame(draw);
+    requestAnimationFrame(drawFrame);
   }
-  draw();
+  drawFrame();
 
-  /* Hide system cursor */
-  document.body.style.cursor = 'none';
-  const styleTag = document.createElement('style');
-  styleTag.textContent = '*, *::before, *::after { cursor: none !important; }';
-  document.head.appendChild(styleTag);
+  /* Hide native cursor everywhere */
+  const s = document.createElement('style');
+  s.textContent = '*, *::before, *::after { cursor: none !important; }';
+  document.head.appendChild(s);
 })();
 
-/* ---- Bento card radial glow (mouse-tracking) ---- */
-document.querySelectorAll('.bento-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%';
-    const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%';
-    card.style.setProperty('--mx', x);
-    card.style.setProperty('--my', y);
-  });
-});
-
-/* ---- Neural canvas particle network ---- */
+/* ============================================================
+   2. SCROLL REVEAL
+   Uses IntersectionObserver — zero scroll event overhead.
+   Only toggles a CSS class; browser handles the animation.
+============================================================ */
 (function () {
-  const canvas = document.getElementById('neural-canvas');
-  const ctx    = canvas.getContext('2d');
-  let W, H;
-  const NUM_PARTICLES = 80;
-  const MAX_DIST      = 130;
-  const particles     = [];
+  const els = document.querySelectorAll('.sr, .sr-l, .sr-r');
+  if (!els.length) return;
 
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  /* Initialise particles */
-  for (let i = 0; i < NUM_PARTICLES; i++) {
-    particles.push({
-      x:  Math.random() * window.innerWidth,
-      y:  Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r:  Math.random() * 1.5 + 0.5
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-
-    /* Draw connecting lines */
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < MAX_DIST) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,210,255,${(1 - d / MAX_DIST) * 0.18})`;
-          ctx.lineWidth   = 0.6;
-          ctx.stroke();
-        }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('on');
+        obs.unobserve(e.target); /* fire once */
       }
-    }
-
-    /* Draw & move particles */
-    particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,210,255,0.5)';
-      ctx.fill();
-
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
     });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    requestAnimationFrame(draw);
-  }
-  draw();
+  els.forEach(el => obs.observe(el));
 })();
 
-/* ---- Scroll Reveal ---- */
-const revElements = document.querySelectorAll('.rev, .rev-l, .rev-r');
-const revObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('on');
-      revObserver.unobserve(entry.target);
+/* ============================================================
+   3. NAVBAR — shadow on scroll (no backdrop-filter used)
+============================================================ */
+(function () {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        nav.classList.toggle('scrolled', window.scrollY > 30);
+        ticking = false;
+      });
+      ticking = true;
     }
-  });
-}, { threshold: 0.12 });
+  }, { passive: true });
+})();
 
-revElements.forEach(el => revObserver.observe(el));
-
-/* ---- Navbar scroll effect ---- */
-window.addEventListener('scroll', () => {
-  const navBg = document.querySelector('nav .nav-bg');
-  if (navBg) {
-    navBg.style.background = window.scrollY > 50
-      ? 'rgba(5,8,14,.96)'
-      : 'rgba(5,8,14,.82)';
-  }
-});
-
-/* ---- Mobile nav toggle ---- */
+/* ============================================================
+   4. MOBILE NAV TOGGLE
+============================================================ */
 function toggleNav() {
   document.getElementById('navLinks').classList.toggle('open');
 }
@@ -208,7 +172,10 @@ document.querySelectorAll('#navLinks a').forEach(a => {
   });
 });
 
-/* ---- Contact form submit (mock) ---- */
+/* ============================================================
+   5. CONTACT FORM — lightweight mock submit
+   ===== EDIT: Replace with real form submission logic =====
+============================================================ */
 function sendMsg() {
   const fn  = document.getElementById('fn').value.trim();
   const em  = document.getElementById('em').value.trim();
@@ -220,13 +187,14 @@ function sendMsg() {
     return;
   }
 
-  /* Show success toast */
+  /* Show toast */
   const toast = document.getElementById('toast');
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 4200);
+  setTimeout(() => toast.classList.remove('show'), 4000);
 
-  /* Reset form fields */
-  ['fn', 'ln', 'em', 'co', 'sv', 'msg'].forEach(id => {
-    document.getElementById(id).value = '';
+  /* Clear fields */
+  ['fn','ln','em','co','sv','msg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
   });
 }
