@@ -1,200 +1,305 @@
 /* ============================================================
-   LYDERTRONICS v3 — script.js
-   Performance-first JavaScript
-   - Canvas cursor (bypasses all CSS stacking contexts)
-   - Lightweight scroll reveal (IntersectionObserver)
-   - No heavy libraries, no canvas particle network
+   LYDERTRONICS — script.js
+   Minimal, optimized vanilla JavaScript
    ============================================================ */
 
-/* ============================================================
-   1. CANVAS CURSOR
-   Drawn on a full-viewport canvas with z-index 2147483647.
-   Cannot be occluded by backdrop-filter, filter, or transform
-   compositing layers — guaranteed always on top.
-============================================================ */
-(function () {
-  /* Create canvas */
-  const cc = document.createElement('canvas');
-  cc.id = 'cc';
-  document.body.prepend(cc);
-  const ctx = cc.getContext('2d');
+'use strict';
 
-  /* Resize to fill viewport */
-  function resize() {
-    cc.width  = window.innerWidth;
-    cc.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
+/* ─── LOADER / ROBOT SKULL INTRO ─────────────────────────── */
+(function initLoader() {
+  const loader    = document.getElementById('loader');
+  const fillEl    = document.getElementById('loaderFill');
+  const pctEl     = document.getElementById('loaderPct');
+  const statusEl  = document.getElementById('loaderStatus');
 
-  /* State */
-  let mx = -200, my = -200; /* dot — instant */
-  let rx = -200, ry = -200; /* ring — lagged */
-  let hover = false;
-  let visible = false;
+  // Status messages cycling during load
+  const statuses = [
+    'INITIALIZING NEURAL CORE...',
+    'LOADING AI SUBSYSTEMS...',
+    'CALIBRATING DATA PIPELINES...',
+    'ESTABLISHING CONNECTIONS...',
+    'SYSTEM READY',
+  ];
 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX;
-    my = e.clientY;
-    visible = true;
-  }, { passive: true });
+  let progress  = 0;
+  let msgIndex  = 0;
+  const totalMs = 3200; // total loader display time
+  const step    = 16;   // ~60fps tick
 
-  document.addEventListener('mouseleave', () => { visible = false; });
+  const interval = setInterval(() => {
+    progress = Math.min(100, progress + (100 / (totalMs / step)));
+    if (fillEl) fillEl.style.width = progress.toFixed(1) + '%';
+    if (pctEl)  pctEl.textContent  = Math.floor(progress) + '%';
 
-  /* Detect interactive elements */
-  document.addEventListener('mouseover', e => {
-    hover = !!e.target.closest(
-      'a, button, .svc-card, .proj-card, .ind-card, .hc, .wi, .rc, .fc, .ap-row'
-    );
-  }, { passive: true });
+    // Cycle status messages at thresholds
+    const thresholds = [20, 45, 65, 85, 99];
+    if (thresholds[msgIndex] && progress >= thresholds[msgIndex]) {
+      if (statusEl) statusEl.textContent = statuses[msgIndex + 1] || statuses[msgIndex];
+      msgIndex++;
+    }
 
-  /* Draw loop — only transform & opacity, no layout */
-  const CYAN   = '#ff5c00'; /* orange dot */
-  const LIME   = '#00b4a6'; /* teal on hover */
-  const SPEED  = 0.13;
+    if (progress >= 100) {
+      clearInterval(interval);
+      // Brief pause at 100% then exit
+      setTimeout(exitLoader, 400);
+    }
+  }, step);
 
-  function draw() {
-    rx += (mx - rx) * SPEED;
-    ry += (my - ry) * SPEED;
-
-    ctx.clearRect(0, 0, cc.width, cc.height);
-
-    if (!visible) { requestAnimationFrame(draw); return; }
-
-    const col   = hover ? LIME   : CYAN;
-    const dotR  = hover ? 9      : 5;
-    const ringR = hover ? 26     : 16;
-    const alpha = hover ? 0.55   : 0.45;
-
-    /* Ring */
-    ctx.beginPath();
-    ctx.arc(rx, ry, ringR, 0, Math.PI * 2);
-    ctx.strokeStyle = col.replace(')', `, ${alpha})`).replace('rgb', 'rgba').replace('#', 'rgba(').replace('rgba(ff5c00', 'rgba(255,92,0').replace('rgba(00b4a6', 'rgba(0,180,166');
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    /* Dot */
-    ctx.beginPath();
-    ctx.arc(mx, my, dotR, 0, Math.PI * 2);
-    ctx.fillStyle = col;
-    ctx.fill();
-
-    requestAnimationFrame(draw);
+  function exitLoader() {
+    if (!loader) return;
+    loader.classList.add('exit');
+    // Remove from DOM after transition
+    setTimeout(() => {
+      loader.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 850);
   }
 
-  /* Simpler color handling */
-  function drawFrame() {
-    rx += (mx - rx) * SPEED;
-    ry += (my - ry) * SPEED;
-    ctx.clearRect(0, 0, cc.width, cc.height);
-
-    if (!visible) { requestAnimationFrame(drawFrame); return; }
-
-    const isHover = hover;
-    const dotR    = isHover ? 9  : 5;
-    const ringR   = isHover ? 26 : 16;
-    const dotCol  = isHover ? 'rgba(0,180,166,1)'     : 'rgba(255,92,0,1)';
-    const ringCol = isHover ? 'rgba(0,180,166,0.5)'   : 'rgba(255,92,0,0.45)';
-
-    /* Outer ring */
-    ctx.beginPath();
-    ctx.arc(rx, ry, ringR, 0, Math.PI * 2);
-    ctx.strokeStyle = ringCol;
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    /* Dot */
-    ctx.beginPath();
-    ctx.arc(mx, my, dotR, 0, Math.PI * 2);
-    ctx.fillStyle = dotCol;
-    ctx.fill();
-
-    requestAnimationFrame(drawFrame);
-  }
-  drawFrame();
-
-  /* Hide native cursor everywhere */
-  const s = document.createElement('style');
-  s.textContent = '*, *::before, *::after { cursor: none !important; }';
-  document.head.appendChild(s);
+  // Prevent scrolling while loader is active
+  document.body.style.overflow = 'hidden';
 })();
 
-/* ============================================================
-   2. SCROLL REVEAL
-   Uses IntersectionObserver — zero scroll event overhead.
-   Only toggles a CSS class; browser handles the animation.
-============================================================ */
-(function () {
-  const els = document.querySelectorAll('.sr, .sr-l, .sr-r');
-  if (!els.length) return;
 
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('on');
-        obs.unobserve(e.target); /* fire once */
+/* ─── SMOOTH SCROLL HELPER ───────────────────────────────── */
+window.smoothScrollTo = function (selector) {
+  const target = document.querySelector(selector);
+  if (!target) return;
+  const navH = document.getElementById('navbar')?.offsetHeight || 66;
+  const top  = target.getBoundingClientRect().top + window.scrollY - navH;
+  window.scrollTo({ top, behavior: 'smooth' });
+};
+
+
+/* ─── NAVBAR: scroll style + active link ─────────────────── */
+(function initNavbar() {
+  const navbar = document.getElementById('navbar');
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  const allLinks = document.querySelectorAll('.nav-link');
+
+  // Scroll → add .scrolled class and highlight active section
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  function onScroll() {
+    if (!navbar) return;
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+    highlightActive();
+  }
+
+  function highlightActive() {
+    const sections = ['hero','about','services','projects','why-us','industries','contact'];
+    const navH = navbar ? navbar.offsetHeight : 66;
+    let current = sections[0];
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top - navH - 10 <= 0) {
+        current = id;
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  els.forEach(el => obs.observe(el));
-})();
+    allLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.section === current);
+    });
+  }
 
-/* ============================================================
-   3. NAVBAR — shadow on scroll (no backdrop-filter used)
-============================================================ */
-(function () {
-  const nav = document.querySelector('nav');
-  if (!nav) return;
-  let ticking = false;
+  // Mobile hamburger toggle
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      const isOpen = links.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        nav.classList.toggle('scrolled', window.scrollY > 30);
-        ticking = false;
+    // Close nav on link click (mobile)
+    allLinks.forEach(a => {
+      a.addEventListener('click', () => {
+        links.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       });
-      ticking = true;
-    }
-  }, { passive: true });
+    });
+  }
 })();
 
-/* ============================================================
-   4. MOBILE NAV TOGGLE
-============================================================ */
-function toggleNav() {
-  document.getElementById('navLinks').classList.toggle('open');
-}
 
-document.querySelectorAll('#navLinks a').forEach(a => {
-  a.addEventListener('click', () => {
-    document.getElementById('navLinks').classList.remove('open');
+/* ─── CSS PARTICLE GENERATOR (Hero) ─────────────────────── */
+(function initParticles() {
+  const field = document.getElementById('particlesField');
+  if (!field) return;
+
+  const COUNT = 35;
+  const frag  = document.createDocumentFragment();
+
+  for (let i = 0; i < COUNT; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+
+    const size  = (Math.random() * 3 + 1).toFixed(1);
+    const x     = (Math.random() * 100).toFixed(1);
+    const y     = (Math.random() * 100).toFixed(1);
+    const dur   = (Math.random() * 4 + 3).toFixed(1);
+    const delay = (Math.random() * 5).toFixed(1);
+    const alpha = (Math.random() * 0.55 + 0.15).toFixed(2);
+
+    p.style.cssText = [
+      `width:${size}px`,
+      `height:${size}px`,
+      `left:${x}%`,
+      `top:${y}%`,
+      `opacity:${alpha}`,
+      `animation-duration:${dur}s`,
+      `animation-delay:-${delay}s`,
+    ].join(';');
+
+    frag.appendChild(p);
+  }
+
+  field.appendChild(frag);
+})();
+
+
+/* ─── SCROLL FADE-IN (IntersectionObserver) ──────────────── */
+(function initFadeIn() {
+  const items = document.querySelectorAll('.fade-in');
+  if (!items.length) return;
+
+  const io = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  items.forEach(el => io.observe(el));
+})();
+
+
+/* ─── CONTACT FORM VALIDATION ────────────────────────────── */
+(function initContactForm() {
+  const form       = document.getElementById('contactForm');
+  const successMsg = document.getElementById('formSuccess');
+  if (!form) return;
+
+  const fields = {
+    fname:  { errId: 'nameErr',  msg: 'Please enter your full name.' },
+    femail: { errId: 'emailErr', msg: 'Please enter a valid email address.' },
+    fmsg:   { errId: 'msgErr',   msg: 'Please describe your project.' },
+  };
+
+  function setErr(id, msg) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = msg;
+  }
+  function clearErrors() {
+    Object.values(fields).forEach(f => setErr(f.errId, ''));
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    clearErrors();
+
+    const name  = document.getElementById('fname')?.value.trim() || '';
+    const email = document.getElementById('femail')?.value.trim() || '';
+    const msg   = document.getElementById('fmsg')?.value.trim() || '';
+    const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    let valid = true;
+    if (name.length < 2)       { setErr('nameErr',  fields.fname.msg);  valid = false; }
+    if (!emailRx.test(email))  { setErr('emailErr', fields.femail.msg); valid = false; }
+    if (msg.length < 10)       { setErr('msgErr',   fields.fmsg.msg);   valid = false; }
+
+    if (!valid) return;
+
+    // Simulate submission (replace with real endpoint if needed)
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) {
+      btn.disabled = true;
+      btn.querySelector('.btn-label').textContent = 'Sending...';
+    }
+
+    setTimeout(() => {
+      form.reset();
+      if (successMsg) successMsg.classList.add('show');
+      if (btn) {
+        btn.disabled = false;
+        btn.querySelector('.btn-label').textContent = 'Send Message';
+      }
+      // Hide success after 5s
+      setTimeout(() => successMsg?.classList.remove('show'), 5000);
+    }, 1200);
+  });
+
+  // Clear per-field error on input
+  ['fname', 'femail', 'fmsg'].forEach(id => {
+    const el = document.getElementById(id);
+    const errId = fields[id]?.errId;
+    if (el && errId) {
+      el.addEventListener('input', () => setErr(errId, ''));
+    }
+  });
+})();
+
+
+/* ─── NAV LINK SMOOTH SCROLL ─────────────────────────────── */
+document.querySelectorAll('.nav-link[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    window.smoothScrollTo(a.getAttribute('href'));
   });
 });
 
-/* ============================================================
-   5. CONTACT FORM — lightweight mock submit
-   ===== EDIT: Replace with real form submission logic =====
-============================================================ */
-function sendMsg() {
-  const fn  = document.getElementById('fn').value.trim();
-  const em  = document.getElementById('em').value.trim();
-  const sv  = document.getElementById('sv').value;
-  const msg = document.getElementById('msg').value.trim();
-
-  if (!fn || !em || !sv || !msg) {
-    alert('Please complete all required fields: Name, Email, Service, and Message.');
-    return;
-  }
-
-  /* Show toast */
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 4000);
-
-  /* Clear fields */
-  ['fn','ln','em','co','sv','msg'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
+/* Also wire footer links */
+document.querySelectorAll('.footer-links a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    window.smoothScrollTo(a.getAttribute('href'));
   });
+});
+
+
+/* ─── BUTTON PRESS HAPTIC EFFECT ─────────────────────────── */
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('pointerdown', () => {
+    btn.style.transform = 'scale(0.96)';
+  });
+  btn.addEventListener('pointerup', () => {
+    btn.style.transform = '';
+  });
+  btn.addEventListener('pointerleave', () => {
+    btn.style.transform = '';
+  });
+});
+
+
+/* ─── OPTIONAL: LIGHTWEIGHT CLICK SOUND ─────────────────── */
+// Plays a short synthesized click on button press (Web Audio API).
+// Web Audio API requires a prior user gesture — triggered only on real clicks.
+let audioCtx = null;
+
+function playClick() {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc  = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.06);
+    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+    osc.start(audioCtx.currentTime);
+    osc.stop(audioCtx.currentTime + 0.09);
+  } catch (_) { /* silent fail */ }
 }
+
+document.querySelectorAll('.btn, .nav-link').forEach(el => {
+  el.addEventListener('click', playClick, { passive: true });
+});
