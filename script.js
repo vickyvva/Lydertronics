@@ -182,10 +182,14 @@ window.smoothScrollTo = function (selector) {
 
 
 /* ─── CONTACT FORM VALIDATION ────────────────────────────── */
-/* ─── CONTACT FORM (FIXED WITH FORMSPREE) ────────────────────────────── */
+
+
+/* ─── CONTACT FORM (FIXED + FORMSPREE WORKING) ────────────────────────────── */
 (function initContactForm() {
+
   const form       = document.getElementById('contactForm');
   const successMsg = document.getElementById('formSuccess');
+
   if (!form) return;
 
   const fields = {
@@ -204,7 +208,7 @@ window.smoothScrollTo = function (selector) {
   }
 
   form.addEventListener('submit', async function(e) {
-    e.preventDefault(); // prevent default but we will send manually
+    e.preventDefault(); // we control submission
 
     clearErrors();
 
@@ -233,7 +237,7 @@ window.smoothScrollTo = function (selector) {
 
     if (!valid) return;
 
-    const btn = form.querySelector('button[type="submit"]');
+    const btn   = form.querySelector('button[type="submit"]');
     const label = btn.querySelector('.btn-label');
 
     btn.disabled = true;
@@ -250,18 +254,35 @@ window.smoothScrollTo = function (selector) {
 
       if (response.ok) {
         form.reset();
-        if (successMsg) successMsg.classList.add('show');
+        successMsg?.classList.add('show');
       } else {
-        alert("Failed to send message. Please try again.");
+        alert("❌ Failed to send message. Please try again.");
       }
 
     } catch (error) {
-      alert("Network error. Please try again.");
+      alert("⚠️ Network error. Please try again.");
     }
 
     btn.disabled = false;
     label.textContent = 'Send Message';
 
+    // auto-hide success message
+    setTimeout(() => {
+      successMsg?.classList.remove('show');
+    }, 5000);
+
+  });
+
+  // Clear errors on input
+  ['fname', 'femail', 'fmsg'].forEach(id => {
+    const el = document.getElementById(id);
+    const errId = fields[id]?.errId;
+    if (el && errId) {
+      el.addEventListener('input', () => setErr(errId, ''));
+    }
+  });
+
+})();
     // hide success after 5s
     setTimeout(() => {
       successMsg?.classList.remove('show');
