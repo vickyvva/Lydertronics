@@ -182,14 +182,9 @@ window.smoothScrollTo = function (selector) {
 
 
 /* ─── CONTACT FORM VALIDATION ────────────────────────────── */
-
-
-/* ─── CONTACT FORM (FIXED + FORMSPREE WORKING) ────────────────────────────── */
 (function initContactForm() {
-
   const form       = document.getElementById('contactForm');
   const successMsg = document.getElementById('formSuccess');
-
   if (!form) return;
 
   const fields = {
@@ -202,103 +197,25 @@ window.smoothScrollTo = function (selector) {
     const el = document.getElementById(id);
     if (el) el.textContent = msg;
   }
-
   function clearErrors() {
     Object.values(fields).forEach(f => setErr(f.errId, ''));
   }
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault(); // we control submission
-
+  form.addEventListener('submit', e => {
+    e.preventDefault();
     clearErrors();
 
     const name  = document.getElementById('fname')?.value.trim() || '';
     const email = document.getElementById('femail')?.value.trim() || '';
     const msg   = document.getElementById('fmsg')?.value.trim() || '';
-
     const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     let valid = true;
-
-    if (name.length < 2) {
-      setErr('nameErr', fields.fname.msg);
-      valid = false;
-    }
-
-    if (!emailRx.test(email)) {
-      setErr('emailErr', fields.femail.msg);
-      valid = false;
-    }
-
-    if (msg.length < 10) {
-      setErr('msgErr', fields.fmsg.msg);
-      valid = false;
-    }
+    if (name.length < 2)       { setErr('nameErr',  fields.fname.msg);  valid = false; }
+    if (!emailRx.test(email))  { setErr('emailErr', fields.femail.msg); valid = false; }
+    if (msg.length < 10)       { setErr('msgErr',   fields.fmsg.msg);   valid = false; }
 
     if (!valid) return;
-
-    const btn   = form.querySelector('button[type="submit"]');
-    const label = btn.querySelector('.btn-label');
-
-    btn.disabled = true;
-    label.textContent = 'Sending...';
-
-    try {
-      const response = await fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        form.reset();
-        successMsg?.classList.add('show');
-      } else {
-        alert("❌ Failed to send message. Please try again.");
-      }
-
-    } catch (error) {
-      alert("⚠️ Network error. Please try again.");
-    }
-
-    btn.disabled = false;
-    label.textContent = 'Send Message';
-
-    // auto-hide success message
-    setTimeout(() => {
-      successMsg?.classList.remove('show');
-    }, 5000);
-
-  });
-
-  // Clear errors on input
-  ['fname', 'femail', 'fmsg'].forEach(id => {
-    const el = document.getElementById(id);
-    const errId = fields[id]?.errId;
-    if (el && errId) {
-      el.addEventListener('input', () => setErr(errId, ''));
-    }
-  });
-
-})();
-    // hide success after 5s
-    setTimeout(() => {
-      successMsg?.classList.remove('show');
-    }, 5000);
-  });
-
-  // clear errors on typing
-  ['fname', 'femail', 'fmsg'].forEach(id => {
-    const el = document.getElementById(id);
-    const errId = fields[id]?.errId;
-    if (el && errId) {
-      el.addEventListener('input', () => setErr(errId, ''));
-    }
-  });
-
-})();
 
     // Simulate submission (replace with real endpoint if needed)
     const btn = form.querySelector('button[type="submit"]');
