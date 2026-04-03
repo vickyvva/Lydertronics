@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,57 +37,38 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
+  
 <body>
 
   <!-- =========================================
-       ROBOT SKULL LOADER / BACK COVER TRANSITION
-       ======================================== -->
+       ROBOT SKULL LOADER
+       ========================================= -->
   <div id="loader" class="loader" aria-hidden="true">
     <div class="loader-inner">
-
-      <!-- Skull Assembly -->
       <div class="skull-wrap">
-
-        <!-- Top lightning bolts -->
         <div class="lightning l5"><div class="bolt"></div></div>
         <div class="lightning l6"><div class="bolt"></div></div>
-
-        <!-- Side lightning -->
         <div class="lightning l1"><div class="bolt"></div></div>
         <div class="lightning l2"><div class="bolt"></div></div>
         <div class="lightning l3"><div class="bolt"></div></div>
         <div class="lightning l4"><div class="bolt"></div></div>
-
-        <!-- Data streams radiating from skull -->
         <div class="data-stream ds1"></div>
         <div class="data-stream ds2"></div>
         <div class="data-stream ds3"></div>
         <div class="data-stream ds4"></div>
         <div class="data-stream ds5"></div>
         <div class="data-stream ds6"></div>
-
-        <!-- Data nodes on streams -->
         <div class="data-node dn1"></div>
         <div class="data-node dn2"></div>
         <div class="data-node dn3"></div>
         <div class="data-node dn4"></div>
-
-        <!-- SKULL HEAD -->
         <div class="skull">
-          <!-- Cranium -->
           <div class="skull-cranium">
-            <!-- Circuit ridge top -->
             <div class="cranium-ridge"></div>
-            <!-- Brow line -->
             <div class="cranium-brow"></div>
-            <!-- Left cheek panel -->
             <div class="cheek-panel left-cheek"></div>
-            <!-- Right cheek panel -->
             <div class="cheek-panel right-cheek"></div>
-            <!-- Skull scan effect -->
             <div class="scan-line"></div>
-
-            <!-- LEFT EYE -->
             <div class="skull-eye left-eye">
               <div class="eye-socket-inner">
                 <div class="eye-iris"></div>
@@ -96,8 +78,6 @@
               </div>
               <div class="eye-flare"></div>
             </div>
-
-            <!-- RIGHT EYE -->
             <div class="skull-eye right-eye">
               <div class="eye-socket-inner">
                 <div class="eye-iris"></div>
@@ -107,47 +87,26 @@
               </div>
               <div class="eye-flare"></div>
             </div>
-
-            <!-- Nose cavity -->
             <div class="skull-nose"></div>
-            <!-- Temple bolts (decorative rivets) -->
             <div class="rivet rv1"></div>
             <div class="rivet rv2"></div>
           </div>
-
-          <!-- JAW -->
           <div class="skull-jaw">
-            <!-- Circuit line on jaw -->
             <div class="jaw-circuit"></div>
-            <!-- Teeth row -->
             <div class="teeth-row">
-              <div class="tooth t1"></div>
-              <div class="tooth t2"></div>
-              <div class="tooth t3"></div>
-              <div class="tooth t4"></div>
-              <div class="tooth t5"></div>
-              <div class="tooth t6"></div>
+              <div class="tooth t1"></div><div class="tooth t2"></div><div class="tooth t3"></div>
+              <div class="tooth t4"></div><div class="tooth t5"></div><div class="tooth t6"></div>
             </div>
           </div>
-        </div><!-- /skull -->
-
-        <!-- Binary data floating bits -->
-        <div class="bin-bits">
-          <span class="bit b1">10110</span>
-          <span class="bit b2">01001</span>
-          <span class="bit b3">11010</span>
-          <span class="bit b4">00111</span>
-          <span class="bit b5">10001</span>
-          <span class="bit b6">01110</span>
-          <span class="bit b7">11100</span>
-          <span class="bit b8">00011</span>
-          <span class="bit b9">10101</span>
-          <span class="bit b10">01100</span>
         </div>
-
-      </div><!-- /skull-wrap -->
-
-      <!-- Loader text block -->
+        <div class="bin-bits">
+          <span class="bit b1">10110</span><span class="bit b2">01001</span>
+          <span class="bit b3">11010</span><span class="bit b4">00111</span>
+          <span class="bit b5">10001</span><span class="bit b6">01110</span>
+          <span class="bit b7">11100</span><span class="bit b8">00011</span>
+          <span class="bit b9">10101</span><span class="bit b10">01100</span>
+        </div>
+      </div>
       <div class="loader-text-block">
         <div class="loader-brand">LYDERTRONICS</div>
         <div class="loader-tagline">AI DATA INTELLIGENCE</div>
@@ -157,9 +116,81 @@
         </div>
         <div class="loader-status" id="loaderStatus">INITIALIZING NEURAL CORE...</div>
       </div>
+    </div>
+  </div>
 
-    </div><!-- /loader-inner -->
-  </div><!-- /loader -->
+
+  <!-- =========================================
+       TEAM MODAL (About Us page)
+       ========================================= -->
+  <div id="teamModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="About Lydertronics">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Close">&#x2715;</button>
+      <div class="modal-hd">
+        <span class="sec-tag">// ABOUT US</span>
+        <h2 class="sec-title">The Minds Behind <span class="accent">Lydertronics</span></h2>
+        <p class="sec-sub">Built by innovators. Driven by precision. Powered by AI.</p>
+      </div>
+      <div class="modal-team-grid">
+        <!-- Founder -->
+        <div class="glass-card about-card">
+          <div class="about-avatar">
+            <div class="av-circle av-blue">
+              <span class="av-init">KV</span>
+              <div class="av-orbit"></div>
+            </div>
+          </div>
+          <div class="about-body">
+            <div class="role-badge">Founder &amp; CEO</div>
+            <h3 class="about-name">Kotagiri Vikram</h3>
+            <p class="about-desc">
+              Visionary leader with deep expertise in AI data services and machine learning
+              infrastructure. Driving Lydertronics toward becoming the global benchmark
+              for precision data annotation.
+            </p>
+            <div class="tag-row">
+              <span class="chip">AI Strategy</span>
+              <span class="chip">Data Science</span>
+              <span class="chip">Leadership</span>
+            </div>
+          </div>
+        </div>
+        <!-- Project Manager -->
+        <div class="glass-card about-card">
+          <div class="about-avatar">
+            <div class="av-circle av-purple">
+              <span class="av-init">VH</span>
+              <div class="av-orbit"></div>
+            </div>
+          </div>
+          <div class="about-body">
+            <div class="role-badge role-pm">Project Manager</div>
+            <h3 class="about-name">Variganti Harikrishna</h3>
+            <p class="about-desc">
+              Seasoned project orchestrator ensuring every dataset is delivered with
+              military precision. Expert in managing complex annotation workflows and
+              cross-functional AI teams at scale.
+            </p>
+            <div class="tag-row">
+              <span class="chip">Project Ops</span>
+              <span class="chip">Workflow Design</span>
+              <span class="chip">QA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Mission inside modal -->
+      <div class="glass-card mission-card modal-mission">
+        <div class="mission-hex">⬡</div>
+        <h3>Our Mission</h3>
+        <p>
+          To accelerate AI development worldwide by providing the most accurate, scalable,
+          and efficient data annotation services — enabling machines to see, hear, and
+          understand the world with human-level precision.
+        </p>
+      </div>
+    </div>
+  </div>
 
 
   <!-- =========================================
@@ -167,17 +198,12 @@
        ========================================= -->
   <nav id="navbar" class="navbar">
     <div class="nav-container">
-      <!-- Company logo -->
       <a href="#hero" class="nav-logo">
         <span class="logo-brk">[</span><span class="logo-main">LYDR</span><span class="logo-accent">TRONICS</span><span class="logo-brk">]</span>
       </a>
-
-      <!-- Mobile hamburger -->
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
-
-      <!-- Nav links -->
       <ul class="nav-links" id="navLinks" role="list">
         <li><a href="#hero"       class="nav-link" data-section="hero">Home</a></li>
         <li><a href="#about"      class="nav-link" data-section="about">About</a></li>
@@ -197,17 +223,13 @@
          HERO SECTION
          ========================================= -->
     <section id="hero" class="section hero">
-      <!-- Animated gradient background layers -->
       <div class="hero-bg">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
         <div class="grid-overlay"></div>
-        <!-- CSS Particles injected by JS -->
         <div class="particles-field" id="particlesField"></div>
       </div>
-
-      <!-- Circuit decoration edges -->
       <div class="circuit-edge ce-left">
         <div class="ce-line"></div><div class="ce-dot"></div>
         <div class="ce-line short"></div><div class="ce-dot"></div>
@@ -218,7 +240,6 @@
         <div class="ce-line short"></div><div class="ce-dot"></div>
         <div class="ce-line"></div>
       </div>
-
       <div class="hero-content">
         <div class="hero-badge">
           <span class="badge-pulse"></span>
@@ -233,7 +254,6 @@
           Fueling next-generation AI with pixel-perfect accuracy at scale.
         </p>
         <div class="hero-cta">
-          <!-- CTA Buttons -->
           <button class="btn btn-primary" onclick="smoothScrollTo('#contact')">
             <span class="btn-bg"></span>
             <span class="btn-label">Get Started</span>
@@ -243,8 +263,6 @@
             <span class="btn-label">Explore Services</span>
           </button>
         </div>
-
-        <!-- Hero stats bar -->
         <div class="hero-stats">
           <div class="stat">
             <span class="stat-n">99.8<em>%</em></span>
@@ -266,76 +284,52 @@
 
 
     <!-- =========================================
-         ABOUT SECTION
+         ABOUT SECTION (compact — team in modal)
          ========================================= -->
     <section id="about" class="section about">
       <div class="container">
-        <div class="section-hd fade-in">
-          <span class="sec-tag">// ABOUT US</span>
-          <h2 class="sec-title">The Minds Behind <span class="accent">Lydertronics</span></h2>
-          <p class="sec-sub">Built by innovators. Driven by precision. Powered by AI.</p>
-        </div>
-
-        <div class="about-grid">
-          <!-- Founder card -->
-          <div class="glass-card about-card fade-in">
-            <div class="about-avatar">
-              <div class="av-circle av-blue">
-                <span class="av-init">KV</span>
-                <div class="av-orbit"></div>
+        <div class="about-hero-wrap fade-in">
+          <div class="glass-card about-hero-card">
+            <div class="about-hero-inner">
+              <div class="about-hero-text">
+                <span class="sec-tag">// ABOUT US</span>
+                <h2 class="about-hero-title">Who We Are</h2>
+                <p class="about-hero-desc">
+                  Lydertronics is an enterprise AI data intelligence company specializing in
+                  high-accuracy annotation, labeling, and dataset preparation. Our expert
+                  team delivers production-ready data pipelines that power the world's most
+                  advanced AI systems — from autonomous vehicles to next-gen robotics.
+                </p>
+                <p class="about-hero-desc">
+                  Founded with a mission to bridge the gap between raw data and intelligent
+                  machines, we bring domain expertise, rigorous QA processes, and 24-hour
+                  turnaround to every project we undertake.
+                </p>
+                <button class="btn btn-primary about-team-btn" id="openTeamModal">
+                  <span class="btn-bg"></span>
+                  <span class="btn-label">Meet Our Team</span>
+                  <span class="btn-arr">&#8594;</span>
+                </button>
+              </div>
+              <div class="about-hero-stats-col">
+                <div class="about-stat-item">
+                  <span class="about-stat-n">99.8%</span>
+                  <span class="about-stat-l">Annotation Accuracy</span>
+                </div>
+                <div class="about-stat-item">
+                  <span class="about-stat-n">50K+</span>
+                  <span class="about-stat-l">Datasets Delivered</span>
+                </div>
+                <div class="about-stat-item">
+                  <span class="about-stat-n">7+</span>
+                  <span class="about-stat-l">Specialized Services</span>
+                </div>
+                <div class="about-stat-item">
+                  <span class="about-stat-n">24hr</span>
+                  <span class="about-stat-l">Fast Turnaround</span>
+                </div>
               </div>
             </div>
-            <div class="about-body">
-              <!-- Company founder info -->
-              <div class="role-badge">Founder &amp; CEO</div>
-              <h3 class="about-name">Kotagiri Vikram</h3>
-              <p class="about-desc">
-                Visionary leader with deep expertise in AI data services and machine learning
-                infrastructure. Driving Lydertronics toward becoming the global benchmark
-                for precision data annotation.
-              </p>
-              <div class="tag-row">
-                <span class="chip">AI Strategy</span>
-                <span class="chip">Data Science</span>
-                <span class="chip">Leadership</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project Manager card -->
-          <div class="glass-card about-card fade-in">
-            <div class="about-avatar">
-              <div class="av-circle av-purple">
-                <span class="av-init">VH</span>
-                <div class="av-orbit"></div>
-              </div>
-            </div>
-            <div class="about-body">
-              <!-- Project manager info -->
-              <div class="role-badge role-pm">Project Manager</div>
-              <h3 class="about-name">Variganti Harikrishna</h3>
-              <p class="about-desc">
-                Seasoned project orchestrator ensuring every dataset is delivered with
-                military precision. Expert in managing complex annotation workflows and
-                cross-functional AI teams at scale.
-              </p>
-              <div class="tag-row">
-                <span class="chip">Project Ops</span>
-                <span class="chip">Workflow Design</span>
-                <span class="chip">QA</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Mission card -->
-          <div class="glass-card mission-card fade-in">
-            <div class="mission-hex">⬡</div>
-            <h3>Our Mission</h3>
-            <p>
-              To accelerate AI development worldwide by providing the most accurate, scalable,
-              and efficient data annotation services — enabling machines to see, hear, and
-              understand the world with human-level precision.
-            </p>
           </div>
         </div>
       </div>
@@ -354,60 +348,66 @@
         </div>
 
         <div class="services-grid">
-          <!-- Service cards -->
+
           <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">◈</div></div>
-            <h3>Image Annotation</h3>
-            <p>Pixel-precise object detection and semantic labeling for robust computer vision model training.</p>
-            <div class="svc-foot"><span class="svc-chip">Computer Vision</span></div>
+            <div class="svc-icon-wrap"><div class="svc-icon">🧠</div></div>
+            <h3>RLHF</h3>
+            <p>Reinforcement Learning from Human Feedback — curating high-quality preference data, comparison rankings, and reward signal annotations for fine-tuning LLMs and AI agents.</p>
+            <div class="svc-foot"><span class="svc-chip">LLM Training</span><span class="svc-chip">Alignment</span></div>
           </div>
 
           <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">⬚</div></div>
-            <h3>Bounding Box Annotation</h3>
-            <p>Precise rectangular region marking for object localization in autonomous systems and surveillance.</p>
-            <div class="svc-foot"><span class="svc-chip">Detection AI</span></div>
+            <div class="svc-icon-wrap"><div class="svc-icon">🤖</div></div>
+            <h3>Video Annotation</h3>
+            <p>Frame-by-frame robot task evaluation and action sequence labeling — benchmarking robotic performance across grasping, navigation, and manipulation tasks.</p>
+            <div class="svc-foot"><span class="svc-chip">Robotics</span><span class="svc-chip">Evaluation</span></div>
+          </div>
+
+          <div class="glass-card svc-card fade-in">
+            <div class="svc-icon-wrap"><div class="svc-icon">📡</div></div>
+            <h3>LiDAR &amp; 3D Point Cloud</h3>
+            <p>Expert annotation of LiDAR scans and 3D point cloud data — object classification, semantic segmentation, and cuboid labeling for autonomous vehicles and spatial AI.</p>
+            <div class="svc-foot"><span class="svc-chip">3D Sensing</span><span class="svc-chip">Autonomous</span></div>
+          </div>
+
+          <div class="glass-card svc-card fade-in">
+            <div class="svc-icon-wrap"><div class="svc-icon">◈</div></div>
+            <h3>Multimodal AI Annotation</h3>
+            <p>Cross-modal data labeling combining text, image, audio, and video inputs — building rich multimodal datasets for vision-language models and generative AI systems.</p>
+            <div class="svc-foot"><span class="svc-chip">Vision-Language</span><span class="svc-chip">Gen AI</span></div>
           </div>
 
           <div class="glass-card svc-card fade-in">
             <div class="svc-icon-wrap"><div class="svc-icon">⊞</div></div>
-            <h3>Image Labeling</h3>
-            <p>Multi-class tagging and metadata enrichment for high-performance image classification models.</p>
-            <div class="svc-foot"><span class="svc-chip">Classification</span></div>
+            <h3>Image Annotation</h3>
+            <p>Pixel-precise object detection, semantic segmentation, and multi-class labeling for computer vision — supporting bounding boxes, polygons, keypoints, and more.</p>
+            <div class="svc-foot"><span class="svc-chip">Computer Vision</span><span class="svc-chip">Detection</span></div>
           </div>
 
           <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">▶</div></div>
-            <h3>Video Annotation</h3>
-            <p>Frame-by-frame tracking and temporal labeling for video understanding and action recognition.</p>
-            <div class="svc-foot"><span class="svc-chip">Temporal AI</span></div>
+            <div class="svc-icon-wrap"><div class="svc-icon">🎙</div></div>
+            <h3>Transcription</h3>
+            <p>Multi-language speech-to-text with speaker diarization, punctuation restoration, and domain-specific terminology — supporting NLP model training and ASR evaluation.</p>
+            <div class="svc-foot"><span class="svc-chip">NLP</span><span class="svc-chip">Speech AI</span></div>
           </div>
 
-          <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">⟳</div></div>
-            <h3>Robotic Movement Analysis</h3>
-            <p>Motion capture labeling and kinematic data annotation for next-generation robotic intelligence.</p>
-            <div class="svc-foot"><span class="svc-chip">Robotics AI</span></div>
-          </div>
-
-          <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">♪</div></div>
-            <h3>Audio Transcription</h3>
-            <p>Multi-language speech-to-text with speaker diarization, punctuation, and sentiment annotation.</p>
-            <div class="svc-foot"><span class="svc-chip">NLP &amp; Speech</span></div>
-          </div>
-
-          <!-- Flagship service card (full-width) -->
+          <!-- Flagship -->
           <div class="glass-card svc-card svc-flagship fade-in">
             <div class="flagship-badge">FLAGSHIP SERVICE</div>
-            <div class="svc-icon-wrap"><div class="svc-icon">⬡</div></div>
-            <h3>AI Dataset Preparation</h3>
-            <p>
-              End-to-end dataset curation, cleaning, augmentation, format conversion, and quality
-              verification — production-ready pipelines for your AI model training at any scale.
-            </p>
-            <div class="svc-foot"><span class="svc-chip">Full Pipeline</span><span class="svc-chip">Enterprise</span></div>
+            <div class="svc-flagship-inner">
+              <div>
+                <div class="svc-icon-wrap"><div class="svc-icon">🎧</div></div>
+                <h3>Audio Recording &amp; Dataset Collection</h3>
+                <p>
+                  Professional audio data collection — scripted recordings, natural speech capture, multi-dialect
+                  datasets, noise augmentation, and quality-controlled audio archives purpose-built for ASR, TTS,
+                  and speech recognition model training at scale.
+                </p>
+                <div class="svc-foot"><span class="svc-chip">ASR</span><span class="svc-chip">TTS</span><span class="svc-chip">Data Collection</span></div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -426,55 +426,30 @@
 
         <div class="projects-grid">
 
-          <!-- Project 1: Audio Transcription -->
+          <!-- Project 1: RLHF -->
           <div class="glass-card proj-card fade-in">
-            <div class="proj-visual audio-visual">
-              <div class="audio-eq">
-                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-              </div>
-              <div class="audio-wave">
-                <div class="wave-line"></div>
+            <div class="proj-visual rlhf-visual">
+              <div class="rlhf-scene">
+                <div class="rlhf-pair">
+                  <div class="rlhf-bubble rb-a">Response A</div>
+                  <div class="rlhf-vs">VS</div>
+                  <div class="rlhf-bubble rb-b">Response B</div>
+                </div>
+                <div class="rlhf-arrow">&#9660;</div>
+                <div class="rlhf-prefer">Human Preference Signal</div>
               </div>
             </div>
             <div class="proj-body">
               <span class="proj-num">01</span>
-              <h3>Audio Transcription</h3>
-              <p>English &amp; Telugu multi-dialect speech recognition dataset preparation with speaker tagging and noise filtering for NLP training.</p>
+              <h3>RLHF — Reward Model Training</h3>
+              <p>Large-scale preference annotation and comparison ranking for LLM fine-tuning pipelines, delivering structured human feedback datasets for alignment training.</p>
               <div class="proj-tags">
-                <span>English</span><span>Telugu</span><span>NLP</span>
+                <span>RLHF</span><span>LLM</span><span>Alignment</span>
               </div>
             </div>
           </div>
 
-          <!-- Project 2: Bounding Boxes -->
-          <div class="glass-card proj-card fade-in">
-            <div class="proj-visual bbox-visual">
-              <div class="bbox-scene">
-                <div class="bbox-obj b-obj-1"></div>
-                <div class="bbox-obj b-obj-2"></div>
-                <div class="bbox-obj b-obj-3"></div>
-                <!-- Corner markers -->
-                <div class="corner-mark cm-tl"></div>
-                <div class="corner-mark cm-tr"></div>
-                <div class="corner-mark cm-bl"></div>
-                <div class="corner-mark cm-br"></div>
-                <div class="cross-hair ch-h"></div>
-                <div class="cross-hair ch-v"></div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <span class="proj-num">02</span>
-              <h3>Image Bounding Boxes</h3>
-              <p>150K+ images processed for autonomous vehicle perception systems with sub-pixel bounding box precision and quality audits.</p>
-              <div class="proj-tags">
-                <span>Detection</span><span>CV</span><span>Auto-Drive</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3: Robot Evaluation -->
+          <!-- Project 2: Video Annotation / Robot Evaluation -->
           <div class="glass-card proj-card fade-in">
             <div class="proj-visual robot-visual">
               <div class="robot-arm-demo">
@@ -488,35 +463,105 @@
               </div>
             </div>
             <div class="proj-body">
-              <span class="proj-num">03</span>
-              <h3>Robot Performance Evaluation</h3>
-              <p>Kinematic accuracy benchmarking and movement pattern annotation for industrial robotic arms across diverse motion trajectories.</p>
+              <span class="proj-num">02</span>
+              <h3>Video Annotation — Robot Task Evaluation</h3>
+              <p>Frame-by-frame kinematic labeling and performance benchmarking for industrial robotic arms — covering grasping, sorting, and pick-and-place task sequences.</p>
               <div class="proj-tags">
-                <span>Robotics</span><span>Motion</span><span>Analysis</span>
+                <span>Robotics</span><span>Video</span><span>Evaluation</span>
               </div>
             </div>
           </div>
 
-          <!-- Project 4: Image Labeling -->
+          <!-- Project 3: LiDAR -->
           <div class="glass-card proj-card fade-in">
-            <div class="proj-visual label-visual">
-              <div class="label-scene">
-                <div class="label-tag lbl-1">car</div>
-                <div class="label-tag lbl-2">tree</div>
-                <div class="label-tag lbl-3">sky</div>
-                <div class="label-tag lbl-4">road</div>
-                <div class="label-line ll-1"></div>
-                <div class="label-line ll-2"></div>
-                <div class="label-line ll-3"></div>
-                <div class="label-line ll-4"></div>
+            <div class="proj-visual lidar-visual">
+              <div class="lidar-scene">
+                <div class="lidar-scan"></div>
+                <div class="lidar-point lp1"></div>
+                <div class="lidar-point lp2"></div>
+                <div class="lidar-point lp3"></div>
+                <div class="lidar-point lp4"></div>
+                <div class="lidar-point lp5"></div>
+                <div class="lidar-point lp6"></div>
+                <div class="lidar-box lb1"></div>
+                <div class="lidar-box lb2"></div>
+              </div>
+            </div>
+            <div class="proj-body">
+              <span class="proj-num">03</span>
+              <h3>LiDAR &amp; 3D Point Cloud Annotation</h3>
+              <p>High-density point cloud labeling for autonomous driving perception — cuboid fitting, semantic segmentation, and multi-frame tracking across complex urban scenes.</p>
+              <div class="proj-tags">
+                <span>LiDAR</span><span>3D</span><span>Auto-Drive</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: Multimodal -->
+          <div class="glass-card proj-card fade-in">
+            <div class="proj-visual multimodal-visual">
+              <div class="mm-scene">
+                <div class="mm-node mm-img">IMG</div>
+                <div class="mm-node mm-txt">TXT</div>
+                <div class="mm-node mm-aud">AUD</div>
+                <div class="mm-node mm-vid">VID</div>
+                <div class="mm-center">AI</div>
+                <div class="mm-line ml1"></div>
+                <div class="mm-line ml2"></div>
+                <div class="mm-line ml3"></div>
+                <div class="mm-line ml4"></div>
               </div>
             </div>
             <div class="proj-body">
               <span class="proj-num">04</span>
-              <h3>Image Labeling</h3>
-              <p>Semantic segmentation and multi-label classification on 80K+ urban scene images for city-scale autonomous navigation AI.</p>
+              <h3>Multimodal AI Annotation</h3>
+              <p>Integrated cross-modal labeling combining image captions, audio descriptions, video transcripts, and text alignments for vision-language and generative model training.</p>
               <div class="proj-tags">
-                <span>Labeling</span><span>Segmentation</span><span>Urban AI</span>
+                <span>Multimodal</span><span>VLM</span><span>Gen AI</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5: Image Annotation -->
+          <div class="glass-card proj-card fade-in">
+            <div class="proj-visual bbox-visual">
+              <div class="bbox-scene">
+                <div class="bbox-obj b-obj-1"></div>
+                <div class="bbox-obj b-obj-2"></div>
+                <div class="bbox-obj b-obj-3"></div>
+                <div class="corner-mark cm-tl"></div>
+                <div class="corner-mark cm-tr"></div>
+                <div class="corner-mark cm-bl"></div>
+                <div class="corner-mark cm-br"></div>
+                <div class="cross-hair ch-h"></div>
+                <div class="cross-hair ch-v"></div>
+              </div>
+            </div>
+            <div class="proj-body">
+              <span class="proj-num">05</span>
+              <h3>Image Annotation</h3>
+              <p>150K+ images processed with bounding boxes, polygons, and semantic masks for autonomous vehicle perception — sub-pixel precision with multi-tier QA audits.</p>
+              <div class="proj-tags">
+                <span>Image</span><span>Segmentation</span><span>CV</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 6: Transcription + Audio -->
+          <div class="glass-card proj-card fade-in">
+            <div class="proj-visual audio-visual">
+              <div class="audio-eq">
+                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+              </div>
+            </div>
+            <div class="proj-body">
+              <span class="proj-num">06</span>
+              <h3>Transcription &amp; Audio Recording</h3>
+              <p>Multi-dialect English and Telugu speech datasets — scripted recordings, live transcription with speaker diarization, and noise-augmented corpora for ASR systems.</p>
+              <div class="proj-tags">
+                <span>ASR</span><span>Telugu</span><span>English</span>
               </div>
             </div>
           </div>
@@ -536,7 +581,6 @@
           <h2 class="sec-title">The Lydertronics <span class="accent">Advantage</span></h2>
           <p class="sec-sub">Four pillars that make us the preferred AI data partner.</p>
         </div>
-
         <div class="why-grid">
           <div class="glass-card why-card fade-in">
             <div class="why-hex">⬡</div>
@@ -548,21 +592,18 @@
               <span>99.8%</span>
             </div>
           </div>
-
           <div class="glass-card why-card fade-in">
             <div class="why-hex">◉</div>
             <div class="why-num">02</div>
             <h3>Skilled Annotators</h3>
-            <p>Domain-certified specialists with deep expertise across computer vision, NLP, audio, and robotics data domains.</p>
+            <p>Domain-certified specialists with deep expertise across computer vision, NLP, audio, robotics, and multimodal data domains.</p>
           </div>
-
           <div class="glass-card why-card fade-in">
             <div class="why-hex">⚡</div>
             <div class="why-num">03</div>
             <h3>Fast Delivery</h3>
             <p>24-hour turnaround on standard projects. Agile sprint cycles for large-scale enterprise dataset requirements.</p>
           </div>
-
           <div class="glass-card why-card fade-in">
             <div class="why-hex">∞</div>
             <div class="why-num">04</div>
@@ -584,31 +625,13 @@
           <h2 class="sec-title">Who We <span class="accent">Serve</span></h2>
           <p class="sec-sub">Partnering with innovators across the global AI ecosystem.</p>
         </div>
-
         <div class="ind-grid fade-in">
-          <div class="glass-card ind-card">
-            <div class="ind-icon-wrap"><span class="ind-glyph">⬡</span></div>
-            <span>AI Companies</span>
-          </div>
-          <div class="glass-card ind-card">
-            <div class="ind-icon-wrap"><span class="ind-glyph">⚙</span></div>
-            <span>Robotics Firms</span>
-          </div>
-          <div class="glass-card ind-card">
-            <div class="ind-icon-wrap"><span class="ind-glyph">◈</span></div>
-            <span>Startups</span>
-          </div>
-          <div class="glass-card ind-card">
-            <div class="ind-icon-wrap"><span class="ind-glyph">⊕</span></div>
-            <span>Research Labs</span>
-          </div>
-          <div class="glass-card ind-card">
-            <div class="ind-icon-wrap"><span class="ind-glyph">⬚</span></div>
-            <span>Tech Firms</span>
-          </div>
+          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">⬡</span></div><span>AI Companies</span></div>
+          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">⚙</span></div><span>Robotics Firms</span></div>
+          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">◈</span></div><span>Startups</span></div>
+          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">⊕</span></div><span>Research Labs</span></div>
+          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">⬚</span></div><span>Tech Firms</span></div>
         </div>
-
-        <!-- Global reach strip -->
         <div class="geo-strip glass-card fade-in">
           <span class="geo-label">GLOBAL REACH</span>
           <div class="geo-flags">
@@ -635,25 +658,20 @@
           <h2 class="sec-title">Start Your <span class="accent">Project</span></h2>
           <p class="sec-sub">Ready to power your AI with precision data? Let's build together.</p>
         </div>
-
         <div class="contact-grid">
-
-          <!-- Contact info panel -->
           <div class="glass-card contact-info fade-in">
             <h3>Get In Touch</h3>
             <div class="contact-item">
               <div class="ci-icon">✉</div>
               <div class="ci-body">
                 <span class="ci-label">Email</span>
-                <!-- Company contact email -->
-                <a href="mailto:Kotagirivikram969@gmail.com" class="ci-val">Kotagirivikram969@gmail.com</a>
+                <a href="mailto:lydertronicsai@gmail.com" class="ci-val">lydertronicsai@gmail.com</a>
               </div>
             </div>
             <div class="contact-item">
               <div class="ci-icon">☏</div>
               <div class="ci-body">
                 <span class="ci-label">Phone</span>
-                <!-- Company contact phone -->
                 <a href="tel:+917981520897" class="ci-val">+91 7981520897</a>
               </div>
             </div>
@@ -673,12 +691,7 @@
             </div>
           </div>
 
-          <!-- Contact form -->
-          <form class="glass-card contact-form fade-in" id="contactForm"
-      action="https://formspree.io/f/xvzvbgwo"
-      method="POST"
-      novalidate>
-            
+          <form class="glass-card contact-form fade-in" id="contactForm" novalidate>
             <div class="form-group">
               <label for="fname">Full Name</label>
               <input type="text" id="fname" name="name" placeholder="Your Full Name" autocomplete="name" required />
@@ -693,13 +706,14 @@
               <label for="fservice">Service Required</label>
               <select id="fservice" name="service">
                 <option value="">Select a service...</option>
+                <option>RLHF (Human Feedback Annotation)</option>
+                <option>Video Annotation — Robot Task Evaluation</option>
+                <option>LiDAR &amp; 3D Point Cloud Annotation</option>
+                <option>Multimodal AI Annotation</option>
                 <option>Image Annotation</option>
-                <option>Bounding Box Annotation</option>
-                <option>Image Labeling</option>
-                <option>Video Annotation</option>
-                <option>Robotic Movement Analysis</option>
-                <option>Audio Transcription</option>
-                <option>AI Dataset Preparation</option>
+                <option>Transcription</option>
+                <option>Audio Recording &amp; Dataset Collection</option>
+                <option>AI Dataset Preparation (Full Pipeline)</option>
               </select>
             </div>
             <div class="form-group">
@@ -716,7 +730,6 @@
               ✓ Message received! We'll respond within 24 hours.
             </div>
           </form>
-
         </div>
       </div>
     </section>
@@ -731,16 +744,12 @@
     <div class="footer-glow"></div>
     <div class="container">
       <div class="footer-grid">
-
-        <!-- Brand column -->
         <div class="footer-col footer-brand-col">
           <div class="footer-logo">
             <span class="logo-brk">[</span><span class="logo-main">LYDR</span><span class="logo-accent">TRONICS</span><span class="logo-brk">]</span>
           </div>
           <p>Powering the future of AI with precision data annotation and labeling services.</p>
         </div>
-
-        <!-- Quick links -->
         <div class="footer-col">
           <h4 class="footer-h">Quick Links</h4>
           <ul class="footer-links">
@@ -751,38 +760,34 @@
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
-
-        <!-- Services list -->
         <div class="footer-col">
           <h4 class="footer-h">Services</h4>
           <ul class="footer-links">
-            <li>Image Annotation</li>
-            <li>Bounding Box</li>
+            <li>RLHF Annotation</li>
             <li>Video Annotation</li>
-            <li>Audio Transcription</li>
-            <li>AI Dataset Prep</li>
+            <li>LiDAR &amp; 3D Point Cloud</li>
+            <li>Multimodal AI</li>
+            <li>Image Annotation</li>
+            <li>Transcription</li>
+            <li>Audio Recording</li>
           </ul>
         </div>
-
-        <!-- Contact info -->
         <div class="footer-col">
           <h4 class="footer-h">Contact</h4>
           <ul class="footer-links">
-            <li><a href="mailto:Kotagirivikram969@gmail.com">Kotagirivikram969@gmail.com</a></li>
+            <li><a href="mailto:lydertronicsai@gmail.comm">lydertronicsai@gmail.com</a></li>
             <li><a href="tel:+917981520897">+91 7981520897</a></li>
             <li>India | USA | Europe</li>
           </ul>
         </div>
-
       </div>
-
+      <div class="footer-rule"></div>
       <div class="footer-bottom">
-        <div class="footer-rule"></div>
-        <p>© 2024 Lydertronics. All Rights Reserved. | Precision Data for AI Excellence.</p>
+        <p>&copy; 2025 Lydertronics. All rights reserved. | Precision AI Data Services.</p>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="update.js"></script>
 </body>
 </html>
