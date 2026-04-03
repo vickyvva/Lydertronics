@@ -12,7 +12,6 @@
   const pctEl     = document.getElementById('loaderPct');
   const statusEl  = document.getElementById('loaderStatus');
 
-  // Status messages cycling during load
   const statuses = [
     'INITIALIZING NEURAL CORE...',
     'LOADING AI SUBSYSTEMS...',
@@ -23,15 +22,14 @@
 
   let progress  = 0;
   let msgIndex  = 0;
-  const totalMs = 3200; // total loader display time
-  const step    = 16;   // ~60fps tick
+  const totalMs = 3200;
+  const step    = 16;
 
   const interval = setInterval(() => {
     progress = Math.min(100, progress + (100 / (totalMs / step)));
     if (fillEl) fillEl.style.width = progress.toFixed(1) + '%';
     if (pctEl)  pctEl.textContent  = Math.floor(progress) + '%';
 
-    // Cycle status messages at thresholds
     const thresholds = [20, 45, 65, 85, 99];
     if (thresholds[msgIndex] && progress >= thresholds[msgIndex]) {
       if (statusEl) statusEl.textContent = statuses[msgIndex + 1] || statuses[msgIndex];
@@ -40,7 +38,6 @@
 
     if (progress >= 100) {
       clearInterval(interval);
-      // Brief pause at 100% then exit
       setTimeout(exitLoader, 400);
     }
   }, step);
@@ -48,14 +45,12 @@
   function exitLoader() {
     if (!loader) return;
     loader.classList.add('exit');
-    // Remove from DOM after transition
     setTimeout(() => {
       loader.style.display = 'none';
       document.body.style.overflow = '';
     }, 850);
   }
 
-  // Prevent scrolling while loader is active
   document.body.style.overflow = 'hidden';
 })();
 
@@ -70,14 +65,45 @@ window.smoothScrollTo = function (selector) {
 };
 
 
+/* ─── TEAM MODAL ─────────────────────────────────────────── */
+(function initModal() {
+  const modal     = document.getElementById('teamModal');
+  const openBtn   = document.getElementById('openTeamModal');
+  const closeBtn  = document.getElementById('modalClose');
+  if (!modal) return;
+
+  function openModal() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (openBtn)  openBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  // Close on backdrop click
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+})();
+
+
 /* ─── NAVBAR: scroll style + active link ─────────────────── */
 (function initNavbar() {
-  const navbar = document.getElementById('navbar');
-  const toggle = document.getElementById('navToggle');
-  const links  = document.getElementById('navLinks');
+  const navbar   = document.getElementById('navbar');
+  const toggle   = document.getElementById('navToggle');
+  const links    = document.getElementById('navLinks');
   const allLinks = document.querySelectorAll('.nav-link');
 
-  // Scroll → add .scrolled class and highlight active section
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
@@ -104,7 +130,6 @@ window.smoothScrollTo = function (selector) {
     });
   }
 
-  // Mobile hamburger toggle
   if (toggle && links) {
     toggle.addEventListener('click', () => {
       const isOpen = links.classList.toggle('open');
@@ -112,7 +137,6 @@ window.smoothScrollTo = function (selector) {
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Close nav on link click (mobile)
     allLinks.forEach(a => {
       a.addEventListener('click', () => {
         links.classList.remove('open');
@@ -217,7 +241,6 @@ window.smoothScrollTo = function (selector) {
 
     if (!valid) return;
 
-    // Simulate submission (replace with real endpoint if needed)
     const btn = form.querySelector('button[type="submit"]');
     if (btn) {
       btn.disabled = true;
@@ -231,12 +254,10 @@ window.smoothScrollTo = function (selector) {
         btn.disabled = false;
         btn.querySelector('.btn-label').textContent = 'Send Message';
       }
-      // Hide success after 5s
       setTimeout(() => successMsg?.classList.remove('show'), 5000);
     }, 1200);
   });
 
-  // Clear per-field error on input
   ['fname', 'femail', 'fmsg'].forEach(id => {
     const el = document.getElementById(id);
     const errId = fields[id]?.errId;
@@ -255,7 +276,6 @@ document.querySelectorAll('.nav-link[href^="#"]').forEach(a => {
   });
 });
 
-/* Also wire footer links */
 document.querySelectorAll('.footer-links a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
@@ -278,9 +298,7 @@ document.querySelectorAll('.btn').forEach(btn => {
 });
 
 
-/* ─── OPTIONAL: LIGHTWEIGHT CLICK SOUND ─────────────────── */
-// Plays a short synthesized click on button press (Web Audio API).
-// Web Audio API requires a prior user gesture — triggered only on real clicks.
+/* ─── LIGHTWEIGHT CLICK SOUND ────────────────────────────── */
 let audioCtx = null;
 
 function playClick() {
