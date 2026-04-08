@@ -790,13 +790,22 @@
     </div>
   </footer>
 
-<div id="chatbox" style="position:fixed; bottom:20px; right:20px; width:300px; background:green; border:1px solid #ccc; padding:10px; border-radius:10px;">
-  
-  <div id="messages" style="height:200px; overflow-y:auto; margin-bottom:10px;"></div>
-  
-  <input id="input" placeholder="Type message..." style="width:70%;" />
-  <button onclick="sendMessage()">Send</button>
+<!-- Chat Button -->
+<div id="chat-toggle">💬</div>
 
+<!-- Chatbox -->
+<div id="chat-container">
+  <div id="chat-header">
+    <span>AI Assistant</span>
+    <button onclick="toggleChat()">✖</button>
+  </div>
+
+  <div id="messages"></div>
+
+  <div id="chat-input">
+    <input type="text" id="input" placeholder="Type a message..." />
+    <button onclick="sendMessage()">➤</button>
+  </div>
 </div>
 
 
