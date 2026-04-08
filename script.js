@@ -352,3 +352,232 @@ async function sendMessage() {
     messages.innerHTML += `<p style="color:red;">Error connecting</p>`;
   }
 }
+
+/*==chatbot/*
+// ===== AI CHATBOT FUNCTIONALITY =====
+(function() {
+    "use strict";
+
+    // DOM Elements
+    const launcher = document.getElementById('chatLauncher');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeBtn = document.getElementById('closeChatBtn');
+    const messagesContainer = document.getElementById('chatMessages');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendMessageBtn');
+
+    // State
+    let isTyping = false;
+    let typingIndicatorElement = null;
+
+    // CONFIGURATION - Replace with your actual API endpoint
+    const API_CONFIG = {
+        url: 'YOUR_API_ENDPOINT_HERE', // e.g., 'https://api.openai.com/v1/chat/completions'
+        key: 'YOUR_API_KEY_HERE',       // Your API key
+        model: 'gpt-3.5-turbo'          // Your model name
+    };
+
+    // Helper: Scroll to bottom
+    function scrollToBottom() {
+        if (!messagesContainer) return;
+        messagesContainer.scrollTo({
+            top: messagesContainer.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+
+    // Create message element
+    function createMessageElement(text, sender = 'user') {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+
+        if (sender === 'bot') {
+            const avatarSpan = document.createElement('span');
+            avatarSpan.className = 'bot-avatar-small';
+            avatarSpan.textContent = '🤖';
+            const contentSpan = document.createElement('span');
+            contentSpan.textContent = text;
+            bubble.appendChild(avatarSpan);
+            bubble.appendChild(contentSpan);
+        } else {
+            bubble.textContent = text;
+        }
+
+        messageDiv.appendChild(bubble);
+        return messageDiv;
+    }
+
+    // Show typing indicator
+    function showTypingIndicator() {
+        if (isTyping) return;
+        isTyping = true;
+
+        const indicator = document.createElement('div');
+        indicator.className = 'typing-indicator';
+        indicator.id = 'typingIndicator';
+        indicator.setAttribute('aria-label', 'AI is typing');
+        
+        for (let i = 0; i < 3; i++) {
+            const dot = document.createElement('span');
+            indicator.appendChild(dot);
+        }
+        
+        messagesContainer.appendChild(indicator);
+        typingIndicatorElement = indicator;
+        scrollToBottom();
+    }
+
+    // Remove typing indicator
+    function removeTypingIndicator() {
+        if (typingIndicatorElement) {
+            typingIndicatorElement.remove();
+            typingIndicatorElement = null;
+        }
+        isTyping = false;
+    }
+
+    // Add bot message
+    function addBotMessage(text) {
+        const botMsg = createMessageElement(text, 'bot');
+        messagesContainer.appendChild(botMsg);
+        scrollToBottom();
+    }
+
+    // ==========================================
+    // API CALL FUNCTION - MODIFY THIS SECTION
+    // ==========================================
+    async function fetchBotResponse(userMessage) {
+        // Replace this with your actual API call
+        // Example for OpenAI:
+        /*
+        try {
+            const response = await fetch(API_CONFIG.url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_CONFIG.key}`
+                },
+                body: JSON.stringify({
+                    model: API_CONFIG.model,
+                    messages: [
+                        { role: 'system', content: 'You are a helpful AI assistant.' },
+                        { role: 'user', content: userMessage }
+                    ],
+                    temperature: 0.7
+                })
+            });
+            
+            const data = await response.json();
+            return data.choices[0].message.content;
+        } catch (error) {
+            console.error('API Error:', error);
+            return 'Sorry, I encountered an error. Please try again.';
+        }
+        */
+
+        // TEMPORARY MOCK RESPONSE - Remove this and uncomment the API call above
+        const mockResponses = [
+            "That's interesting! Tell me more. 🤔",
+            "I understand what you're saying. How can I assist further? 💡",
+            "Great question! Let me help you with that. ✨",
+            "I'm here to help! What specific information do you need? 🎯",
+            "Thanks for sharing. Is there anything else you'd like to know? 🌟"
+        ];
+        
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
+                resolve(randomResponse);
+            }, 1500);
+        });
+    }
+
+    // Send user message and get bot response
+    async function sendUserMessage(text) {
+        if (!text.trim()) return;
+
+        // Add user message
+        const userMsg = createMessageElement(text, 'user');
+        messagesContainer.appendChild(userMsg);
+        scrollToBottom();
+
+        // Clear input
+        messageInput.value = '';
+
+        // Show typing indicator
+        showTypingIndicator();
+
+        try {
+            // Get bot response from API
+            const botResponse = await fetchBotResponse(text);
+            
+            // Remove typing indicator and add response
+            removeTypingIndicator();
+            addBotMessage(botResponse);
+        } catch (error) {
+            removeTypingIndicator();
+            addBotMessage('Sorry, something went wrong. Please try again.');
+            console.error('Error:', error);
+        }
+    }
+
+    // Toggle chat window
+    function openChat() {
+        chatWindow.classList.remove('closed');
+        setTimeout(() => messageInput.focus(), 150);
+    }
+
+    function closeChat() {
+        chatWindow.classList.add('closed');
+    }
+
+    // Handle send action
+    function handleSend() {
+        const text = messageInput.value.trim();
+        if (!text) return;
+        sendUserMessage(text);
+    }
+
+    // Event Listeners
+    launcher.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (chatWindow.classList.contains('closed')) {
+            openChat();
+        }
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeChat();
+    });
+
+    sendBtn.addEventListener('click', handleSend);
+
+    messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSend();
+        }
+    });
+
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !chatWindow.classList.contains('closed')) {
+            closeChat();
+        }
+    });
+
+    // Auto-scroll on new messages
+    const observer = new MutationObserver(() => {
+        if (!chatWindow.classList.contains('closed')) {
+            scrollToBottom();
+        }
+    });
+    
+    observer.observe(messagesContainer, { childList: true, subtree: true });
+
+    console.log('✅ AI Chatbot Interface Ready');
+})();
