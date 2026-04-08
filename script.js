@@ -353,7 +353,6 @@ async function sendMessage() {
   }
 }
 
-/*==chatbot/*
 // ===== AI CHATBOT FUNCTIONALITY =====
 (function() {
     "use strict";
