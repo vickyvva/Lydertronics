@@ -85,10 +85,12 @@ window.smoothScrollTo = function (selector) {
   if (openBtn)  openBtn.addEventListener('click', openModal);
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
+  // Close on backdrop click
   modal.addEventListener('click', e => {
     if (e.target === modal) closeModal();
   });
 
+  // Close on Escape key
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
   });
@@ -320,251 +322,33 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
   el.addEventListener('click', playClick, { passive: true });
 });
 
+async function sendMessage() {
+  const input = document.getElementById("input");
+  const message = input.value;
 
-/* ============================================================
-   FLOATING AI CHATBOT
-   ============================================================ */
-(function initChatbot() {
-  const fab          = document.getElementById('chatFab');
-  const overlay      = document.getElementById('chatOverlay');
-  const closeBtn     = document.getElementById('chatClose');
-  const clearBtn     = document.getElementById('chatClear');
-  const messagesEl   = document.getElementById('chatMessages');
-  const inputEl      = document.getElementById('chatInput');
-  const sendBtn      = document.getElementById('chatSend');
-  const typingEl     = document.getElementById('chatTyping');
-  const charCountEl  = document.getElementById('chatCharCount');
-  const fabNotif     = document.getElementById('fabNotif');
-  const suggestions  = document.getElementById('chatSuggestions');
+  if (!message) return;
 
-  if (!fab || !overlay) return;
+  const messages = document.getElementById("messages");
 
-  // ── State ──
-  let isOpen       = false;
-  let isBotTyping  = false;
+  messages.innerHTML += `<p><b>You:</b> ${message}</p>`;
 
-  const BOT_ENDPOINT = 'https://ai-chatbot-1-ebvn.onrender.com/chat';
+  input.value = "";
 
-  const WELCOME_MSG = `<strong>👋 Hello! I'm LYDR AI</strong>
-Lydertronics' intelligent assistant. I can help you with:
-<br>• Our AI data annotation services
-<br>• Project quotes &amp; timelines
-<br>• RLHF, LiDAR, multimodal labeling
-<br>• General AI data questions
-
-How can I assist you today?`;
-
-  // ── Open / Close ──
-  function openChat() {
-    isOpen = true;
-    overlay.classList.add('open');
-    fab.classList.add('chat-open');
-    document.body.style.overflow = 'hidden';
-    // Hide notification dot
-    if (fabNotif) fabNotif.classList.add('hidden');
-    // Focus input after transition
-    setTimeout(() => inputEl?.focus(), 420);
-  }
-
-  function closeChat() {
-    isOpen = false;
-    overlay.classList.remove('open');
-    fab.classList.remove('chat-open');
-    document.body.style.overflow = '';
-  }
-
-  fab.addEventListener('click', openChat);
-  closeBtn?.addEventListener('click', closeChat);
-
-  // Close on backdrop click (clicking the dark overlay, not the panel)
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeChat();
-  });
-
-  // Close on Escape (only if chatbot is open; team modal check via class)
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && isOpen) {
-      const teamModal = document.getElementById('teamModal');
-      if (!teamModal?.classList.contains('open')) closeChat();
-    }
-  });
-
-  // ── Render welcome message ──
-  appendBotMessage(WELCOME_MSG, true);
-
-  // ── Suggestion pills ──
-  suggestions?.querySelectorAll('.suggest-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      const msg = pill.dataset.msg;
-      if (msg) {
-        suggestions.classList.add('hidden');
-        sendMessage(msg);
-      }
+  try {
+    const res = await fetch("https://ai-chatbot-1-ebvn.onrender.com/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
     });
-  });
 
-  // ── Clear conversation ──
-  clearBtn?.addEventListener('click', () => {
-    if (messagesEl) messagesEl.innerHTML = '';
-    suggestions?.classList.remove('hidden');
-    appendBotMessage(WELCOME_MSG, true);
-  });
+    const data = await res.json();
 
-  // ── Input auto-resize & char count ──
-  inputEl?.addEventListener('input', () => {
-    // Auto-resize textarea
-    inputEl.style.height = 'auto';
-    inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
+    messages.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+    messages.scrollTop = messages.scrollHeight;
 
-    // Char count
-    const len = inputEl.value.length;
-    if (charCountEl) charCountEl.textContent = `${len}/1000`;
-
-    // Enable/disable send button
-    if (sendBtn) sendBtn.disabled = len === 0 || isBotTyping;
-  });
-
-  // ── Send on Enter (Shift+Enter = new line) ──
-  inputEl?.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      if (!sendBtn?.disabled) triggerSend();
-    }
-  });
-
-  sendBtn?.addEventListener('click', triggerSend);
-
-  function triggerSend() {
-    const text = inputEl?.value.trim();
-    if (!text || isBotTyping) return;
-    suggestions?.classList.add('hidden');
-    sendMessage(text);
+  } catch (error) {
+    messages.innerHTML += `<p style="color:red;">Error connecting</p>`;
   }
-
-  // ── Core send function ──
-  async function sendMessage(text) {
-    if (!text) return;
-
-    // Reset input
-    if (inputEl) {
-      inputEl.value = '';
-      inputEl.style.height = 'auto';
-    }
-    if (charCountEl) charCountEl.textContent = '0/1000';
-    if (sendBtn) sendBtn.disabled = true;
-
-    // Append user message
-    appendUserMessage(text);
-
-    // Show typing
-    isBotTyping = true;
-    showTyping(true);
-
-    try {
-      const res = await fetch(BOT_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text }),
-      });
-
-      if (!res.ok) throw new Error(`Server error: ${res.status}`);
-
-      const data = await res.json();
-      const reply = data.reply || data.message || data.response || 'No response received.';
-
-      showTyping(false);
-      appendBotMessage(reply);
-
-    } catch (err) {
-      console.error('Chatbot error:', err);
-      showTyping(false);
-      appendBotMessage(
-        '⚠️ Connection error. Please check your internet connection and try again.',
-        false,
-        true
-      );
-    } finally {
-      isBotTyping = false;
-      if (sendBtn && inputEl?.value.length > 0) sendBtn.disabled = false;
-    }
-  }
-
-  // ── DOM helpers ──
-  function appendUserMessage(text) {
-    const now = formatTime();
-    const div = document.createElement('div');
-    div.className = 'chat-msg user';
-    div.innerHTML = `
-      <div class="msg-avatar">
-        <div class="user-avatar-icon">YOU</div>
-      </div>
-      <div>
-        <div class="msg-bubble">${escapeHtml(text)}</div>
-        <span class="msg-time">${now}</span>
-      </div>
-    `;
-    messagesEl?.appendChild(div);
-    scrollToBottom();
-  }
-
-  function appendBotMessage(html, isWelcome = false, isError = false) {
-    const now = formatTime();
-    const div = document.createElement('div');
-    div.className = 'chat-msg bot';
-
-    const bubbleClass = isWelcome ? 'msg-bubble msg-welcome' : isError ? 'msg-bubble msg-error' : 'msg-bubble';
-
-    div.innerHTML = `
-      <div class="msg-avatar">
-        <svg viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="30" cy="26" rx="22" ry="20" fill="rgba(0,180,255,0.1)" stroke="rgba(0,212,255,0.8)" stroke-width="1.5"/>
-          <ellipse cx="20" cy="31" rx="6" ry="5" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.8)" stroke-width="1"/>
-          <ellipse cx="20" cy="31" rx="3" ry="2.5" fill="rgba(0,212,255,0.9)"/>
-          <ellipse cx="40" cy="31" rx="6" ry="5" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.8)" stroke-width="1"/>
-          <ellipse cx="40" cy="31" rx="3" ry="2.5" fill="rgba(0,212,255,0.9)"/>
-          <path d="M12 44 Q12 56 30 56 Q48 56 48 44" fill="none" stroke="rgba(0,212,255,0.7)" stroke-width="1.2"/>
-          <rect x="17" y="48" width="4" height="6" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.6)" stroke-width="0.8"/>
-          <rect x="24" y="48" width="4" height="7" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.6)" stroke-width="0.8"/>
-          <rect x="32" y="48" width="4" height="7" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.6)" stroke-width="0.8"/>
-          <rect x="39" y="48" width="4" height="6" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.6)" stroke-width="0.8"/>
-        </svg>
-      </div>
-      <div>
-        <div class="${bubbleClass}">${html}</div>
-        ${isWelcome ? '' : `<span class="msg-time">${now}</span>`}
-      </div>
-    `;
-    messagesEl?.appendChild(div);
-    scrollToBottom();
-  }
-
-  function showTyping(show) {
-    if (!typingEl) return;
-    typingEl.classList.toggle('show', show);
-    if (show) scrollToBottom();
-  }
-
-  function scrollToBottom() {
-    if (messagesEl) {
-      requestAnimationFrame(() => {
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-      });
-    }
-  }
-
-  function formatTime() {
-    const now = new Date();
-    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  }
-
-  function escapeHtml(str) {
-    return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;')
-      .replace(/\n/g, '<br>');
-  }
-
-})();
+}
