@@ -790,6 +790,54 @@
     </div>
   </footer>
 
+  <!---Chatbot--->
+<!-- Floating Chat Button -->
+<button class="chat-launcher" id="chatLauncher" aria-label="Open chat">
+    <span class="robot-icon">🤖</span>
+</button>
+
+<!-- Chat Window -->
+<div class="chat-window closed" id="chatWindow">
+    <!-- Header -->
+    <div class="chat-header">
+        <div class="header-left">
+            <div class="bot-avatar">🤖</div>
+            <div class="assistant-info">
+                <h3>AI Assistant</h3>
+                <span class="online-status">Online · Ready to help</span>
+            </div>
+        </div>
+        <button class="close-btn" id="closeChatBtn" aria-label="Minimize chat">✕</button>
+    </div>
+
+    <!-- Messages Container -->
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot">
+            <div class="bubble">
+                <span class="bot-avatar-small">🤖</span>
+                <span>Hello! 👋 I'm your AI assistant. How can I help you today?</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="chat-input-area">
+        <input 
+            type="text" 
+            id="messageInput" 
+            placeholder="Ask anything..." 
+            autocomplete="off" 
+            enterkeyhint="send"
+        >
+        <button class="send-btn" id="sendMessageBtn" aria-label="Send message">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        </button>
+    </div>
+</div>
+  <!---chatbot end-->
 
   <script src="script.js"></script>
 </body>
