@@ -11,7 +11,7 @@
   <meta name="keywords" content="AI data annotation, image labeling, video annotation, RLHF, data labeling company, AI training data, automation services, Lydertronics" />
   <meta name="author" content="Lydertronics" />
 
-  <!-- Open Graph (for LinkedIn, WhatsApp, etc.) -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Lydertronics | Powering AI with Precision Data" />
   <meta property="og:description" content="Enterprise AI data annotation, labeling, RLHF, and automation services." />
   <meta property="og:type" content="website" />
@@ -135,12 +135,10 @@
         <!-- Founder -->
         <div class="glass-card about-card">
           <div class="about-avatar">
-            
-           <div class="av-circle av-blue">
-  <img src="images/vikram.jpg" alt="Kotagiri Vikram">
-  <div class="av-orbit"></div>
-</div>
-            
+            <div class="av-circle av-blue">
+              <img src="images/vikram.jpg" alt="Kotagiri Vikram" class="av-photo">
+              <div class="av-orbit"></div>
+            </div>
           </div>
           <div class="about-body">
             <div class="role-badge">Founder &amp; CEO</div>
@@ -286,7 +284,7 @@
 
 
     <!-- =========================================
-         ABOUT SECTION (compact — team in modal)
+         ABOUT SECTION
          ========================================= -->
     <section id="about" class="section about">
       <div class="container">
@@ -428,7 +426,6 @@
 
         <div class="projects-grid">
 
-          <!-- Project 1: RLHF -->
           <div class="glass-card proj-card fade-in">
             <div class="proj-visual rlhf-visual">
               <div class="rlhf-scene">
@@ -451,7 +448,6 @@
             </div>
           </div>
 
-          <!-- Project 2: Video Annotation / Robot Evaluation -->
           <div class="glass-card proj-card fade-in">
             <div class="proj-visual robot-visual">
               <div class="robot-arm-demo">
@@ -474,7 +470,6 @@
             </div>
           </div>
 
-          <!-- Project 3: LiDAR -->
           <div class="glass-card proj-card fade-in">
             <div class="proj-visual lidar-visual">
               <div class="lidar-scene">
@@ -499,7 +494,6 @@
             </div>
           </div>
 
-          <!-- Project 4: Multimodal -->
           <div class="glass-card proj-card fade-in">
             <div class="proj-visual multimodal-visual">
               <div class="mm-scene">
@@ -524,7 +518,6 @@
             </div>
           </div>
 
-          <!-- Project 5: Image Annotation -->
           <div class="glass-card proj-card fade-in">
             <div class="proj-visual bbox-visual">
               <div class="bbox-scene">
@@ -549,7 +542,6 @@
             </div>
           </div>
 
-          <!-- Project 6: Transcription + Audio -->
           <div class="glass-card proj-card fade-in">
             <div class="proj-visual audio-visual">
               <div class="audio-eq">
@@ -777,7 +769,8 @@
         <div class="footer-col">
           <h4 class="footer-h">Contact</h4>
           <ul class="footer-links">
-            <li><a href="mailto:lydertronicsai@gmail.comm">lydertronicsai@gmail.com</a></li>
+            <!-- BUG FIX: removed double 'm' from .comm -->
+            <li><a href="mailto:lydertronicsai@gmail.com">lydertronicsai@gmail.com</a></li>
             <li><a href="tel:+917981520897">+91 7981520897</a></li>
             <li>India | USA | Europe</li>
           </ul>
@@ -789,6 +782,159 @@
       </div>
     </div>
   </footer>
+
+
+  <!-- =========================================
+       FLOATING AI CHATBOT
+       ========================================= -->
+
+  <!-- Floating Skull Trigger Button -->
+  <button class="chat-fab" id="chatFab" aria-label="Open AI Assistant" title="Chat with Lydr AI">
+    <div class="fab-ring fab-ring-outer"></div>
+    <div class="fab-ring fab-ring-inner"></div>
+    <div class="fab-pulse"></div>
+    <!-- Skull SVG Icon -->
+    <svg class="fab-skull" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cranium -->
+      <ellipse cx="30" cy="26" rx="22" ry="20" fill="rgba(0,180,255,0.08)" stroke="rgba(0,212,255,0.9)" stroke-width="1.5"/>
+      <!-- Brow ridge -->
+      <path d="M12 28 Q30 22 48 28" stroke="rgba(0,212,255,0.5)" stroke-width="1" fill="none"/>
+      <!-- Left Eye Socket -->
+      <ellipse cx="20" cy="31" rx="7" ry="6" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.9)" stroke-width="1.2"/>
+      <!-- Left Eye Glow -->
+      <ellipse cx="20" cy="31" rx="3.5" ry="3" fill="rgba(0,212,255,0.9)"/>
+      <ellipse cx="20" cy="31" rx="1.5" ry="1.4" fill="white" opacity="0.9"/>
+      <!-- Right Eye Socket -->
+      <ellipse cx="40" cy="31" rx="7" ry="6" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.9)" stroke-width="1.2"/>
+      <!-- Right Eye Glow -->
+      <ellipse cx="40" cy="31" rx="3.5" ry="3" fill="rgba(0,212,255,0.9)"/>
+      <ellipse cx="40" cy="31" rx="1.5" ry="1.4" fill="white" opacity="0.9"/>
+      <!-- Nose Cavity -->
+      <path d="M27 40 L30 36 L33 40 L31 43 L29 43 Z" fill="rgba(0,0,0,0.9)" stroke="rgba(0,212,255,0.4)" stroke-width="0.8"/>
+      <!-- Jaw -->
+      <path d="M10 44 Q10 58 30 58 Q50 58 50 44" fill="rgba(0,180,255,0.06)" stroke="rgba(0,212,255,0.8)" stroke-width="1.5"/>
+      <!-- Teeth -->
+      <rect x="17" y="50" width="5" height="7" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.7)" stroke-width="1"/>
+      <rect x="24" y="50" width="5" height="8" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.7)" stroke-width="1"/>
+      <rect x="31" y="50" width="5" height="8" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.7)" stroke-width="1"/>
+      <rect x="38" y="50" width="5" height="7" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.7)" stroke-width="1"/>
+      <!-- Circuit lines on cranium -->
+      <line x1="30" y1="6" x2="30" y2="14" stroke="rgba(0,212,255,0.6)" stroke-width="1"/>
+      <line x1="10" y1="20" x2="6" y2="16" stroke="rgba(0,212,255,0.4)" stroke-width="0.8"/>
+      <line x1="50" y1="20" x2="54" y2="16" stroke="rgba(0,212,255,0.4)" stroke-width="0.8"/>
+      <!-- Rivets -->
+      <circle cx="14" cy="18" r="2" fill="rgba(0,212,255,0.7)" stroke="rgba(0,212,255,0.9)" stroke-width="0.5"/>
+      <circle cx="46" cy="18" r="2" fill="rgba(0,212,255,0.7)" stroke="rgba(0,212,255,0.9)" stroke-width="0.5"/>
+    </svg>
+    <span class="fab-label">LYDR AI</span>
+    <!-- Notification dot -->
+    <span class="fab-notif" id="fabNotif"></span>
+  </button>
+
+  <!-- Full-Page Chat Overlay -->
+  <div class="chat-overlay" id="chatOverlay" role="dialog" aria-modal="true" aria-label="Lydr AI Assistant">
+    <div class="chat-panel">
+
+      <!-- Chat Header -->
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <div class="chat-avatar">
+            <svg class="chat-skull-icon" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="30" cy="26" rx="22" ry="20" fill="rgba(0,180,255,0.1)" stroke="rgba(0,212,255,0.9)" stroke-width="1.5"/>
+              <path d="M12 28 Q30 22 48 28" stroke="rgba(0,212,255,0.5)" stroke-width="1" fill="none"/>
+              <ellipse cx="20" cy="31" rx="7" ry="6" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.9)" stroke-width="1.2"/>
+              <ellipse cx="20" cy="31" rx="3.5" ry="3" fill="rgba(0,212,255,0.9)"/>
+              <ellipse cx="20" cy="31" rx="1.5" ry="1.4" fill="white" opacity="0.9"/>
+              <ellipse cx="40" cy="31" rx="7" ry="6" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.9)" stroke-width="1.2"/>
+              <ellipse cx="40" cy="31" rx="3.5" ry="3" fill="rgba(0,212,255,0.9)"/>
+              <ellipse cx="40" cy="31" rx="1.5" ry="1.4" fill="white" opacity="0.9"/>
+              <path d="M27 40 L30 36 L33 40 L31 43 L29 43 Z" fill="rgba(0,0,0,0.9)" stroke="rgba(0,212,255,0.4)" stroke-width="0.8"/>
+              <path d="M10 44 Q10 58 30 58 Q50 58 50 44" fill="rgba(0,180,255,0.06)" stroke="rgba(0,212,255,0.8)" stroke-width="1.5"/>
+              <rect x="17" y="50" width="5" height="7" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.7)" stroke-width="1"/>
+              <rect x="24" y="50" width="5" height="8" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.7)" stroke-width="1"/>
+              <rect x="31" y="50" width="5" height="8" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.7)" stroke-width="1"/>
+              <rect x="38" y="50" width="5" height="7" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.7)" stroke-width="1"/>
+              <line x1="30" y1="6" x2="30" y2="14" stroke="rgba(0,212,255,0.6)" stroke-width="1"/>
+              <circle cx="14" cy="18" r="2" fill="rgba(0,212,255,0.7)"/>
+              <circle cx="46" cy="18" r="2" fill="rgba(0,212,255,0.7)"/>
+            </svg>
+            <div class="chat-avatar-pulse"></div>
+          </div>
+          <div class="chat-header-info">
+            <span class="chat-bot-name">LYDR AI</span>
+            <span class="chat-bot-status">
+              <span class="status-dot"></span>
+              Online · AI Assistant
+            </span>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button class="chat-clear-btn" id="chatClear" title="Clear conversation" aria-label="Clear chat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          </button>
+          <button class="chat-close-btn" id="chatClose" aria-label="Close chat">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Pills -->
+      <div class="chat-suggestions" id="chatSuggestions">
+        <button class="suggest-pill" data-msg="What services does Lydertronics offer?">Our Services</button>
+        <button class="suggest-pill" data-msg="How accurate is your data annotation?">Accuracy Info</button>
+        <button class="suggest-pill" data-msg="How can I get a project quote?">Get a Quote</button>
+        <button class="suggest-pill" data-msg="What is RLHF annotation?">What is RLHF?</button>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="chat-messages" id="chatMessages">
+        <!-- Welcome message injected by JS -->
+      </div>
+
+      <!-- Typing Indicator -->
+      <div class="chat-typing" id="chatTyping" aria-live="polite">
+        <div class="typing-avatar">
+          <svg viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="24">
+            <ellipse cx="30" cy="26" rx="22" ry="20" fill="rgba(0,180,255,0.1)" stroke="rgba(0,212,255,0.8)" stroke-width="1.5"/>
+            <ellipse cx="20" cy="31" rx="6" ry="5" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.8)" stroke-width="1"/>
+            <ellipse cx="20" cy="31" rx="3" ry="2.5" fill="rgba(0,212,255,0.9)"/>
+            <ellipse cx="40" cy="31" rx="6" ry="5" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.8)" stroke-width="1"/>
+            <ellipse cx="40" cy="31" rx="3" ry="2.5" fill="rgba(0,212,255,0.9)"/>
+            <path d="M12 44 Q12 56 30 56 Q48 56 48 44" fill="none" stroke="rgba(0,212,255,0.7)" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <!-- Input Area -->
+      <div class="chat-input-area">
+        <div class="chat-input-wrap">
+          <textarea
+            id="chatInput"
+            class="chat-input"
+            placeholder="Ask me about Lydertronics services, pricing, or AI data..."
+            rows="1"
+            aria-label="Chat message"
+            maxlength="1000"
+          ></textarea>
+          <div class="chat-input-actions">
+            <span class="chat-charcount" id="chatCharCount">0/1000</span>
+            <button class="chat-send-btn" id="chatSend" aria-label="Send message" disabled>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <p class="chat-footer-note">Powered by Lydertronics AI · Press <kbd>Enter</kbd> to send</p>
+      </div>
+
+    </div>
+  </div>
+  <!-- END CHATBOT -->
 
 
   <script src="script.js"></script>
