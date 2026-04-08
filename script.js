@@ -321,3 +321,34 @@ function playClick() {
 document.querySelectorAll('.btn, .nav-link').forEach(el => {
   el.addEventListener('click', playClick, { passive: true });
 });
+
+async function sendMessage() {
+  const input = document.getElementById("input");
+  const message = input.value;
+
+  if (!message) return;
+
+  const messages = document.getElementById("messages");
+
+  messages.innerHTML += `<p><b>You:</b> ${message}</p>`;
+
+  input.value = "";
+
+  try {
+    const res = await fetch("https://ai-chatbot-7klu.onrender.com/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await res.json();
+
+    messages.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+    messages.scrollTop = messages.scrollHeight;
+
+  } catch (error) {
+    messages.innerHTML += `<p style="color:red;">Error connecting</p>`;
+  }
+}
