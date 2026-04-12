@@ -644,7 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
     messages.scrollTop = messages.scrollHeight;
 
     try {
-      const res = await fetch("https://your-render-url.onrender.com/api/chat", {
+      const res = await fetch("https://ai-chatbot-2-kh6z.onrender.com/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
