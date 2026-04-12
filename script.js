@@ -1,59 +1,9 @@
 /* ============================================================
-   LYDERTRONICS — script.js
-   Minimal, optimized vanilla JavaScript
+   LYDERTRONICS — Enhanced script.js
+   Professional animations and interactions
    ============================================================ */
 
 'use strict';
-
-/* ─── LOADER / ROBOT SKULL INTRO ─────────────────────────── */
-(function initLoader() {
-  const loader    = document.getElementById('loader');
-  const fillEl    = document.getElementById('loaderFill');
-  const pctEl     = document.getElementById('loaderPct');
-  const statusEl  = document.getElementById('loaderStatus');
-
-  const statuses = [
-    'INITIALIZING NEURAL CORE...',
-    'LOADING AI SUBSYSTEMS...',
-    'CALIBRATING DATA PIPELINES...',
-    'ESTABLISHING CONNECTIONS...',
-    'SYSTEM READY',
-  ];
-
-  let progress  = 0;
-  let msgIndex  = 0;
-  const totalMs = 3200;
-  const step    = 16;
-
-  const interval = setInterval(() => {
-    progress = Math.min(100, progress + (100 / (totalMs / step)));
-    if (fillEl) fillEl.style.width = progress.toFixed(1) + '%';
-    if (pctEl)  pctEl.textContent  = Math.floor(progress) + '%';
-
-    const thresholds = [20, 45, 65, 85, 99];
-    if (thresholds[msgIndex] && progress >= thresholds[msgIndex]) {
-      if (statusEl) statusEl.textContent = statuses[msgIndex + 1] || statuses[msgIndex];
-      msgIndex++;
-    }
-
-    if (progress >= 100) {
-      clearInterval(interval);
-      setTimeout(exitLoader, 400);
-    }
-  }, step);
-
-  function exitLoader() {
-    if (!loader) return;
-    loader.classList.add('exit');
-    setTimeout(() => {
-      loader.style.display = 'none';
-      document.body.style.overflow = '';
-    }, 850);
-  }
-
-  document.body.style.overflow = 'hidden';
-})();
-
 
 /* ─── SMOOTH SCROLL HELPER ───────────────────────────────── */
 window.smoothScrollTo = function (selector) {
@@ -146,24 +96,24 @@ window.smoothScrollTo = function (selector) {
 })();
 
 
-/* ─── CSS PARTICLE GENERATOR (Hero) ─────────────────────── */
+/* ─── ENHANCED PARTICLE GENERATOR (Hero) ─────────────────── */
 (function initParticles() {
   const field = document.getElementById('particlesField');
   if (!field) return;
 
-  const COUNT = 35;
+  const COUNT = 40;
   const frag  = document.createDocumentFragment();
 
   for (let i = 0; i < COUNT; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
 
-    const size  = (Math.random() * 3 + 1).toFixed(1);
+    const size  = (Math.random() * 4 + 2).toFixed(1);
     const x     = (Math.random() * 100).toFixed(1);
     const y     = (Math.random() * 100).toFixed(1);
-    const dur   = (Math.random() * 4 + 3).toFixed(1);
-    const delay = (Math.random() * 5).toFixed(1);
-    const alpha = (Math.random() * 0.55 + 0.15).toFixed(2);
+    const dur   = (Math.random() * 6 + 4).toFixed(1);
+    const delay = (Math.random() * 8).toFixed(1);
+    const alpha = (Math.random() * 0.6 + 0.2).toFixed(2);
 
     p.style.cssText = [
       `width:${size}px`,
@@ -182,24 +132,126 @@ window.smoothScrollTo = function (selector) {
 })();
 
 
-/* ─── SCROLL FADE-IN (IntersectionObserver) ──────────────── */
+/* ─── SCROLL FADE-IN WITH ENHANCED STAGGER ───────────────── */
 (function initFadeIn() {
   const items = document.querySelectorAll('.fade-in');
   if (!items.length) return;
 
   const io = new IntersectionObserver(
     entries => {
-      entries.forEach(entry => {
+      entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          // Add staggered delay
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
           io.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
   );
 
   items.forEach(el => io.observe(el));
+})();
+
+
+/* ─── SERVICE CARDS SCROLL REVEAL ────────────────────────── */
+(function initServiceCardsReveal() {
+  const cards = document.querySelectorAll('.svc-card');
+  if (!cards.length) return;
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0) rotateX(0)';
+          }, index * 120);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2, rootMargin: '0px 0px -80px 0px' }
+  );
+
+  cards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(40px) rotateX(-10deg)';
+    card.style.transition = 'opacity .8s cubic-bezier(.23,1,.32,1), transform .8s cubic-bezier(.23,1,.32,1)';
+    observer.observe(card);
+  });
+})();
+
+
+/* ─── PARALLAX EFFECT ON SCROLL ──────────────────────────── */
+(function initParallax() {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+
+  const orbs = hero.querySelectorAll('.orb');
+  const cubes = hero.querySelectorAll('.cube-3d');
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const limit = hero.offsetHeight;
+
+    if (scrolled < limit) {
+      // Parallax orbs
+      orbs.forEach((orb, index) => {
+        const speed = 0.3 + (index * 0.1);
+        orb.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+
+      // Parallax 3D cubes
+      cubes.forEach((cube, index) => {
+        const speed = 0.2 + (index * 0.15);
+        cube.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    }
+  }, { passive: true });
+})();
+
+
+/* ─── SMOOTH CARD DEPTH EFFECT (No Shake) ────────────────── */
+(function initCardDepth() {
+  const cards = document.querySelectorAll('.svc-card, .proj-card');
+  
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'all .6s cubic-bezier(.23,1,.32,1)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'all .6s cubic-bezier(.23,1,.32,1)';
+    });
+  });
+})();
+
+
+/* ─── PARALLAX CARDS ON SCROLL ───────────────────────────── */
+(function initCardParallax() {
+  const cards = document.querySelectorAll('.glass-card');
+  
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+  );
+  
+  cards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'opacity .8s ease, transform .8s ease';
+    observer.observe(card);
+  });
 })();
 
 
@@ -282,21 +334,46 @@ document.querySelectorAll('.footer-links a[href^="#"]').forEach(a => {
 });
 
 
-/* ─── BUTTON PRESS HAPTIC EFFECT ─────────────────────────── */
+/* ─── ENHANCED BUTTON MICRO-INTERACTIONS ─────────────────── */
 document.querySelectorAll('.btn').forEach(btn => {
+  // Smooth press effect
   btn.addEventListener('pointerdown', () => {
-    btn.style.transform = 'scale(0.96)';
+    btn.style.transition = 'transform .1s ease';
+    btn.style.transform = 'scale(0.97)';
   });
+  
   btn.addEventListener('pointerup', () => {
+    btn.style.transition = 'all .4s cubic-bezier(.34,1.56,.64,1)';
     btn.style.transform = '';
   });
+  
   btn.addEventListener('pointerleave', () => {
+    btn.style.transition = 'all .4s cubic-bezier(.34,1.56,.64,1)';
     btn.style.transform = '';
   });
+  
+  // Magnetic effect for primary buttons
+  if (btn.classList.contains('btn-primary')) {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      // Subtle magnetic pull (max 5px)
+      const moveX = x * 0.1;
+      const moveY = y * 0.1;
+      
+      btn.style.transform = `translate(${moveX}px, ${moveY}px) translateY(-3px) scale(1.05)`;
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  }
 });
 
 
-/* ─── LIGHTWEIGHT CLICK SOUND ────────────────────────────── */
+/* ─── SUBTLE CLICK SOUND ─────────────────────────────────── */
 let audioCtx = null;
 
 function playClick() {
@@ -322,66 +399,40 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
 
 
 /* ============================================================
-   FLOATING AI CHATBOT
+   AI CHATBOT
    ============================================================ */
 (function initChatbot() {
-  const fab          = document.getElementById('chatFab');
-  const overlay      = document.getElementById('chatOverlay');
-  const closeBtn     = document.getElementById('chatClose');
-  const clearBtn     = document.getElementById('chatClear');
+  const launcher     = document.getElementById('chatLauncher');
+  const chatWindow   = document.getElementById('chatWindow');
+  const closeBtn     = document.getElementById('closeChatBtn');
   const messagesEl   = document.getElementById('chatMessages');
-  const inputEl      = document.getElementById('chatInput');
-  const sendBtn      = document.getElementById('chatSend');
-  const typingEl     = document.getElementById('chatTyping');
-  const charCountEl  = document.getElementById('chatCharCount');
-  const fabNotif     = document.getElementById('fabNotif');
-  const suggestions  = document.getElementById('chatSuggestions');
+  const inputEl      = document.getElementById('messageInput');
+  const sendBtn      = document.getElementById('sendMessageBtn');
 
-  if (!fab || !overlay) return;
+  if (!launcher || !chatWindow) return;
 
-  // ── State ──
-  let isOpen       = false;
-  let isBotTyping  = false;
+  let isOpen = false;
 
-  const BOT_ENDPOINT = 'https://ai-chatbot-1-ebvn.onrender.com/chat';
-
-  const WELCOME_MSG = `<strong>👋 Hello! I'm LYDR AI</strong>
-Lydertronics' intelligent assistant. I can help you with:
-<br>• Our AI data annotation services
-<br>• Project quotes &amp; timelines
-<br>• RLHF, LiDAR, multimodal labeling
-<br>• General AI data questions
-
-How can I assist you today?`;
-
-  // ── Open / Close ──
   function openChat() {
     isOpen = true;
-    overlay.classList.add('open');
-    fab.classList.add('chat-open');
-    document.body.style.overflow = 'hidden';
-    // Hide notification dot
-    if (fabNotif) fabNotif.classList.add('hidden');
-    // Focus input after transition
-    setTimeout(() => inputEl?.focus(), 420);
+    chatWindow.classList.remove('closed');
+    chatWindow.classList.add('open');
+    setTimeout(() => inputEl?.focus(), 400);
   }
 
   function closeChat() {
     isOpen = false;
-    overlay.classList.remove('open');
-    fab.classList.remove('chat-open');
-    document.body.style.overflow = '';
+    chatWindow.classList.remove('open');
+    chatWindow.classList.add('closed');
   }
 
-  fab.addEventListener('click', openChat);
+  launcher.addEventListener('click', openChat);
   closeBtn?.addEventListener('click', closeChat);
 
-  // Close on backdrop click (clicking the dark overlay, not the panel)
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeChat();
+  chatWindow.addEventListener('click', e => {
+    if (e.target === chatWindow) closeChat();
   });
 
-  // Close on Escape (only if chatbot is open; team modal check via class)
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && isOpen) {
       const teamModal = document.getElementById('teamModal');
@@ -389,42 +440,7 @@ How can I assist you today?`;
     }
   });
 
-  // ── Render welcome message ──
-  appendBotMessage(WELCOME_MSG, true);
-
-  // ── Suggestion pills ──
-  suggestions?.querySelectorAll('.suggest-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      const msg = pill.dataset.msg;
-      if (msg) {
-        suggestions.classList.add('hidden');
-        sendMessage(msg);
-      }
-    });
-  });
-
-  // ── Clear conversation ──
-  clearBtn?.addEventListener('click', () => {
-    if (messagesEl) messagesEl.innerHTML = '';
-    suggestions?.classList.remove('hidden');
-    appendBotMessage(WELCOME_MSG, true);
-  });
-
-  // ── Input auto-resize & char count ──
-  inputEl?.addEventListener('input', () => {
-    // Auto-resize textarea
-    inputEl.style.height = 'auto';
-    inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
-
-    // Char count
-    const len = inputEl.value.length;
-    if (charCountEl) charCountEl.textContent = `${len}/1000`;
-
-    // Enable/disable send button
-    if (sendBtn) sendBtn.disabled = len === 0 || isBotTyping;
-  });
-
-  // ── Send on Enter (Shift+Enter = new line) ──
+  // Send message functionality
   inputEl?.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -436,112 +452,44 @@ How can I assist you today?`;
 
   function triggerSend() {
     const text = inputEl?.value.trim();
-    if (!text || isBotTyping) return;
-    suggestions?.classList.add('hidden');
-    sendMessage(text);
-  }
-
-  // ── Core send function ──
-  async function sendMessage(text) {
     if (!text) return;
-
-    // Reset input
+    
+    // Add user message
+    appendUserMessage(text);
+    
+    // Clear input
     if (inputEl) {
       inputEl.value = '';
       inputEl.style.height = 'auto';
     }
-    if (charCountEl) charCountEl.textContent = '0/1000';
-    if (sendBtn) sendBtn.disabled = true;
-
-    // Append user message
-    appendUserMessage(text);
-
-    // Show typing
-    isBotTyping = true;
-    showTyping(true);
-
-    try {
-      const res = await fetch(BOT_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text }),
-      });
-
-      if (!res.ok) throw new Error(`Server error: ${res.status}`);
-
-      const data = await res.json();
-      const reply = data.reply || data.message || data.response || 'No response received.';
-
-      showTyping(false);
-      appendBotMessage(reply);
-
-    } catch (err) {
-      console.error('Chatbot error:', err);
-      showTyping(false);
-      appendBotMessage(
-        '⚠️ Connection error. Please check your internet connection and try again.',
-        false,
-        true
-      );
-    } finally {
-      isBotTyping = false;
-      if (sendBtn && inputEl?.value.length > 0) sendBtn.disabled = false;
-    }
+    
+    // Simulate bot response
+    setTimeout(() => {
+      appendBotMessage('Thank you for your message! Our team will get back to you shortly.');
+    }, 800);
   }
 
-  // ── DOM helpers ──
   function appendUserMessage(text) {
-    const now = formatTime();
     const div = document.createElement('div');
-    div.className = 'chat-msg user';
+    div.className = 'message user';
     div.innerHTML = `
-      <div class="msg-avatar">
-        <div class="user-avatar-icon">YOU</div>
-      </div>
-      <div>
-        <div class="msg-bubble">${escapeHtml(text)}</div>
-        <span class="msg-time">${now}</span>
-      </div>
+      <div class="bubble">${escapeHtml(text)}</div>
     `;
     messagesEl?.appendChild(div);
     scrollToBottom();
   }
 
-  function appendBotMessage(html, isWelcome = false, isError = false) {
-    const now = formatTime();
+  function appendBotMessage(text) {
     const div = document.createElement('div');
-    div.className = 'chat-msg bot';
-
-    const bubbleClass = isWelcome ? 'msg-bubble msg-welcome' : isError ? 'msg-bubble msg-error' : 'msg-bubble';
-
+    div.className = 'message bot';
     div.innerHTML = `
-      <div class="msg-avatar">
-        <svg viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="30" cy="26" rx="22" ry="20" fill="rgba(0,180,255,0.1)" stroke="rgba(0,212,255,0.8)" stroke-width="1.5"/>
-          <ellipse cx="20" cy="31" rx="6" ry="5" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.8)" stroke-width="1"/>
-          <ellipse cx="20" cy="31" rx="3" ry="2.5" fill="rgba(0,212,255,0.9)"/>
-          <ellipse cx="40" cy="31" rx="6" ry="5" fill="rgba(0,0,0,0.8)" stroke="rgba(0,212,255,0.8)" stroke-width="1"/>
-          <ellipse cx="40" cy="31" rx="3" ry="2.5" fill="rgba(0,212,255,0.9)"/>
-          <path d="M12 44 Q12 56 30 56 Q48 56 48 44" fill="none" stroke="rgba(0,212,255,0.7)" stroke-width="1.2"/>
-          <rect x="17" y="48" width="4" height="6" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.6)" stroke-width="0.8"/>
-          <rect x="24" y="48" width="4" height="7" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.6)" stroke-width="0.8"/>
-          <rect x="32" y="48" width="4" height="7" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.6)" stroke-width="0.8"/>
-          <rect x="39" y="48" width="4" height="6" rx="1" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.6)" stroke-width="0.8"/>
-        </svg>
-      </div>
-      <div>
-        <div class="${bubbleClass}">${html}</div>
-        ${isWelcome ? '' : `<span class="msg-time">${now}</span>`}
+      <div class="bubble">
+        <span class="bot-avatar-small">🤖</span>
+        <span>${escapeHtml(text)}</span>
       </div>
     `;
     messagesEl?.appendChild(div);
     scrollToBottom();
-  }
-
-  function showTyping(show) {
-    if (!typingEl) return;
-    typingEl.classList.toggle('show', show);
-    if (show) scrollToBottom();
   }
 
   function scrollToBottom() {
@@ -550,11 +498,6 @@ How can I assist you today?`;
         messagesEl.scrollTop = messagesEl.scrollHeight;
       });
     }
-  }
-
-  function formatTime() {
-    const now = new Date();
-    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
 
   function escapeHtml(str) {
@@ -566,5 +509,91 @@ How can I assist you today?`;
       .replace(/'/g, '&#039;')
       .replace(/\n/g, '<br>');
   }
-
 })();
+
+
+/* ─── NUMBER COUNTER ANIMATION ───────────────────────────── */
+(function initCounters() {
+  const counters = document.querySelectorAll('.stat-n, .about-stat-n');
+  
+  const animateCounter = (element) => {
+    const target = parseFloat(element.textContent);
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        element.innerHTML = element.innerHTML.replace(/[\d.]+/, target.toFixed(1));
+        clearInterval(timer);
+      } else {
+        element.innerHTML = element.innerHTML.replace(/[\d.]+/, current.toFixed(1));
+      }
+    }, 16);
+  };
+  
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  counters.forEach(counter => io.observe(counter));
+})();
+
+
+/* ─── PROGRESS BAR ANIMATION ─────────────────────────────── */
+(function initProgressBars() {
+  const bars = document.querySelectorAll('.acc-fill');
+  
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        const width = bar.style.getPropertyValue('--w') || '0%';
+        setTimeout(() => {
+          bar.style.width = width;
+        }, 200);
+        io.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  bars.forEach(bar => io.observe(bar));
+})();
+
+
+/* ─── CURSOR GLOW EFFECT ─────────────────────────────────── */
+(function initCursorGlow() {
+  const glow = document.createElement('div');
+  glow.style.cssText = `
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,255,0.4), transparent);
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    display: none;
+  `;
+  document.body.appendChild(glow);
+
+  document.addEventListener('mousemove', e => {
+    glow.style.display = 'block';
+    glow.style.left = e.clientX - 10 + 'px';
+    glow.style.top = e.clientY - 10 + 'px';
+  });
+
+  document.addEventListener('mouseleave', () => {
+    glow.style.display = 'none';
+  });
+})();
+
+
+console.log('%c🚀 Lydertronics Website Loaded', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
+console.log('%cPowering AI with Precision Data', 'color: #7a8aaa; font-size: 12px;');
