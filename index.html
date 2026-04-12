@@ -41,86 +41,6 @@
 <body>
 
   <!-- =========================================
-       ROBOT SKULL LOADER
-       ========================================= -->
-  <div id="loader" class="loader" aria-hidden="true">
-    <div class="loader-inner">
-      <div class="skull-wrap">
-        <div class="lightning l5"><div class="bolt"></div></div>
-        <div class="lightning l6"><div class="bolt"></div></div>
-        <div class="lightning l1"><div class="bolt"></div></div>
-        <div class="lightning l2"><div class="bolt"></div></div>
-        <div class="lightning l3"><div class="bolt"></div></div>
-        <div class="lightning l4"><div class="bolt"></div></div>
-        <div class="data-stream ds1"></div>
-        <div class="data-stream ds2"></div>
-        <div class="data-stream ds3"></div>
-        <div class="data-stream ds4"></div>
-        <div class="data-stream ds5"></div>
-        <div class="data-stream ds6"></div>
-        <div class="data-node dn1"></div>
-        <div class="data-node dn2"></div>
-        <div class="data-node dn3"></div>
-        <div class="data-node dn4"></div>
-        <div class="skull">
-          <div class="skull-cranium">
-            <div class="cranium-ridge"></div>
-            <div class="cranium-brow"></div>
-            <div class="cheek-panel left-cheek"></div>
-            <div class="cheek-panel right-cheek"></div>
-            <div class="scan-line"></div>
-            <div class="skull-eye left-eye">
-              <div class="eye-socket-inner">
-                <div class="eye-iris"></div>
-                <div class="eye-pupil"></div>
-                <div class="eye-ring r1"></div>
-                <div class="eye-ring r2"></div>
-              </div>
-              <div class="eye-flare"></div>
-            </div>
-            <div class="skull-eye right-eye">
-              <div class="eye-socket-inner">
-                <div class="eye-iris"></div>
-                <div class="eye-pupil"></div>
-                <div class="eye-ring r1"></div>
-                <div class="eye-ring r2"></div>
-              </div>
-              <div class="eye-flare"></div>
-            </div>
-            <div class="skull-nose"></div>
-            <div class="rivet rv1"></div>
-            <div class="rivet rv2"></div>
-          </div>
-          <div class="skull-jaw">
-            <div class="jaw-circuit"></div>
-            <div class="teeth-row">
-              <div class="tooth t1"></div><div class="tooth t2"></div><div class="tooth t3"></div>
-              <div class="tooth t4"></div><div class="tooth t5"></div><div class="tooth t6"></div>
-            </div>
-          </div>
-        </div>
-        <div class="bin-bits">
-          <span class="bit b1">10110</span><span class="bit b2">01001</span>
-          <span class="bit b3">11010</span><span class="bit b4">00111</span>
-          <span class="bit b5">10001</span><span class="bit b6">01110</span>
-          <span class="bit b7">11100</span><span class="bit b8">00011</span>
-          <span class="bit b9">10101</span><span class="bit b10">01100</span>
-        </div>
-      </div>
-      <div class="loader-text-block">
-        <div class="loader-brand">LYDERTRONICS</div>
-        <div class="loader-tagline">AI DATA INTELLIGENCE</div>
-        <div class="loader-progress-wrap">
-          <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
-          <span class="loader-pct" id="loaderPct">0%</span>
-        </div>
-        <div class="loader-status" id="loaderStatus">INITIALIZING NEURAL CORE...</div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- =========================================
        TEAM MODAL (About Us page)
        ========================================= -->
   <div id="teamModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="About Lydertronics">
@@ -222,7 +142,7 @@
   <main>
 
     <!-- =========================================
-         HERO SECTION
+         HERO SECTION WITH 3D EFFECTS
          ========================================= -->
     <section id="hero" class="section hero">
       <div class="hero-bg">
@@ -231,7 +151,36 @@
         <div class="orb orb-3"></div>
         <div class="grid-overlay"></div>
         <div class="particles-field" id="particlesField"></div>
+        
+        <!-- 3D Floating Elements -->
+        <div class="floating-3d-container">
+          <div class="cube-3d cube-1">
+            <div class="cube-face front"></div>
+            <div class="cube-face back"></div>
+            <div class="cube-face left"></div>
+            <div class="cube-face right"></div>
+            <div class="cube-face top"></div>
+            <div class="cube-face bottom"></div>
+          </div>
+          <div class="cube-3d cube-2">
+            <div class="cube-face front"></div>
+            <div class="cube-face back"></div>
+            <div class="cube-face left"></div>
+            <div class="cube-face right"></div>
+            <div class="cube-face top"></div>
+            <div class="cube-face bottom"></div>
+          </div>
+          <div class="cube-3d cube-3">
+            <div class="cube-face front"></div>
+            <div class="cube-face back"></div>
+            <div class="cube-face left"></div>
+            <div class="cube-face right"></div>
+            <div class="cube-face top"></div>
+            <div class="cube-face bottom"></div>
+          </div>
+        </div>
       </div>
+      
       <div class="circuit-edge ce-left">
         <div class="ce-line"></div><div class="ce-dot"></div>
         <div class="ce-line short"></div><div class="ce-dot"></div>
@@ -242,6 +191,7 @@
         <div class="ce-line short"></div><div class="ce-dot"></div>
         <div class="ce-line"></div>
       </div>
+      
       <div class="hero-content">
         <div class="hero-badge">
           <span class="badge-pulse"></span>
@@ -777,8 +727,7 @@
         <div class="footer-col">
           <h4 class="footer-h">Contact</h4>
           <ul class="footer-links">
-            <li><a href="mailto:lydertronicsai@gmail.comm">lydertronicsai@trainbot.in
-</a></li>
+            <li><a href="mailto:lydertronicsai@gmail.comm">lydertronicsai@trainbot.in</a></li>
             <li><a href="tel:+917981520897">+91 7981520897</a></li>
             <li>India | USA | Europe</li>
           </ul>
@@ -791,54 +740,49 @@
     </div>
   </footer>
 
-  <!---Chatbot--->
-<!-- Floating Chat Button -->
-<button class="chat-launcher" id="chatLauncher" aria-label="Open chat">
+  <!-- Floating Chat Button -->
+  <button class="chat-launcher" id="chatLauncher" aria-label="Open chat">
     <span class="robot-icon">🤖</span>
-</button>
+  </button>
 
-<!-- Chat Window -->
-<div class="chat-window closed" id="chatWindow">
-    <!-- Header -->
+  <!-- Chat Window -->
+  <div class="chat-window closed" id="chatWindow">
     <div class="chat-header">
-        <div class="header-left">
-            <div class="bot-avatar">🤖</div>
-            <div class="assistant-info">
-                <h3>AI Assistant</h3>
-                <span class="online-status">Online · Ready to help</span>
-            </div>
+      <div class="header-left">
+        <div class="bot-avatar">🤖</div>
+        <div class="assistant-info">
+          <h3>AI Assistant</h3>
+          <span class="online-status">Online · Ready to help</span>
         </div>
-        <button class="close-btn" id="closeChatBtn" aria-label="Minimize chat">✕</button>
+      </div>
+      <button class="close-btn" id="closeChatBtn" aria-label="Minimize chat">✕</button>
     </div>
 
-    <!-- Messages Container -->
     <div class="chat-messages" id="chatMessages">
-        <div class="message bot">
-            <div class="bubble">
-                <span class="bot-avatar-small">🤖</span>
-                <span>Hello! 👋 I'm your AI assistant. How can I help you today?</span>
-            </div>
+      <div class="message bot">
+        <div class="bubble">
+          <span class="bot-avatar-small">🤖</span>
+          <span>Hello! 👋 I'm your AI assistant. How can I help you today?</span>
         </div>
+      </div>
     </div>
 
-    <!-- Input Area -->
     <div class="chat-input-area">
-        <input 
-            type="text" 
-            id="messageInput" 
-            placeholder="Ask anything..." 
-            autocomplete="off" 
-            enterkeyhint="send"
-        >
-        <button class="send-btn" id="sendMessageBtn" aria-label="Send message">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-        </button>
+      <input 
+        type="text" 
+        id="messageInput" 
+        placeholder="Ask anything..." 
+        autocomplete="off" 
+        enterkeyhint="send"
+      >
+      <button class="send-btn" id="sendMessageBtn" aria-label="Send message">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
     </div>
-</div>
-  <!---chatbot end-->
+  </div>
 
   <script src="script.js"></script>
 </body>
