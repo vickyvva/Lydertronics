@@ -600,32 +600,27 @@ console.log('%cPowering AI with Precision Data', 'color: #7a8aaa; font-size: 12p
 
 
 
+/* ============================================================
+   AI CHATBOT (FINAL - API CONNECTED)
+   ============================================================ */
 
+(function initChatbot() {
+  const launcher   = document.getElementById('chatLauncher');
+  const chatWindow = document.getElementById('chatWindow');
+  const closeBtn   = document.getElementById('closeChatBtn');
+  const messages   = document.getElementById('chatMessages');
+  const input      = document.getElementById('messageInput');
+  const sendBtn    = document.getElementById('sendMessageBtn');
 
-document.addEventListener("DOMContentLoaded", () => {
+  if (!launcher || !chatWindow) return;
 
-  const sendBtn = document.getElementById("sendMessageBtn");
-  const input = document.getElementById("messageInput");
-  const messages = document.getElementById("chatMessages");
-  const chatLauncher = document.getElementById("chatLauncher");
-  const chatWindow = document.getElementById("chatWindow");
-  const closeBtn = document.getElementById("closeChatBtn");
+  // Open / Close
+  launcher.onclick = () => chatWindow.classList.remove('closed');
+  closeBtn.onclick = () => chatWindow.classList.add('closed');
 
-  // Open chat
-  chatLauncher.onclick = () => {
-    chatWindow.classList.remove("closed");
-  };
-
-  // Close chat
-  closeBtn.onclick = () => {
-    chatWindow.classList.add("closed");
-  };
-
-  // Send message (button)
+  // Send events
   sendBtn.onclick = sendMessage;
-
-  // Send message (Enter key)
-  input.addEventListener("keypress", function(e) {
+  input.addEventListener("keypress", e => {
     if (e.key === "Enter") sendMessage();
   });
 
@@ -633,7 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = input.value.trim();
     if (!text) return;
 
-    // Show user message
+    // User message
     messages.innerHTML += `
       <div class="message user">
         <div class="bubble">${text}</div>
@@ -643,8 +638,20 @@ document.addEventListener("DOMContentLoaded", () => {
     input.value = "";
     messages.scrollTop = messages.scrollHeight;
 
+    // Typing indicator
+    const typing = document.createElement("div");
+    typing.className = "message bot";
+    typing.innerHTML = `
+      <div class="bubble">
+        <span class="bot-avatar-small">🤖</span>
+        <span>Typing...</span>
+      </div>
+    `;
+    messages.appendChild(typing);
+    messages.scrollTop = messages.scrollHeight;
+
     try {
-      const res = await fetch("https://ai-chatbot-2-kh6z.onrender.com/api/chat", {
+      const res = await fetch("https://ai-chatbot-2-kh6z.onrender.com/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -654,7 +661,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await res.json();
 
-      // Show bot reply
+      typing.remove();
+
+      // Bot reply
       messages.innerHTML += `
         <div class="message bot">
           <div class="bubble">
@@ -664,16 +673,20 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
-      messages.scrollTop = messages.scrollHeight;
-
     } catch (err) {
+      typing.remove();
+
       messages.innerHTML += `
         <div class="message bot">
           <div class="bubble">⚠️ Server error</div>
         </div>
       `;
+
       console.error(err);
     }
+
+    messages.scrollTop = messages.scrollHeight;
   }
 
-});
+})();
+
