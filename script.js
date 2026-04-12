@@ -597,3 +597,83 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
 
 console.log('%c🚀 Lydertronics Website Loaded', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
 console.log('%cPowering AI with Precision Data', 'color: #7a8aaa; font-size: 12px;');
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const sendBtn = document.getElementById("sendMessageBtn");
+  const input = document.getElementById("messageInput");
+  const messages = document.getElementById("chatMessages");
+  const chatLauncher = document.getElementById("chatLauncher");
+  const chatWindow = document.getElementById("chatWindow");
+  const closeBtn = document.getElementById("closeChatBtn");
+
+  // Open chat
+  chatLauncher.onclick = () => {
+    chatWindow.classList.remove("closed");
+  };
+
+  // Close chat
+  closeBtn.onclick = () => {
+    chatWindow.classList.add("closed");
+  };
+
+  // Send message (button)
+  sendBtn.onclick = sendMessage;
+
+  // Send message (Enter key)
+  input.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") sendMessage();
+  });
+
+  async function sendMessage() {
+    const text = input.value.trim();
+    if (!text) return;
+
+    // Show user message
+    messages.innerHTML += `
+      <div class="message user">
+        <div class="bubble">${text}</div>
+      </div>
+    `;
+
+    input.value = "";
+    messages.scrollTop = messages.scrollHeight;
+
+    try {
+      const res = await fetch("https://your-render-url.onrender.com/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: text })
+      });
+
+      const data = await res.json();
+
+      // Show bot reply
+      messages.innerHTML += `
+        <div class="message bot">
+          <div class="bubble">
+            <span class="bot-avatar-small">🤖</span>
+            <span>${data.reply}</span>
+          </div>
+        </div>
+      `;
+
+      messages.scrollTop = messages.scrollHeight;
+
+    } catch (err) {
+      messages.innerHTML += `
+        <div class="message bot">
+          <div class="bubble">⚠️ Server error</div>
+        </div>
+      `;
+      console.error(err);
+    }
+  }
+
+});
