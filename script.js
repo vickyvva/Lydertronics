@@ -1,6 +1,5 @@
 /* ============================================================
-   LYDERTRONICS — Enhanced script.js
-   Professional animations and interactions
+   LYDERTRONICS — script.js
    ============================================================ */
 
 'use strict';
@@ -141,7 +140,6 @@ window.smoothScrollTo = function (selector) {
     entries => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          // Add staggered delay
           setTimeout(() => {
             entry.target.classList.add('visible');
           }, index * 100);
@@ -190,7 +188,7 @@ window.smoothScrollTo = function (selector) {
   const hero = document.querySelector('.hero');
   if (!hero) return;
 
-  const orbs = hero.querySelectorAll('.orb');
+  const orbs  = hero.querySelectorAll('.orb');
   const cubes = hero.querySelectorAll('.cube-3d');
 
   window.addEventListener('scroll', () => {
@@ -198,13 +196,11 @@ window.smoothScrollTo = function (selector) {
     const limit = hero.offsetHeight;
 
     if (scrolled < limit) {
-      // Parallax orbs
       orbs.forEach((orb, index) => {
         const speed = 0.3 + (index * 0.1);
         orb.style.transform = `translateY(${scrolled * speed}px)`;
       });
 
-      // Parallax 3D cubes
       cubes.forEach((cube, index) => {
         const speed = 0.2 + (index * 0.15);
         cube.style.transform = `translateY(${scrolled * speed}px)`;
@@ -214,26 +210,10 @@ window.smoothScrollTo = function (selector) {
 })();
 
 
-/* ─── SMOOTH CARD DEPTH EFFECT (No Shake) ────────────────── */
-(function initCardDepth() {
-  const cards = document.querySelectorAll('.svc-card, .proj-card');
-  
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.style.transition = 'all .6s cubic-bezier(.23,1,.32,1)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      card.style.transition = 'all .6s cubic-bezier(.23,1,.32,1)';
-    });
-  });
-})();
-
-
 /* ─── PARALLAX CARDS ON SCROLL ───────────────────────────── */
 (function initCardParallax() {
   const cards = document.querySelectorAll('.glass-card');
-  
+
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
@@ -245,7 +225,7 @@ window.smoothScrollTo = function (selector) {
     },
     { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
   );
-  
+
   cards.forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(30px)';
@@ -336,36 +316,29 @@ document.querySelectorAll('.footer-links a[href^="#"]').forEach(a => {
 
 /* ─── ENHANCED BUTTON MICRO-INTERACTIONS ─────────────────── */
 document.querySelectorAll('.btn').forEach(btn => {
-  // Smooth press effect
   btn.addEventListener('pointerdown', () => {
     btn.style.transition = 'transform .1s ease';
     btn.style.transform = 'scale(0.97)';
   });
-  
+
   btn.addEventListener('pointerup', () => {
     btn.style.transition = 'all .4s cubic-bezier(.34,1.56,.64,1)';
     btn.style.transform = '';
   });
-  
+
   btn.addEventListener('pointerleave', () => {
     btn.style.transition = 'all .4s cubic-bezier(.34,1.56,.64,1)';
     btn.style.transform = '';
   });
-  
-  // Magnetic effect for primary buttons
+
   if (btn.classList.contains('btn-primary')) {
     btn.addEventListener('mousemove', e => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      
-      // Subtle magnetic pull (max 5px)
-      const moveX = x * 0.1;
-      const moveY = y * 0.1;
-      
+      const rect  = btn.getBoundingClientRect();
+      const moveX = (e.clientX - rect.left - rect.width  / 2) * 0.1;
+      const moveY = (e.clientY - rect.top  - rect.height / 2) * 0.1;
       btn.style.transform = `translate(${moveX}px, ${moveY}px) translateY(-3px) scale(1.05)`;
     });
-    
+
     btn.addEventListener('mouseleave', () => {
       btn.style.transform = '';
     });
@@ -398,130 +371,16 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
 });
 
 
-/* ============================================================
-   AI CHATBOT
-   ============================================================ */
-(function initChatbot() {
-  const launcher     = document.getElementById('chatLauncher');
-  const chatWindow   = document.getElementById('chatWindow');
-  const closeBtn     = document.getElementById('closeChatBtn');
-  const messagesEl   = document.getElementById('chatMessages');
-  const inputEl      = document.getElementById('messageInput');
-  const sendBtn      = document.getElementById('sendMessageBtn');
-
-  if (!launcher || !chatWindow) return;
-
-  let isOpen = false;
-
-  function openChat() {
-    isOpen = true;
-    chatWindow.classList.remove('closed');
-    chatWindow.classList.add('open');
-    setTimeout(() => inputEl?.focus(), 400);
-  }
-
-  function closeChat() {
-    isOpen = false;
-    chatWindow.classList.remove('open');
-    chatWindow.classList.add('closed');
-  }
-
-  launcher.addEventListener('click', openChat);
-  closeBtn?.addEventListener('click', closeChat);
-
-  chatWindow.addEventListener('click', e => {
-    if (e.target === chatWindow) closeChat();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && isOpen) {
-      const teamModal = document.getElementById('teamModal');
-      if (!teamModal?.classList.contains('open')) closeChat();
-    }
-  });
-
-  // Send message functionality
-  inputEl?.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      if (!sendBtn?.disabled) triggerSend();
-    }
-  });
-
-  sendBtn?.addEventListener('click', triggerSend);
-
-  function triggerSend() {
-    const text = inputEl?.value.trim();
-    if (!text) return;
-    
-    // Add user message
-    appendUserMessage(text);
-    
-    // Clear input
-    if (inputEl) {
-      inputEl.value = '';
-      inputEl.style.height = 'auto';
-    }
-    
-    // Simulate bot response
-    setTimeout(() => {
-      appendBotMessage('Thank you for your message! Our team will get back to you shortly.');
-    }, 800);
-  }
-
-  function appendUserMessage(text) {
-    const div = document.createElement('div');
-    div.className = 'message user';
-    div.innerHTML = `
-      <div class="bubble">${escapeHtml(text)}</div>
-    `;
-    messagesEl?.appendChild(div);
-    scrollToBottom();
-  }
-
-  function appendBotMessage(text) {
-    const div = document.createElement('div');
-    div.className = 'message bot';
-    div.innerHTML = `
-      <div class="bubble">
-        <span class="bot-avatar-small">🤖</span>
-        <span>${escapeHtml(text)}</span>
-      </div>
-    `;
-    messagesEl?.appendChild(div);
-    scrollToBottom();
-  }
-
-  function scrollToBottom() {
-    if (messagesEl) {
-      requestAnimationFrame(() => {
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-      });
-    }
-  }
-
-  function escapeHtml(str) {
-    return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;')
-      .replace(/\n/g, '<br>');
-  }
-})();
-
-
 /* ─── NUMBER COUNTER ANIMATION ───────────────────────────── */
 (function initCounters() {
   const counters = document.querySelectorAll('.stat-n, .about-stat-n');
-  
+
   const animateCounter = (element) => {
-    const target = parseFloat(element.textContent);
+    const target   = parseFloat(element.textContent);
     const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
-    
+    const step     = target / (duration / 16);
+    let current    = 0;
+
     const timer = setInterval(() => {
       current += step;
       if (current >= target) {
@@ -532,7 +391,7 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
       }
     }, 16);
   };
-  
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -541,7 +400,7 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
       }
     });
   }, { threshold: 0.5 });
-  
+
   counters.forEach(counter => io.observe(counter));
 })();
 
@@ -549,20 +408,18 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
 /* ─── PROGRESS BAR ANIMATION ─────────────────────────────── */
 (function initProgressBars() {
   const bars = document.querySelectorAll('.acc-fill');
-  
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const bar = entry.target;
+        const bar   = entry.target;
         const width = bar.style.getPropertyValue('--w') || '0%';
-        setTimeout(() => {
-          bar.style.width = width;
-        }, 200);
+        setTimeout(() => { bar.style.width = width; }, 200);
         io.unobserve(bar);
       }
     });
   }, { threshold: 0.5 });
-  
+
   bars.forEach(bar => io.observe(bar));
 })();
 
@@ -586,7 +443,7 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
   document.addEventListener('mousemove', e => {
     glow.style.display = 'block';
     glow.style.left = e.clientX - 10 + 'px';
-    glow.style.top = e.clientY - 10 + 'px';
+    glow.style.top  = e.clientY - 10 + 'px';
   });
 
   document.addEventListener('mouseleave', () => {
@@ -595,15 +452,9 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
 })();
 
 
-console.log('%c🚀 Lydertronics Website Loaded', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
-console.log('%cPowering AI with Precision Data', 'color: #7a8aaa; font-size: 12px;');
-
-
-
 /* ============================================================
-   AI CHATBOT (FINAL - API CONNECTED)
+   AI CHATBOT — API CONNECTED (single, clean version)
    ============================================================ */
-
 (function initChatbot() {
   const launcher   = document.getElementById('chatLauncher');
   const chatWindow = document.getElementById('chatWindow');
@@ -612,81 +463,129 @@ console.log('%cPowering AI with Precision Data', 'color: #7a8aaa; font-size: 12p
   const input      = document.getElementById('messageInput');
   const sendBtn    = document.getElementById('sendMessageBtn');
 
-  if (!launcher || !chatWindow) return;
+  if (!launcher || !chatWindow || !messages || !input || !sendBtn) return;
 
-  // Open / Close
-  launcher.onclick = () => chatWindow.classList.remove('closed');
-  closeBtn.onclick = () => chatWindow.classList.add('closed');
-
-  // Send events
-  sendBtn.onclick = sendMessage;
-  input.addEventListener("keypress", e => {
-    if (e.key === "Enter") sendMessage();
+  /* ── open / close ── */
+  launcher.addEventListener('click', () => {
+    chatWindow.classList.remove('closed');
+    chatWindow.classList.add('open');
+    input.focus();
   });
 
+  closeBtn.addEventListener('click', () => {
+    chatWindow.classList.add('closed');
+    chatWindow.classList.remove('open');
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !chatWindow.classList.contains('closed')) {
+      const teamModal = document.getElementById('teamModal');
+      if (!teamModal?.classList.contains('open')) {
+        chatWindow.classList.add('closed');
+        chatWindow.classList.remove('open');
+      }
+    }
+  });
+
+  /* ── send triggers ── */
+  sendBtn.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  /* ── main send function ── */
   async function sendMessage() {
     const text = input.value.trim();
-    if (!text) return;
+    if (!text || sendBtn.disabled) return;
 
-    // User message
-    messages.innerHTML += `
-      <div class="message user">
-        <div class="bubble">${text}</div>
-      </div>
-    `;
+    // Disable input while waiting
+    sendBtn.disabled = true;
+    input.disabled   = true;
+    input.value      = '';
 
-    input.value = "";
-    messages.scrollTop = messages.scrollHeight;
+    // Show user bubble
+    appendMessage('user', escapeHtml(text));
 
-    // Typing indicator
-    const typing = document.createElement("div");
-    typing.className = "message bot";
-    typing.innerHTML = `
-      <div class="bubble">
-        <span class="bot-avatar-small">🤖</span>
-        <span>Typing...</span>
-      </div>
-    `;
-    messages.appendChild(typing);
-    messages.scrollTop = messages.scrollHeight;
+    // Show typing indicator
+    const typingEl = appendTyping();
 
     try {
-      const res = await fetch("https://ai-chatbot-2-kh6z.onrender.com/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message: text })
+      const res = await fetch('https://ai-chatbot-2-kh6z.onrender.com/chat', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ message: text }),
       });
 
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
       const data = await res.json();
-
-      typing.remove();
-
-      // Bot reply
-      messages.innerHTML += `
-        <div class="message bot">
-          <div class="bubble">
-            <span class="bot-avatar-small">🤖</span>
-            <span>${data.reply}</span>
-          </div>
-        </div>
-      `;
+      typingEl.remove();
+      appendMessage('bot', escapeHtml(data.reply || '⚠️ Empty response'));
 
     } catch (err) {
-      typing.remove();
-
-      messages.innerHTML += `
-        <div class="message bot">
-          <div class="bubble">⚠️ Server error</div>
-        </div>
-      `;
-
-      console.error(err);
+      console.error('Chatbot error:', err);
+      typingEl.remove();
+      appendMessage('bot', '⚠️ Could not reach server. Please try again.');
+    } finally {
+      sendBtn.disabled = false;
+      input.disabled   = false;
+      input.focus();
     }
-
-    messages.scrollTop = messages.scrollHeight;
   }
 
+  /* ── helpers ── */
+  function appendMessage(role, htmlContent) {
+    const div = document.createElement('div');
+    div.className = `message ${role}`;
+
+    if (role === 'bot') {
+      div.innerHTML = `
+        <div class="bubble">
+          <span class="bot-avatar-small">🤖</span>
+          <span>${htmlContent}</span>
+        </div>`;
+    } else {
+      div.innerHTML = `<div class="bubble">${htmlContent}</div>`;
+    }
+
+    messages.appendChild(div);
+    scrollBottom();
+    return div;
+  }
+
+  function appendTyping() {
+    const div = document.createElement('div');
+    div.className = 'message bot typing-indicator';
+    div.innerHTML = `
+      <div class="bubble">
+        <span class="bot-avatar-small">🤖</span>
+        <span class="dots"><span>.</span><span>.</span><span>.</span></span>
+      </div>`;
+    messages.appendChild(div);
+    scrollBottom();
+    return div;
+  }
+
+  function scrollBottom() {
+    requestAnimationFrame(() => {
+      messages.scrollTop = messages.scrollHeight;
+    });
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g,  '&amp;')
+      .replace(/</g,  '&lt;')
+      .replace(/>/g,  '&gt;')
+      .replace(/"/g,  '&quot;')
+      .replace(/'/g,  '&#039;')
+      .replace(/\n/g, '<br>');
+  }
 })();
 
+
+console.log('%c🚀 Lydertronics Website Loaded', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
+console.log('%cPowering AI with Precision Data', 'color: #7a8aaa; font-size: 12px;');
