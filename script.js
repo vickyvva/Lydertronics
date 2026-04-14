@@ -513,8 +513,8 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
     const typingEl = appendTyping();
 
     try {
-      const res = await fetch('https://ai-chatbot-2-qjpk.onrender.com/chat', {
-         
+      const res = await  fetch("https://ai-chatbot-2-qjpk.onrender.com/chat", {
+        
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ message: text }),
