@@ -453,7 +453,7 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
 
 
 /* ============================================================
-   AI CHATBOT — API CONNECTED (single, clean version)
+   AI CHATBOT — API CONNECTED (with cold-start timeout fix)
    ============================================================ */
 (function initChatbot() {
   const launcher   = document.getElementById('chatLauncher');
@@ -513,11 +513,18 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
     const typingEl = appendTyping();
 
     try {
+      // ✅ FIX: 30s timeout to handle Render cold starts
+      const controller = new AbortController();
+      const timeout    = setTimeout(() => controller.abort(), 30000);
+
       const res = await fetch('https://ai-chatbot-1-kuff.onrender.com/chat', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ message: text }),
+        signal:  controller.signal,
       });
+
+      clearTimeout(timeout);
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
@@ -528,7 +535,13 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
     } catch (err) {
       console.error('Chatbot error:', err);
       typingEl.remove();
-      appendMessage('bot', '⚠️ Could not reach server. Please try again.');
+
+      // ✅ Friendly message for cold-start timeout
+      if (err.name === 'AbortError') {
+        appendMessage('bot', '⏳ Server is waking up, please try again in a few seconds.');
+      } else {
+        appendMessage('bot', '⚠️ Could not reach server. Please try again.');
+      }
     } finally {
       sendBtn.disabled = false;
       input.disabled   = false;
