@@ -236,6 +236,7 @@ window.smoothScrollTo = function (selector) {
 
 
 /* ─── CONTACT FORM VALIDATION ────────────────────────────── */
+/* ─── CONTACT FORM — FORMSPREE ───────────────────────────── */
 (function initContactForm() {
   const form       = document.getElementById('contactForm');
   const successMsg = document.getElementById('formSuccess');
@@ -255,45 +256,62 @@ window.smoothScrollTo = function (selector) {
     Object.values(fields).forEach(f => setErr(f.errId, ''));
   }
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     clearErrors();
 
-    const name  = document.getElementById('fname')?.value.trim() || '';
-    const email = document.getElementById('femail')?.value.trim() || '';
-    const msg   = document.getElementById('fmsg')?.value.trim() || '';
+    const name    = document.getElementById('fname')?.value.trim() || '';
+    const email   = document.getElementById('femail')?.value.trim() || '';
+    const service = document.getElementById('fservice')?.value || '';
+    const msg     = document.getElementById('fmsg')?.value.trim() || '';
     const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     let valid = true;
-    if (name.length < 2)       { setErr('nameErr',  fields.fname.msg);  valid = false; }
-    if (!emailRx.test(email))  { setErr('emailErr', fields.femail.msg); valid = false; }
-    if (msg.length < 10)       { setErr('msgErr',   fields.fmsg.msg);   valid = false; }
-
+    if (name.length < 2)      { setErr('nameErr',  fields.fname.msg);  valid = false; }
+    if (!emailRx.test(email)) { setErr('emailErr', fields.femail.msg); valid = false; }
+    if (msg.length < 10)      { setErr('msgErr',   fields.fmsg.msg);   valid = false; }
     if (!valid) return;
 
-    const btn = form.querySelector('button[type="submit"]');
-    if (btn) {
-      btn.disabled = true;
-      btn.querySelector('.btn-label').textContent = 'Sending...';
-    }
+    const btn   = form.querySelector('button[type="submit"]');
+    const label = btn?.querySelector('.btn-label');
+    if (btn)   btn.disabled = true;
+    if (label) label.textContent = 'Sending...';
 
-    setTimeout(() => {
+    try {
+
+      const res = await fetch('https://formspree.io/f/xvzvbgwo', {
+
+
+        method:  'POST',
+
+
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+
+
+        body: JSON.stringify({ name, email, service, message: msg }),
+
+      });
+
+
+      if (!res.ok) throw new Error(`Formspree error ${res.status}`);
+
+
       form.reset();
       if (successMsg) successMsg.classList.add('show');
-      if (btn) {
-        btn.disabled = false;
-        btn.querySelector('.btn-label').textContent = 'Send Message';
-      }
       setTimeout(() => successMsg?.classList.remove('show'), 5000);
-    }, 1200);
+
+    } catch (err) {
+      setErr('msgErr', '⚠️ Failed to send. Please email us directly.');
+    } finally {
+      if (btn)   btn.disabled = false;
+      if (label) label.textContent = 'Send Message';
+    }
   });
 
   ['fname', 'femail', 'fmsg'].forEach(id => {
-    const el = document.getElementById(id);
+    const el    = document.getElementById(id);
     const errId = fields[id]?.errId;
-    if (el && errId) {
-      el.addEventListener('input', () => setErr(errId, ''));
-    }
+    if (el && errId) el.addEventListener('input', () => setErr(errId, ''));
   });
 })();
 
