@@ -590,3 +590,42 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
 
 console.log('%c🚀 Lydertronics Website Loaded', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
 console.log('%cPowering AI with Precision Data', 'color: #7a8aaa; font-size: 12px;');
+
+
+
+const form = document.getElementById("contactForm");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const isValid = validateForm(); // your existing validation
+  if (!isValid) return;
+
+  const data = {
+    name: document.getElementById("fname").value,
+    email: document.getElementById("femail").value,
+    service: document.getElementById("fservice").value,
+    message: document.getElementById("fmsg").value
+  };
+
+  try {
+    const res = await fetch("https://formspree.io/f/xvzvbgwo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      document.getElementById("formSuccess").style.display = "block";
+      form.reset();
+    } else {
+      alert("Failed to send message");
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong");
+  }
+});
