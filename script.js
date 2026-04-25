@@ -609,5 +609,215 @@ document.querySelectorAll('.btn, .nav-link').forEach(el => {
 console.log('%c🚀 Lydertronics Website Loaded', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
 console.log('%cPowering AI with Precision Data', 'color: #7a8aaa; font-size: 12px;');
 
+/* ============================================================
+   LYDERTRONICS — JS ADDITIONS
+   Add this to the END of your existing script.js file
+   ============================================================ */
+
+
+/* ── Voice Waveform Generator ── */
+(function initVoiceWaveform() {
+  const container = document.getElementById('vwBars');
+  if (!container) return;
+
+  const BAR_COUNT = 32;
+  const phrases = [
+    'Processing audio stream...',
+    'Transcribing speech in real time...',
+    'Telugu dialect detected...',
+    'Speaker diarization active...',
+    'Confidence: 98.7%'
+  ];
+  let phraseIndex = 0;
+  let charIndex   = 0;
+  let phraseTimer;
+  const vtText = document.querySelector('.vt-text');
+
+  // Build bars
+  for (let i = 0; i < BAR_COUNT; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'vw-bar';
+    const maxH = 8 + Math.round(Math.sin((i / BAR_COUNT) * Math.PI) * 28);
+    bar.style.setProperty('--ph', maxH + 'px');
+    bar.style.setProperty('--dur', (0.6 + Math.random() * 0.8).toFixed(2) + 's');
+    bar.style.setProperty('--del', (i * 0.04).toFixed(2) + 's');
+    bar.style.height = '4px';
+    container.appendChild(bar);
+  }
+
+  // Typewriter effect
+  function typePhrase() {
+    if (!vtText) return;
+    if (charIndex < phrases[phraseIndex].length) {
+      vtText.textContent += phrases[phraseIndex][charIndex++];
+      phraseTimer = setTimeout(typePhrase, 55);
+    } else {
+      setTimeout(() => {
+        vtText.textContent = '';
+        charIndex = 0;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typePhrase();
+      }, 2000);
+    }
+  }
+  typePhrase();
+})();
+
+
+/* ── Chatbot Replay Animation ── */
+(function initChatbotAnim() {
+  const typing  = document.getElementById('cbTyping');
+  const reply   = document.getElementById('cbReply');
+  if (!typing || !reply) return;
+
+  // Show reply after typing animation delay
+  setTimeout(() => {
+    if (typing.parentElement) typing.parentElement.style.display = 'none';
+    reply.style.display = 'flex';
+    reply.style.opacity = '0';
+    reply.style.animation = 'cbMsgIn .4s ease forwards';
+  }, 3800);
+})();
+
+
+/* ── Dashboard Counter Animation ── */
+(function initDashCounters() {
+  const counters = document.querySelectorAll('.ds-n[data-target]');
+  if (!counters.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el     = entry.target;
+      const target = parseFloat(el.dataset.target);
+      const isFloat = String(target).includes('.');
+      const duration = 1500;
+      const start  = performance.now();
+
+      function tick(now) {
+        const elapsed  = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease     = 1 - Math.pow(1 - progress, 3);
+        const current  = target * ease;
+        el.textContent = isFloat ? current.toFixed(1) : Math.round(current).toLocaleString();
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(el => observer.observe(el));
+})();
+
+
+/* ── Process Step Active State on Scroll ── */
+(function initProcessSteps() {
+  const steps = document.querySelectorAll('.proc-step');
+  if (!steps.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('ps-active');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  steps.forEach(step => observer.observe(step));
+})();
+
+
+/* ── Why Lydertronics bar animation ── */
+(function initWLBars() {
+  const cards = document.querySelectorAll('.wl-card');
+  if (!cards.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  cards.forEach(card => observer.observe(card));
+})();
+
+
+/* ── Industries card expand on mobile (tap) ── */
+(function initIndustriesCards() {
+  const cards = document.querySelectorAll('.aii-card');
+  if (!cards.length) return;
+
+  // On touch devices, toggle expanded state
+  cards.forEach(card => {
+    card.addEventListener('click', function () {
+      if (window.innerWidth <= 768) {
+        this.classList.toggle('aii-expanded');
+      }
+    });
+  });
+})();
+
+
+/* ── CTA stats counter animation ── */
+(function initCTACounters() {
+  // Reuse same pattern for any .cta-stat-n elements
+  const els = document.querySelectorAll('.cta-stat-n');
+  if (!els.length) return;
+
+  const map = {
+    '1000': { val: 1000, suffix: '+' },
+    '97.8':  { val: 97.8, suffix: '%', float: true },
+    '24':    { val: 24,   suffix: 'hr' },
+    '60':    { val: 60,   suffix: '%' }
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el    = entry.target;
+      const em    = el.querySelector('em');
+      const suffix = em ? em.textContent : '';
+      const raw   = el.textContent.replace(suffix, '').trim();
+      const target = parseFloat(raw);
+      const isFloat = String(target).includes('.') || raw.includes('.');
+      const duration = 1200;
+      const start = performance.now();
+
+      function tick(now) {
+        const elapsed  = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease     = 1 - Math.pow(1 - progress, 3);
+        const current  = target * ease;
+        // Rebuild text
+        el.innerHTML = (isFloat ? current.toFixed(1) : Math.round(current)) +
+          (em ? `<em>${suffix}</em>` : '');
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+
+  els.forEach(el => observer.observe(el));
+})();
+
+
+/* ── Smooth scroll helper (if not already defined in script.js) ── */
+if (typeof smoothScrollTo === 'undefined') {
+  window.smoothScrollTo = function(selector) {
+    const el = document.querySelector(selector);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+}
+
+
+/* ── Add new nav sections to intersection observer ── */
+// If your script.js uses IntersectionObserver for active nav,
+// the new sections (ai-industries, process, cta) will be auto-detected
+// because they use the same data-section pattern.
+// Just make sure the nav links for these sections are added to the navbar.
 
 
