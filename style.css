@@ -38,6 +38,8 @@ body {
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+ font-family: "Times New Roman", Times, serif;
+
 }
 
 ::selection { background: rgba(0,180,255,.25); color: #fff; }
@@ -3656,6 +3658,4 @@ ul { list-style: none; }
   .cta-stats-row { flex-direction: column; align-items: center; }
 }
 
-body {
-  font-family: "Times New Roman", Times, serif;
-}
+
