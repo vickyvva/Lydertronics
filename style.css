@@ -3655,3 +3655,7 @@ ul { list-style: none; }
   .wl-grid  { grid-template-columns: 1fr; }
   .cta-stats-row { flex-direction: column; align-items: center; }
 }
+
+body {
+  font-family: "Times New Roman", Times, serif;
+}
