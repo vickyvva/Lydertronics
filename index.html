@@ -1,1584 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- =========================================
-       PRIMARY SEO
-       ========================================= -->
-  <title>Lydertronics | AI Data Annotation & Automation Solutions</title>
-
-  <meta
-    name="description"
-    content="Lydertronics provides high-quality AI data annotation, image labeling, video annotation, RLHF, multimodal data services, and enterprise AI automation solutions."
-  />
-
-  <meta
-    name="keywords"
-    content="AI data annotation, image annotation, image labeling, video annotation, LiDAR annotation, 3D point cloud annotation, RLHF, multimodal AI annotation, AI training data, data labeling company, AI automation, Lydertronics"
-  />
-
+  <title>Lydertronics | AI Data Services & Automation</title>
+  <meta name="description" content="Lydertronics delivers AI data annotation, RLHF, LiDAR, multimodal data, transcription, dataset collection and AI automation services." />
+  <meta name="keywords" content="AI data annotation, RLHF, image annotation, video annotation, LiDAR annotation, multimodal AI, transcription, AI automation, Lydertronics" />
   <meta name="author" content="Lydertronics" />
-
-  <!-- Tell search engines this is the preferred URL -->
-  <link rel="canonical" href="https://lydertronicsai.com/" />
-
-  <!-- Allow search engines to index and follow the website -->
   <meta name="robots" content="index, follow" />
-
-  <!-- Browser theme color -->
-  <meta name="theme-color" content="#050816" />
-
-
-  <!-- =========================================
-       OPEN GRAPH
-       Used when sharing on LinkedIn, WhatsApp,
-       Facebook, etc.
-       ========================================= -->
-
-  <meta property="og:type" content="website" />
-
-  <meta property="og:site_name" content="Lydertronics" />
-
-  <meta
-    property="og:title"
-    content="Lydertronics | Powering AI with Precision Data"
-  />
-
-  <meta
-    property="og:description"
-    content="Enterprise AI data annotation, labeling, RLHF, multimodal data services, and automation solutions."
-  />
-
-  <meta
-    property="og:url"
-    content="https://lydertronicsai.com/"
-  />
-
-  <meta
-    property="og:image"
-    content="https://lydertronicsai.com/preview.png"
-  />
-
-  <meta
-    property="og:image:alt"
-    content="Lydertronics AI Data Annotation and Automation Solutions"
-  />
-
-
-  <!-- =========================================
-       TWITTER / X PREVIEW
-       ========================================= -->
-
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <meta
-    name="twitter:title"
-    content="Lydertronics | AI Data Annotation & Automation"
-  />
-
-  <meta
-    name="twitter:description"
-    content="High-quality AI training data, annotation, labeling, RLHF, and automation services."
-  />
-
-  <meta
-    name="twitter:image"
-    content="https://lydertronicsai.com/preview.png"
-  />
-
-  <meta
-    name="twitter:image:alt"
-    content="Lydertronics AI Data Annotation and Automation Solutions"
-  />
-
-  <meta
-    name="twitter:url"
-    content="https://lydertronicsai.com/"
-  />
-
-  <!-- =========================================
-       FAVICON
-       ========================================= -->
-
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="32x32"
-    href="https://lydertronicsai.com/favicon.png?v=2"
-  />
-
-  <link
-    rel="shortcut icon"
-    href="https://lydertronicsai.com/favicon.png?v=2"
-  />
-
-  <!-- =========================================
-       FONTS
-       ========================================= -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <!--=
-       CSS
-       = -->
+  <meta name="theme-color" content="#f4f2eb" />
+  <link rel="canonical" href="https://lydertronicsai.com/" />
+  <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
-  
-<body>
-
-  <!-- =========================================
-       TEAM MODAL (About Us page)
-       ========================================= -->
-  <div id="teamModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="About Lydertronics">
-    <div class="modal-box">
-      <button class="modal-close" id="modalClose" aria-label="Close">&#x2715;</button>
-      <div class="modal-hd">
-        <span class="sec-tag">// ABOUT US</span>
-        <h2 class="sec-title">The Minds Behind <span class="accent">Lydertronics</span></h2>
-        <p class="sec-sub">Built by innovators. Driven by precision. Powered by AI.</p>
-      </div>
-      <div class="modal-team-grid">
-        <!-- Founder -->
-        <div class="glass-card about-card">
-          <div class="about-avatar">
-            
-           <div class="av-circle av-blue">
-  <img src="images/vikram.jpg" alt="Kotagiri Vikram">
-  <div class="av-orbit"></div>
-</div>
-            
-          </div>
-          <div class="about-body">
-            <div class="role-badge">Founder &amp; CEO</div>
-            <h3 class="about-name">Kotagiri Vikram</h3>
-            <p class="about-desc">
-              Visionary leader with deep expertise in AI data services and machine learning
-              infrastructure. Driving Lydertronics toward becoming the global benchmark
-              for precision data annotation.
-            </p>
-            <div class="tag-row">
-              <span class="chip">AI Strategy</span>
-              <span class="chip">Data Science</span>
-              <span class="chip">Leadership</span>
-            </div>
-          </div>
-        </div>
-        <!-- Project Manager -->
-        <div class="glass-card about-card">
-          <div class="about-avatar">
-            <div class="av-circle av-purple">
-              <span class="av-init">VH</span>
-              <div class="av-orbit"></div>
-            </div>
-          </div>
-          <div class="about-body">
-            <div class="role-badge role-pm">Project Manager</div>
-            <h3 class="about-name">Variganti Harikrishna</h3>
-            <p class="about-desc">
-              Seasoned project orchestrator ensuring every dataset is delivered with
-              military precision. Expert in managing complex annotation workflows and
-              cross-functional AI teams at scale.
-            </p>
-            <div class="tag-row">
-              <span class="chip">Project Ops</span>
-              <span class="chip">Workflow Design</span>
-              <span class="chip">QA</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Mission inside modal -->
-      <div class="glass-card mission-card modal-mission">
-        <div class="mission-hex">⬡</div>
-        <h3>Our Mission</h3>
-        <p>
-          To accelerate AI development worldwide by providing the most accurate, scalable,
-          and efficient data annotation services — enabling machines to see, hear, and
-          understand the world with human-level precision.
-        </p>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- =========================================
-       STICKY GLASS NAVIGATION
-       ========================================= -->
-  <nav id="navbar" class="navbar">
-    <div class="nav-container">
-      <a href="#hero" class="nav-logo">
-        <span class="logo-brk">[</span><span class="logo-main">LYDR</span><span class="logo-accent">TRONICS</span><span class="logo-brk">]</span>
+<body data-page="home">
+  <header class="site-header" id="siteHeader">
+    <div class="shell nav-shell">
+      <a class="brand" href="#home" aria-label="Lydertronics home">
+        <span class="brand-mark">L</span>
+        <span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span>
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span>
       </button>
-      <ul class="nav-links" id="navLinks" role="list">
-        <li><a href="#hero"       class="nav-link" data-section="hero">Home</a></li>
-        <li><a href="#about"      class="nav-link" data-section="about">About</a></li>
-        <li><a href="#services"   class="nav-link" data-section="services">Services</a></li>
-        <li><a href="#projects"   class="nav-link" data-section="projects">Projects</a></li>
-        <li><a href="#why-us"     class="nav-link" data-section="why-us">Why Us</a></li>
-        <li><a href="#industries" class="nav-link" data-section="industries">Industries</a></li>
-        <li><a href="careers.html" class="nav-link">Careers</a></li>
-        <li><a href="#contact"    class="nav-link cta-nav" data-section="contact">Contact</a></li>
-      </ul>
+      <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="careers.html">Careers</a>
+        <a class="nav-cta" href="#contact">Start a project</a>
+      </nav>
     </div>
-  </nav>
-
+  </header>
 
   <main>
+    <section class="hero" id="home">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">AI DATA SERVICES · HUMAN PRECISION · GLOBAL DELIVERY</p>
+          <h1>Human precision for <em>intelligent systems.</em></h1>
+          <p class="hero-lede">We help AI teams turn complex raw data into dependable training datasets, evaluation signals and production-ready workflows.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#contact">Discuss your project <span>↗</span></a>
+            <a class="button text-button" href="#services">Explore services <span>↓</span></a>
+          </div>
+          <div class="hero-proof" aria-label="Company highlights">
+            <div><strong>97.8%</strong><span>reported accuracy</span></div>
+            <div><strong>1000+</strong><span>datasets delivered</span></div>
+            <div><strong>24 hr</strong><span>fast-turnaround capability</span></div>
+          </div>
+        </div>
 
-    <!-- =========================================
-         HERO SECTION WITH 3D EFFECTS
-         ========================================= -->
-    <section id="hero" class="section hero">
-      <div class="hero-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="grid-overlay"></div>
-        <div class="particles-field" id="particlesField"></div>
-        
-        <!-- 3D Floating Elements -->
-        <div class="floating-3d-container">
-          <div class="cube-3d cube-1">
-            <div class="cube-face front"></div>
-            <div class="cube-face back"></div>
-            <div class="cube-face left"></div>
-            <div class="cube-face right"></div>
-            <div class="cube-face top"></div>
-            <div class="cube-face bottom"></div>
-          </div>
-          <div class="cube-3d cube-2">
-            <div class="cube-face front"></div>
-            <div class="cube-face back"></div>
-            <div class="cube-face left"></div>
-            <div class="cube-face right"></div>
-            <div class="cube-face top"></div>
-            <div class="cube-face bottom"></div>
-          </div>
-          <div class="cube-3d cube-3">
-            <div class="cube-face front"></div>
-            <div class="cube-face back"></div>
-            <div class="cube-face left"></div>
-            <div class="cube-face right"></div>
-            <div class="cube-face top"></div>
-            <div class="cube-face bottom"></div>
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="visual-window">
+            <div class="visual-topbar"><span></span><span></span><span></span><b>precision.pipeline</b></div>
+            <div class="visual-body">
+              <div class="signal-card signal-main">
+                <span class="signal-kicker">DATA QUALITY</span>
+                <strong>Human-in-the-loop</strong>
+                <div class="quality-line"><i style="--w:94%"></i></div>
+                <small>Review → Verify → Deliver</small>
+              </div>
+              <div class="mini-grid">
+                <div class="signal-card"><span>Vision</span><strong>01</strong><small>Image · Video</small></div>
+                <div class="signal-card"><span>Language</span><strong>02</strong><small>RLHF · NLP</small></div>
+                <div class="signal-card"><span>Spatial</span><strong>03</strong><small>LiDAR · 3D</small></div>
+                <div class="signal-card"><span>Audio</span><strong>04</strong><small>Speech · ASR</small></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
-      <div class="circuit-edge ce-left">
-        <div class="ce-line"></div><div class="ce-dot"></div>
-        <div class="ce-line short"></div><div class="ce-dot"></div>
-        <div class="ce-line"></div>
+      <div class="shell client-strip reveal">
+        <span>Built for</span>
+        <b>AI product teams</b><i></i><b>robotics</b><i></i><b>research labs</b><i></i><b>enterprise automation</b>
       </div>
-      <div class="circuit-edge ce-right">
-        <div class="ce-line"></div><div class="ce-dot"></div>
-        <div class="ce-line short"></div><div class="ce-dot"></div>
-        <div class="ce-line"></div>
-      </div>
-      
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span class="badge-pulse"></span>
-          <span>AI Data Intelligence Platform</span>
+    </section>
+
+    <section class="section" id="services">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">SERVICES</p>
+            <h2>One partner for the data behind your AI.</h2>
+          </div>
+          <p>From carefully reviewed human feedback to high-volume multimodal annotation, our workflows are built around clear guidelines, measurable quality and reliable delivery.</p>
         </div>
-        <h1 class="hero-title">
-          <span class="ht-line">Powering AI</span>
-          <span class="ht-line ht-accent">with Precision Data</span>
-        </h1>
-        <p class="hero-sub">
-          Enterprise-grade annotation, labeling &amp; dataset preparation services.
-          Fueling next-generation AI with pixel-perfect accuracy at scale.
-        </p>
-        <div class="hero-cta">
-          <button class="btn btn-primary" onclick="smoothScrollTo('#contact')">
-            <span class="btn-bg"></span>
-            <span class="btn-label">Get Started</span>
-            <span class="btn-arr">&#8594;</span>
-          </button>
-          <button class="btn btn-ghost" onclick="smoothScrollTo('#services')">
-            <span class="btn-label">Explore Services</span>
-          </button>
-        </div>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-n">97.8<em>%</em></span>
-            <span class="stat-l">Accuracy Rate</span>
-          </div>
-          <span class="stat-sep"></span>
-          <div class="stat">
-            <span class="stat-n">1000+<em>+</em></span>
-            <span class="stat-l">Datasets Delivered</span>
-          </div>
-          <span class="stat-sep"></span>
-          <div class="stat">
-            <span class="stat-n">24<em>hr</em></span>
-            <span class="stat-l">Turnaround</span>
-          </div>
+
+        <div class="service-grid">
+          <article class="service-card reveal"><span class="card-index">01</span><h3>RLHF & LLM Evaluation</h3><p>Preference ranking, response comparison, safety review and structured human feedback for language-model training and evaluation.</p><div class="tags"><span>Preference data</span><span>Evaluation</span></div></article>
+          <article class="service-card reveal"><span class="card-index">02</span><h3>Image & Video Annotation</h3><p>Bounding boxes, polygons, segmentation, keypoints and frame-level labels for computer vision and robotics systems.</p><div class="tags"><span>Computer vision</span><span>Robotics</span></div></article>
+          <article class="service-card reveal"><span class="card-index">03</span><h3>LiDAR & 3D Point Cloud</h3><p>Cuboids, tracking, classification and semantic segmentation for autonomous systems, mapping and spatial intelligence.</p><div class="tags"><span>3D sensing</span><span>Autonomy</span></div></article>
+          <article class="service-card reveal"><span class="card-index">04</span><h3>Multimodal AI Annotation</h3><p>Aligned text, image, audio and video labels for vision-language models, generative systems and multimodal evaluation.</p><div class="tags"><span>VLM</span><span>Generative AI</span></div></article>
+          <article class="service-card reveal"><span class="card-index">05</span><h3>Audio & Transcription</h3><p>Speech collection, transcription, diarization, language review and quality-controlled audio datasets for ASR and TTS.</p><div class="tags"><span>ASR</span><span>Speech data</span></div></article>
+          <article class="service-card reveal"><span class="card-index">06</span><h3>AI Automation</h3><p>Practical AI workflows, agents and integrations that reduce repetitive operations and connect existing business systems.</p><div class="tags"><span>Agents</span><span>Workflow design</span></div></article>
         </div>
       </div>
     </section>
 
+    <section class="section soft-section" id="process">
+      <div class="shell process-grid">
+        <div class="process-intro reveal">
+          <p class="eyebrow">HOW WE WORK</p>
+          <h2>Simple process. Visible quality.</h2>
+          <p>Every engagement begins with the dataset, the acceptance criteria and the outcome you need. We build the workflow around those constraints—not the other way around.</p>
+          <a class="inline-link" href="#contact">Plan a pilot project <span>↗</span></a>
+        </div>
+        <ol class="steps">
+          <li class="reveal"><span>01</span><div><h3>Define</h3><p>Scope, sample data, taxonomy, edge cases and target quality metrics.</p></div></li>
+          <li class="reveal"><span>02</span><div><h3>Pilot</h3><p>A small production-like batch validates instructions, tooling and review criteria.</p></div></li>
+          <li class="reveal"><span>03</span><div><h3>Scale</h3><p>Trained operators, layered QA and throughput planning expand the workflow safely.</p></div></li>
+          <li class="reveal"><span>04</span><div><h3>Improve</h3><p>Error analysis and guideline feedback continuously sharpen the process.</p></div></li>
+        </ol>
+      </div>
+    </section>
 
-    <!-- =========================================
-         ABOUT SECTION (compact — team in modal)
-         ========================================= -->
-    <section id="about" class="section about">
-      <div class="container">
-        <div class="about-hero-wrap fade-in">
-          <div class="glass-card about-hero-card">
-            <div class="about-hero-inner">
-              <div class="about-hero-text">
-                <span class="sec-tag">// ABOUT US</span>
-                <h2 class="about-hero-title">Who We Are</h2>
-                <p class="about-hero-desc">
-                  Lydertronics is an enterprise AI data intelligence company specializing in
-                  high-accuracy annotation, labeling, and dataset preparation. Our expert
-                  team delivers production-ready data pipelines that power the world's most
-                  advanced AI systems — from autonomous vehicles to next-gen robotics.
-                </p>
-                <p class="about-hero-desc">
-                  Founded with a mission to bridge the gap between raw data and intelligent
-                  machines, we bring domain expertise, rigorous QA processes, and 24-hour
-                  turnaround to every project we undertake.
-                </p>
-                <button class="btn btn-primary about-team-btn" id="openTeamModal">
-                  <span class="btn-bg"></span>
-                  <span class="btn-label">Meet Our Team</span>
-                  <span class="btn-arr">&#8594;</span>
-                </button>
-              </div>
-              <div class="about-hero-stats-col">
-                <div class="about-stat-item">
-                  <span class="about-stat-n">97.8%</span>
-                  <span class="about-stat-l">Annotation Accuracy</span>
-                </div>
-                <div class="about-stat-item">
-                  <span class="about-stat-n">1000+</span>
-                  <span class="about-stat-l">Datasets Delivered</span>
-                </div>
-                <div class="about-stat-item">
-                  <span class="about-stat-n">7+</span>
-                  <span class="about-stat-l">Specialized Services</span>
-                </div>
-                <div class="about-stat-item">
-                  <span class="about-stat-n">24hr</span>
-                  <span class="about-stat-l">Fast Turnaround</span>
-                </div>
-              </div>
-            </div>
-          </div>
+    <section class="section" id="work">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">SELECTED WORK</p><h2>Built around real AI workflows.</h2></div>
+          <p>A snapshot of the kinds of data operations Lydertronics supports across language, vision, robotics and speech.</p>
+        </div>
+        <div class="work-grid">
+          <article class="work-card reveal"><div class="work-art art-one"><span>Response A</span><b>↔</b><span>Response B</span></div><div class="work-copy"><small>LANGUAGE AI</small><h3>RLHF preference evaluation</h3><p>Human comparison and structured ranking for model-alignment workflows.</p></div></article>
+          <article class="work-card reveal"><div class="work-art art-two"><div class="bbox b1"></div><div class="bbox b2"></div><div class="scan-line"></div></div><div class="work-copy"><small>VISION & ROBOTICS</small><h3>Video and image annotation</h3><p>Object, action and scene labels designed for machine perception systems.</p></div></article>
+          <article class="work-card reveal"><div class="work-art art-three"><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div></div><div class="work-copy"><small>SPEECH AI</small><h3>Audio collection & transcription</h3><p>Quality-controlled multilingual speech data for ASR and evaluation.</p></div></article>
         </div>
       </div>
     </section>
 
-
-    <!-- =========================================
-         SERVICES SECTION
-         ========================================= -->
-    <section id="services" class="section services">
-      <div class="container">
-        <div class="section-hd fade-in">
-          <span class="sec-tag">// SERVICES</span>
-          <h2 class="sec-title">What We <span class="accent">Deliver</span></h2>
-          <p class="sec-sub">Precision-engineered AI data services for cutting-edge systems.</p>
+    <section class="section about-section" id="about">
+      <div class="shell about-grid">
+        <div class="about-copy reveal">
+          <p class="eyebrow">ABOUT LYDERTRONICS</p>
+          <h2>Data work that respects the details.</h2>
+          <p>Lydertronics is an AI data intelligence company focused on high-quality annotation, labeling, evaluation, collection and automation. We combine trained human judgment with disciplined quality control to help teams build dependable AI systems.</p>
+          <p>Our operating model is designed for distributed delivery, clear communication and flexible project sizes—from focused pilots to ongoing production programs.</p>
         </div>
-
-        <div class="services-grid">
-
-          <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">🧠</div></div>
-            <h3>RLHF</h3>
-            <p>Reinforcement Learning from Human Feedback — curating high-quality preference data, comparison rankings, and reward signal annotations for fine-tuning LLMs and AI agents.</p>
-            <div class="svc-foot"><span class="svc-chip">LLM Training</span><span class="svc-chip">Alignment</span></div>
-          </div>
-
-          <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">🤖</div></div>
-            <h3>Video Annotation</h3>
-            <p>Frame-by-frame robot task evaluation and action sequence labeling — benchmarking robotic performance across grasping, navigation, and manipulation tasks.</p>
-            <div class="svc-foot"><span class="svc-chip">Robotics</span><span class="svc-chip">Evaluation</span></div>
-          </div>
-
-          <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">📡</div></div>
-            <h3>LiDAR &amp; 3D Point Cloud</h3>
-            <p>Expert annotation of LiDAR scans and 3D point cloud data — object classification, semantic segmentation, and cuboid labeling for autonomous vehicles and spatial AI.</p>
-            <div class="svc-foot"><span class="svc-chip">3D Sensing</span><span class="svc-chip">Autonomous</span></div>
-          </div>
-
-          <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">◈</div></div>
-            <h3>Multimodal AI Annotation</h3>
-            <p>Cross-modal data labeling combining text, image, audio, and video inputs — building rich multimodal datasets for vision-language models and generative AI systems.</p>
-            <div class="svc-foot"><span class="svc-chip">Vision-Language</span><span class="svc-chip">Gen AI</span></div>
-          </div>
-
-          <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">⊞</div></div>
-            <h3>Image Annotation</h3>
-            <p>Pixel-precise object detection, semantic segmentation, and multi-class labeling for computer vision — supporting bounding boxes, polygons, keypoints, and more.</p>
-            <div class="svc-foot"><span class="svc-chip">Computer Vision</span><span class="svc-chip">Detection</span></div>
-          </div>
-
-          <div class="glass-card svc-card fade-in">
-            <div class="svc-icon-wrap"><div class="svc-icon">🎙</div></div>
-            <h3>Transcription</h3>
-            <p>Multi-language speech-to-text with speaker diarization, punctuation restoration, and domain-specific terminology — supporting NLP model training and ASR evaluation.</p>
-            <div class="svc-foot"><span class="svc-chip">NLP</span><span class="svc-chip">Speech AI</span></div>
-          </div>
-
-          <!-- Flagship -->
-          <div class="glass-card svc-card svc-flagship fade-in">
-            <div class="flagship-badge">FLAGSHIP SERVICE</div>
-            <div class="svc-flagship-inner">
-              <div>
-                <div class="svc-icon-wrap"><div class="svc-icon">🎧</div></div>
-                <h3>Audio Recording &amp; Dataset Collection</h3>
-                <p>
-                  Professional audio data collection — scripted recordings, natural speech capture, multi-dialect
-                  datasets, noise augmentation, and quality-controlled audio archives purpose-built for ASR, TTS,
-                  and speech recognition model training at scale.
-                </p>
-                <div class="svc-foot"><span class="svc-chip">ASR</span><span class="svc-chip">TTS</span><span class="svc-chip">Data Collection</span></div>
-              </div>
-            </div>
-          </div>
-
+        <div class="principles reveal">
+          <div><strong>01</strong><h3>Precision first</h3><p>Guidelines and QA are treated as core product requirements.</p></div>
+          <div><strong>02</strong><h3>Clear ownership</h3><p>Every workflow has accountable review and delivery checkpoints.</p></div>
+          <div><strong>03</strong><h3>Flexible scale</h3><p>Teams and throughput can expand as project demand changes.</p></div>
+          <div><strong>04</strong><h3>Human judgment</h3><p>Complex edge cases receive thoughtful review, not blind throughput.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- =====================================================
-     INSERT THESE SECTIONS INTO index.html
-     Place them AFTER the #services section and BEFORE the #projects section.
-     Also replace the existing #why-us section with the new Why Lydertronics AI section below.
-     Add the #process and #cta sections BEFORE the #contact section.
-     ===================================================== -->
-
-
-<!-- =====================================================
-     SECTION: AI AUTOMATION ACROSS INDUSTRIES
-     ===================================================== -->
-<section id="ai-industries" class="section ai-industries">
-  <div class="container">
-    <div class="section-hd fade-in">
-      <span class="sec-tag">// AI AUTOMATION</span>
-      <h2 class="sec-title">Automation Across <span class="accent">Industries</span></h2>
-      <p class="sec-sub">From healthcare to e-commerce — we deploy intelligent automation that transforms how businesses operate at every level.</p>
-    </div>
-
-    <div class="aii-grid">
-
-      <!-- Healthcare -->
-      <div class="glass-card aii-card fade-in" data-industry="healthcare">
-        <div class="aii-top">
-          <div class="aii-icon-ring">
-            <div class="aii-icon">🏥</div>
-            <div class="aii-ring"></div>
-          </div>
-          <div class="aii-meta">
-            <span class="aii-tag">Healthcare</span>
-            <h3>Medical AI Solutions</h3>
-          </div>
-          <div class="aii-arrow">&#8250;</div>
-        </div>
-        <p class="aii-desc">Intelligent clinical assistants, diagnostic support systems, and patient data automation that reduce workload while improving care outcomes.</p>
-        <div class="aii-solutions">
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>AI Diagnostic Imaging Analysis</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Patient Intake & Scheduling Bots</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Medical Records Automation (EMR)</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Predictive Health Risk Monitoring</span>
-          </div>
-        </div>
-        <div class="aii-bar" style="--c1:#00b4ff;--c2:#0077ff;"></div>
-      </div>
-
-      <!-- E-commerce -->
-      <div class="glass-card aii-card fade-in" data-industry="ecommerce">
-        <div class="aii-top">
-          <div class="aii-icon-ring">
-            <div class="aii-icon">🛒</div>
-            <div class="aii-ring"></div>
-          </div>
-          <div class="aii-meta">
-            <span class="aii-tag">E-Commerce</span>
-            <h3>Retail AI Engines</h3>
-          </div>
-          <div class="aii-arrow">&#8250;</div>
-        </div>
-        <p class="aii-desc">Hyper-personalized shopping experiences, demand forecasting, and intelligent inventory management powered by real-time AI models.</p>
-        <div class="aii-solutions">
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Product Recommendation Engines</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Visual Search & Cataloging AI</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Dynamic Pricing Automation</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>AI-Powered Fraud Detection</span>
-          </div>
-        </div>
-        <div class="aii-bar" style="--c1:#7c3aff;--c2:#00b4ff;"></div>
-      </div>
-
-      <!-- Finance -->
-      <div class="glass-card aii-card fade-in" data-industry="finance">
-        <div class="aii-top">
-          <div class="aii-icon-ring">
-            <div class="aii-icon">📈</div>
-            <div class="aii-ring"></div>
-          </div>
-          <div class="aii-meta">
-            <span class="aii-tag">Finance</span>
-            <h3>FinTech AI Systems</h3>
-          </div>
-          <div class="aii-arrow">&#8250;</div>
-        </div>
-        <p class="aii-desc">Risk analysis, algorithmic trading support, and regulatory compliance automation that give financial institutions a decisive intelligence edge.</p>
-        <div class="aii-solutions">
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Real-Time Risk Scoring Models</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>AML & Compliance Automation</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Credit Underwriting AI</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Intelligent Portfolio Analytics</span>
-          </div>
-        </div>
-        <div class="aii-bar" style="--c1:#00ffe0;--c2:#0077ff;"></div>
-      </div>
-
-      <!-- Manufacturing -->
-      <div class="glass-card aii-card fade-in" data-industry="manufacturing">
-        <div class="aii-top">
-          <div class="aii-icon-ring">
-            <div class="aii-icon">⚙️</div>
-            <div class="aii-ring"></div>
-          </div>
-          <div class="aii-meta">
-            <span class="aii-tag">Manufacturing</span>
-            <h3>Industrial AI Ops</h3>
-          </div>
-          <div class="aii-arrow">&#8250;</div>
-        </div>
-        <p class="aii-desc">Predictive maintenance, computer vision quality control, and autonomous production line optimization for Industry 4.0 environments.</p>
-        <div class="aii-solutions">
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Predictive Equipment Maintenance</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Visual Quality Inspection AI</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Supply Chain Intelligence</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Digital Twin Simulation</span>
-          </div>
-        </div>
-        <div class="aii-bar" style="--c1:#ff2d78;--c2:#7c3aff;"></div>
-      </div>
-
-      <!-- Education -->
-      <div class="glass-card aii-card fade-in" data-industry="education">
-        <div class="aii-top">
-          <div class="aii-icon-ring">
-            <div class="aii-icon">🎓</div>
-            <div class="aii-ring"></div>
-          </div>
-          <div class="aii-meta">
-            <span class="aii-tag">Education</span>
-            <h3>EdTech Intelligence</h3>
-          </div>
-          <div class="aii-arrow">&#8250;</div>
-        </div>
-        <p class="aii-desc">Adaptive learning platforms, automated assessment systems, and intelligent tutoring that personalize education at scale for every learner.</p>
-        <div class="aii-solutions">
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Adaptive Learning Path AI</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Automated Essay Grading</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Student Performance Analytics</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>AI Tutoring & Doubt Resolution</span>
-          </div>
-        </div>
-        <div class="aii-bar" style="--c1:#00ffe0;--c2:#7c3aff;"></div>
-      </div>
-
-      <!-- Customer Support -->
-      <div class="glass-card aii-card fade-in" data-industry="support">
-        <div class="aii-top">
-          <div class="aii-icon-ring">
-            <div class="aii-icon">🎧</div>
-            <div class="aii-ring"></div>
-          </div>
-          <div class="aii-meta">
-            <span class="aii-tag">Customer Support</span>
-            <h3>CX Automation</h3>
-          </div>
-          <div class="aii-arrow">&#8250;</div>
-        </div>
-        <p class="aii-desc">Multi-channel AI agents, sentiment-aware routing, and intelligent self-service portals that resolve customer issues faster and smarter.</p>
-        <div class="aii-solutions">
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Omnichannel AI Chatbots</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Sentiment Analysis & Routing</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Ticket Auto-Classification</span>
-          </div>
-          <div class="aii-sol-item">
-            <span class="aii-sol-dot"></span>
-            <span>Voice AI & IVR Automation</span>
-          </div>
-        </div>
-        <div class="aii-bar" style="--c1:#00b4ff;--c2:#00ffe0;"></div>
-      </div>
-
-    </div><!-- /aii-grid -->
-  </div>
-</section>
-
-
-<!-- =====================================================
-     SECTION: AI INTERFACES IN ACTION
-     ===================================================== -->
-<section id="ai-interfaces" class="section ai-interfaces">
-  <div class="container">
-    <div class="section-hd fade-in">
-      <span class="sec-tag">// LIVE DEMOS</span>
-      <h2 class="sec-title">AI Interfaces <span class="accent">in Action</span></h2>
-      <p class="sec-sub">Real-world AI use cases visualized — see what intelligent automation looks like across different business contexts.</p>
-    </div>
-
-    <div class="aia-grid">
-
-      <!-- Mockup 1: Chatbot Conversation -->
-      <div class="glass-card aia-card fade-in">
-        <div class="aia-label">
-          <span class="aia-dot"></span>
-          <span>AI Chatbot · Live</span>
-        </div>
-        <div class="aia-mockup chatbot-mock">
-          <div class="cb-header">
-            <div class="cb-avatar">🤖</div>
-            <div class="cb-info">
-              <span class="cb-name">Lydr Assistant</span>
-              <span class="cb-status">● Online</span>
-            </div>
-          </div>
-          <div class="cb-messages" id="cbMessages">
-            <div class="cb-msg bot">
-              <span>Hello! How can I help you today?</span>
-            </div>
-            <div class="cb-msg user cb-anim-1">
-              <span>I need to track my order #4821</span>
-            </div>
-            <div class="cb-msg bot cb-anim-2">
-              <div class="cb-typing" id="cbTyping">
-                <span></span><span></span><span></span>
-              </div>
-            </div>
-            <div class="cb-msg bot cb-anim-3" id="cbReply" style="display:none;">
-              <span>Your order is out for delivery! ETA: 2 hours. 📦</span>
-            </div>
-          </div>
-          <div class="cb-input">
-            <span>Type a message...</span>
-            <div class="cb-send">&#8594;</div>
-          </div>
-        </div>
-        <div class="aia-meta">
-          <h4>Conversational AI Agent</h4>
-          <p>Context-aware chatbots with NLP, intent detection, and seamless handoff to human agents.</p>
-        </div>
-      </div>
-
-      <!-- Mockup 2: Analytics Dashboard -->
-      <div class="glass-card aia-card fade-in">
-        <div class="aia-label">
-          <span class="aia-dot" style="background:#00ffe0;box-shadow:0 0 8px #00ffe0;"></span>
-          <span>Analytics Dashboard · Live</span>
-        </div>
-        <div class="aia-mockup dashboard-mock">
-          <div class="dash-header">
-            <span class="dash-title">AI Insights</span>
-            <div class="dash-pills">
-              <span class="dash-pill active">7D</span>
-              <span class="dash-pill">30D</span>
-              <span class="dash-pill">90D</span>
-            </div>
-          </div>
-          <div class="dash-stats-row">
-            <div class="dash-stat">
-              <span class="ds-n" data-target="98.4">0</span><span class="ds-u">%</span>
-              <span class="ds-l">Accuracy</span>
-            </div>
-            <div class="dash-stat">
-              <span class="ds-n" data-target="1240">0</span><span class="ds-u">K</span>
-              <span class="ds-l">Records</span>
-            </div>
-            <div class="dash-stat">
-              <span class="ds-n" data-target="3.2">0</span><span class="ds-u">x</span>
-              <span class="ds-l">Speed</span>
-            </div>
-          </div>
-          <div class="dash-chart">
-            <div class="dc-bar-group">
-              <div class="dc-bar" style="--h:45%;--delay:0s;--c:#00b4ff;"></div>
-              <div class="dc-bar" style="--h:70%;--delay:.1s;--c:#7c3aff;"></div>
-              <div class="dc-bar" style="--h:55%;--delay:.2s;--c:#00b4ff;"></div>
-              <div class="dc-bar" style="--h:85%;--delay:.3s;--c:#00ffe0;"></div>
-              <div class="dc-bar" style="--h:60%;--delay:.4s;--c:#7c3aff;"></div>
-              <div class="dc-bar" style="--h:90%;--delay:.5s;--c:#00ffe0;"></div>
-              <div class="dc-bar" style="--h:75%;--delay:.6s;--c:#00b4ff;"></div>
-            </div>
-            <div class="dc-line">
-              <svg viewBox="0 0 200 60" preserveAspectRatio="none">
-                <polyline class="dc-line-path" points="0,55 28,40 56,48 84,25 112,35 140,15 168,22 200,10" />
-                <polyline class="dc-line-fill" points="0,55 28,40 56,48 84,25 112,35 140,15 168,22 200,10 200,60 0,60" />
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div class="aia-meta">
-          <h4>Predictive Analytics Engine</h4>
-          <p>Real-time data visualization with ML-powered forecasting and anomaly detection alerts.</p>
-        </div>
-      </div>
-
-      <!-- Mockup 3: Voice AI Waveform -->
-      <div class="glass-card aia-card fade-in">
-        <div class="aia-label">
-          <span class="aia-dot" style="background:#ff2d78;box-shadow:0 0 8px #ff2d78;"></span>
-          <span>Voice AI · Processing</span>
-        </div>
-        <div class="aia-mockup voice-mock">
-          <div class="voice-orb">
-            <div class="vo-core">
-              <span>🎙️</span>
-            </div>
-            <div class="vo-ring vo-r1"></div>
-            <div class="vo-ring vo-r2"></div>
-            <div class="vo-ring vo-r3"></div>
-          </div>
-          <div class="voice-waveform">
-            <div class="vw-bars" id="vwBars">
-              <!-- Generated by JS -->
-            </div>
-          </div>
-          <div class="voice-transcript">
-            <div class="vt-line" id="vtLine">
-              <span class="vt-cursor">|</span>
-              <span class="vt-text"></span>
-            </div>
-          </div>
-        </div>
-        <div class="aia-meta">
-          <h4>Voice AI & Speech Recognition</h4>
-          <p>Multi-dialect ASR models with real-time transcription, diarization, and intent extraction.</p>
-        </div>
-      </div>
-
-      <!-- Mockup 4: Workflow Automation Builder -->
-      <div class="glass-card aia-card fade-in">
-        <div class="aia-label">
-          <span class="aia-dot" style="background:#7c3aff;box-shadow:0 0 8px #7c3aff;"></span>
-          <span>Workflow Builder · Active</span>
-        </div>
-        <div class="aia-mockup workflow-mock">
-          <div class="wf-scene">
-            <div class="wf-node wf-trigger">
-              <span class="wf-n-icon">⚡</span>
-              <span>Trigger</span>
-            </div>
-            <div class="wf-connector wf-c1">
-              <div class="wf-pulse-dot"></div>
-            </div>
-            <div class="wf-node wf-process">
-              <span class="wf-n-icon">🧠</span>
-              <span>AI Process</span>
-            </div>
-            <div class="wf-connector wf-c2">
-              <div class="wf-pulse-dot" style="animation-delay:.4s;"></div>
-            </div>
-            <div class="wf-branch">
-              <div class="wf-node wf-action wf-a1">
-                <span class="wf-n-icon">✅</span>
-                <span>Approve</span>
-              </div>
-              <div class="wf-node wf-action wf-a2">
-                <span class="wf-n-icon">🔄</span>
-                <span>Review</span>
-              </div>
-            </div>
-            <div class="wf-connector wf-c3">
-              <div class="wf-pulse-dot" style="animation-delay:.8s;"></div>
-            </div>
-            <div class="wf-node wf-output">
-              <span class="wf-n-icon">📤</span>
-              <span>Output</span>
-            </div>
-          </div>
-          <div class="wf-status-bar">
-            <div class="wsb-item wsb-active">
-              <span class="wsb-dot"></span>
-              <span>Running · 3 active workflows</span>
-            </div>
-          </div>
-        </div>
-        <div class="aia-meta">
-          <h4>Workflow Automation Builder</h4>
-          <p>Visual drag-and-drop AI automation pipelines with conditional logic and multi-system integration.</p>
-        </div>
-      </div>
-
-    </div><!-- /aia-grid -->
-  </div>
-</section>
-
-
-<!-- =====================================================
-     REPLACE existing #why-us with this section
-     (Delete the old why-us section and use this one)
-     ===================================================== -->
-<section id="why-us" class="section why-us-new">
-  <div class="container">
-    <div class="section-hd fade-in">
-      <span class="sec-tag">// WHY US</span>
-      <h2 class="sec-title">Why <span class="accent">Lydertronics AI</span></h2>
-      <p class="sec-sub">Six pillars that make us the trusted AI partner for growing enterprises worldwide.</p>
-    </div>
-
-    <div class="wl-grid">
-
-      <div class="glass-card wl-card fade-in">
-        <div class="wl-icon-wrap">
-          <div class="wl-hex-bg"></div>
-          <span class="wl-icon">🎯</span>
-        </div>
-        <div class="wl-num">01</div>
-        <h3>Custom AI Solutions</h3>
-        <p>No off-the-shelf templates. Every model, pipeline, and interface is architected around your specific domain, data, and business goals.</p>
-        <div class="wl-bar">
-          <div class="wl-fill" style="--pw:92%;"></div>
-        </div>
-      </div>
-
-      <div class="glass-card wl-card fade-in">
-        <div class="wl-icon-wrap">
-          <div class="wl-hex-bg"></div>
-          <span class="wl-icon">⚡</span>
-        </div>
-        <div class="wl-num">02</div>
-        <h3>Infinite Scalability</h3>
-        <p>Our cloud-native infrastructure handles 100 to 100 million data points with zero degradation in performance or quality.</p>
-        <div class="wl-bar">
-          <div class="wl-fill" style="--pw:98%;"></div>
-        </div>
-      </div>
-
-      <div class="glass-card wl-card fade-in">
-        <div class="wl-icon-wrap">
-          <div class="wl-hex-bg"></div>
-          <span class="wl-icon">🔗</span>
-        </div>
-        <div class="wl-num">03</div>
-        <h3>Seamless Integration</h3>
-        <p>REST APIs, webhooks, and native connectors for Salesforce, SAP, HubSpot, AWS, GCP — we plug into your existing stack.</p>
-        <div class="wl-bar">
-          <div class="wl-fill" style="--pw:89%;"></div>
-        </div>
-      </div>
-
-      <div class="glass-card wl-card fade-in">
-        <div class="wl-icon-wrap">
-          <div class="wl-hex-bg"></div>
-          <span class="wl-icon">💡</span>
-        </div>
-        <div class="wl-num">04</div>
-        <h3>High Accuracy</h3>
-        <p>Industry-leading 99.8% annotation accuracy with multi-tier quality verification and AI-assisted QA protocols at every layer.</p>
-        <div class="acc-bar-wrap">
-          <div class="acc-bar"><div class="acc-fill" style="--w:99.8%;"></div></div>
-          <span>99.8%</span>
-        </div>
-      </div>
-
-      <div class="glass-card wl-card fade-in">
-        <div class="wl-icon-wrap">
-          <div class="wl-hex-bg"></div>
-          <span class="wl-icon">💰</span>
-        </div>
-        <div class="wl-num">05</div>
-        <h3>Cost Efficiency</h3>
-        <p>Reduce operational costs by up to 60% through intelligent automation — delivering enterprise-grade AI at startup-friendly economics.</p>
-        <div class="wl-bar">
-          <div class="wl-fill" style="--pw:85%;"></div>
-        </div>
-      </div>
-
-      <div class="glass-card wl-card fade-in">
-        <div class="wl-icon-wrap">
-          <div class="wl-hex-bg"></div>
-          <span class="wl-icon">🛡️</span>
-        </div>
-        <div class="wl-num">06</div>
-        <h3>Continuous Support</h3>
-        <p>Dedicated success managers, 24/7 monitoring dashboards, and proactive model retraining — we don't just deliver, we maintain.</p>
-        <div class="wl-bar">
-          <div class="wl-fill" style="--pw:96%;"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- =====================================================
-     SECTION: OUR PROCESS (Timeline)
-     (Insert BEFORE #contact section)
-     ===================================================== -->
-<section id="process" class="section process">
-  <div class="container">
-    <div class="section-hd fade-in">
-      <span class="sec-tag">// HOW IT WORKS</span>
-      <h2 class="sec-title">Our <span class="accent">Process</span></h2>
-      <p class="sec-sub">A structured, transparent workflow from first conversation to production deployment — and beyond.</p>
-    </div>
-
-    <div class="proc-timeline fade-in">
-
-      <!-- Progress track -->
-      <div class="proc-track">
-        <div class="proc-track-fill"></div>
-      </div>
-
-      <!-- Step 1 -->
-      <div class="proc-step ps-active">
-        <div class="proc-dot-wrap">
-          <div class="proc-dot">
-            <span>01</span>
-            <div class="proc-pulse"></div>
-          </div>
-        </div>
-        <div class="glass-card proc-card">
-          <div class="pc-icon">🤝</div>
-          <h3>Consultation</h3>
-          <p>We map your data landscape, understand your AI goals, and identify automation opportunities with the highest ROI potential.</p>
-          <div class="pc-tags">
-            <span>Needs Analysis</span>
-            <span>Feasibility Study</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="proc-step">
-        <div class="proc-dot-wrap">
-          <div class="proc-dot">
-            <span>02</span>
-            <div class="proc-pulse"></div>
-          </div>
-        </div>
-        <div class="glass-card proc-card">
-          <div class="pc-icon">🎨</div>
-          <h3>Design</h3>
-          <p>Data architecture, model selection, annotation schemas, and UI wireframes are crafted into a precision-engineered AI blueprint.</p>
-          <div class="pc-tags">
-            <span>Architecture</span>
-            <span>Prototyping</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="proc-step">
-        <div class="proc-dot-wrap">
-          <div class="proc-dot">
-            <span>03</span>
-            <div class="proc-pulse"></div>
-          </div>
-        </div>
-        <div class="glass-card proc-card">
-          <div class="pc-icon">⚙️</div>
-          <h3>Development</h3>
-          <p>Annotation pipelines, model training, API development, and QA cycles — built fast, built right, with full transparency.</p>
-          <div class="pc-tags">
-            <span>Annotation</span>
-            <span>Model Training</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="proc-step">
-        <div class="proc-dot-wrap">
-          <div class="proc-dot">
-            <span>04</span>
-            <div class="proc-pulse"></div>
-          </div>
-        </div>
-        <div class="glass-card proc-card">
-          <div class="pc-icon">🚀</div>
-          <h3>Deployment</h3>
-          <p>Seamless integration into your production environment with load testing, rollback protocols, and go-live support.</p>
-          <div class="pc-tags">
-            <span>Integration</span>
-            <span>Go-Live</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 5 -->
-      <div class="proc-step">
-        <div class="proc-dot-wrap">
-          <div class="proc-dot">
-            <span>05</span>
-            <div class="proc-pulse"></div>
-          </div>
-        </div>
-        <div class="glass-card proc-card">
-          <div class="pc-icon">📊</div>
-          <h3>Optimization</h3>
-          <p>Ongoing model retraining, performance monitoring, and feature expansion — your AI system gets smarter every sprint.</p>
-          <div class="pc-tags">
-            <span>Monitoring</span>
-            <span>Continuous Learning</span>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /proc-timeline -->
-  </div>
-</section>
-
-
-<!-- =====================================================
-     SECTION: ENHANCED CTA (Insert BEFORE #contact)
-     ===================================================== -->
-<section id="cta" class="section cta-section">
-  <div class="cta-bg">
-    <div class="cta-orb cta-orb-1"></div>
-    <div class="cta-orb cta-orb-2"></div>
-    <div class="cta-grid-overlay"></div>
-    <!-- Floating tech chips -->
-    <div class="cta-float-chip cf-1">RLHF</div>
-    <div class="cta-float-chip cf-2">LiDAR</div>
-    <div class="cta-float-chip cf-3">NLP</div>
-    <div class="cta-float-chip cf-4">AutoML</div>
-    <div class="cta-float-chip cf-5">CV</div>
-  </div>
-  <div class="container">
-    <div class="cta-inner fade-in">
-      <div class="cta-badge">
-        <span class="badge-pulse"></span>
-        <span>Start Your AI Journey Today</span>
-      </div>
-      <h2 class="cta-title">
-        Ready to Automate<br>
-        <span class="cta-accent">Your Future?</span>
-      </h2>
-      <p class="cta-sub">
-        Join the companies transforming their operations with Lydertronics AI.<br>
-        From data annotation to full automation — we make it real.
-      </p>
-      <div class="cta-stats-row">
-        <div class="glass-card cta-stat">
-          <span class="cta-stat-n">1000<em>+</em></span>
-          <span class="cta-stat-l">AI Projects Delivered</span>
-        </div>
-        <div class="glass-card cta-stat">
-          <span class="cta-stat-n">97.8<em>%</em></span>
-          <span class="cta-stat-l">Accuracy Rate</span>
-        </div>
-        <div class="glass-card cta-stat">
-          <span class="cta-stat-n">24<em>hr</em></span>
-          <span class="cta-stat-l">Turnaround</span>
-        </div>
-        <div class="glass-card cta-stat">
-          <span class="cta-stat-n">60<em>%</em></span>
-          <span class="cta-stat-l">Cost Reduction</span>
-        </div>
-      </div>
-      <div class="cta-actions">
-        <button class="btn btn-primary cta-btn-primary" onclick="smoothScrollTo('#contact')">
-          <span class="btn-bg"></span>
-          <span class="btn-label">Start a Project</span>
-          <span class="btn-arr">&#8594;</span>
-        </button>
-        <button class="btn btn-ghost cta-btn-ghost" onclick="smoothScrollTo('#ai-industries')">
-          <span class="btn-label">Explore Solutions</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- =====================================================
-     ALSO: Add these nav links to the navbar ul.nav-links
-     (insert before the contact link)
-     ===================================================== -->
-<!--
-  <li><a href="#ai-industries" class="nav-link" data-section="ai-industries">AI Automation</a></li>
-  <li><a href="#process"       class="nav-link" data-section="process">Process</a></li>
--->
-
-
-    <!-- =========================================
-         PROJECTS / PORTFOLIO SECTION
-         ========================================= -->
-    <section id="projects" class="section projects">
-      <div class="container">
-        <div class="section-hd fade-in">
-          <span class="sec-tag">// PORTFOLIO</span>
-          <h2 class="sec-title">Featured <span class="accent">Projects</span></h2>
-          <p class="sec-sub">Real-world AI data solutions delivered with precision.</p>
-        </div>
-
-        <div class="projects-grid">
-
-          <!-- Project 1: RLHF -->
-          <div class="glass-card proj-card fade-in">
-            <div class="proj-visual rlhf-visual">
-              <div class="rlhf-scene">
-                <div class="rlhf-pair">
-                  <div class="rlhf-bubble rb-a">Response A</div>
-                  <div class="rlhf-vs">VS</div>
-                  <div class="rlhf-bubble rb-b">Response B</div>
-                </div>
-                <div class="rlhf-arrow">&#9660;</div>
-                <div class="rlhf-prefer">Human Preference Signal</div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <span class="proj-num">01</span>
-              <h3>RLHF — Reward Model Training</h3>
-              <p>Large-scale preference annotation and comparison ranking for LLM fine-tuning pipelines, delivering structured human feedback datasets for alignment training.</p>
-              <div class="proj-tags">
-                <span>RLHF</span><span>LLM</span><span>Alignment</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2: Video Annotation / Robot Evaluation -->
-          <div class="glass-card proj-card fade-in">
-            <div class="proj-visual robot-visual">
-              <div class="robot-arm-demo">
-                <div class="arm-segment seg-1"></div>
-                <div class="arm-joint jt-1"></div>
-                <div class="arm-segment seg-2"></div>
-                <div class="arm-joint jt-2"></div>
-                <div class="arm-segment seg-3"></div>
-                <div class="arm-end-effector"></div>
-                <div class="arm-path-trace"></div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <span class="proj-num">02</span>
-              <h3>Video Annotation — Robot Task Evaluation</h3>
-              <p>Frame-by-frame kinematic labeling and performance benchmarking for industrial robotic arms — covering grasping, sorting, and pick-and-place task sequences.</p>
-              <div class="proj-tags">
-                <span>Robotics</span><span>Video</span><span>Evaluation</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3: LiDAR -->
-          <div class="glass-card proj-card fade-in">
-            <div class="proj-visual lidar-visual">
-              <div class="lidar-scene">
-                <div class="lidar-scan"></div>
-                <div class="lidar-point lp1"></div>
-                <div class="lidar-point lp2"></div>
-                <div class="lidar-point lp3"></div>
-                <div class="lidar-point lp4"></div>
-                <div class="lidar-point lp5"></div>
-                <div class="lidar-point lp6"></div>
-                <div class="lidar-box lb1"></div>
-                <div class="lidar-box lb2"></div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <span class="proj-num">03</span>
-              <h3>LiDAR &amp; 3D Point Cloud Annotation</h3>
-              <p>High-density point cloud labeling for autonomous driving perception — cuboid fitting, semantic segmentation, and multi-frame tracking across complex urban scenes.</p>
-              <div class="proj-tags">
-                <span>LiDAR</span><span>3D</span><span>Auto-Drive</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 4: Multimodal -->
-          <div class="glass-card proj-card fade-in">
-            <div class="proj-visual multimodal-visual">
-              <div class="mm-scene">
-                <div class="mm-node mm-img">IMG</div>
-                <div class="mm-node mm-txt">TXT</div>
-                <div class="mm-node mm-aud">AUD</div>
-                <div class="mm-node mm-vid">VID</div>
-                <div class="mm-center">AI</div>
-                <div class="mm-line ml1"></div>
-                <div class="mm-line ml2"></div>
-                <div class="mm-line ml3"></div>
-                <div class="mm-line ml4"></div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <span class="proj-num">04</span>
-              <h3>Multimodal AI Annotation</h3>
-              <p>Integrated cross-modal labeling combining image captions, audio descriptions, video transcripts, and text alignments for vision-language and generative model training.</p>
-              <div class="proj-tags">
-                <span>Multimodal</span><span>VLM</span><span>Gen AI</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 5: Image Annotation -->
-          <div class="glass-card proj-card fade-in">
-            <div class="proj-visual bbox-visual">
-              <div class="bbox-scene">
-                <div class="bbox-obj b-obj-1"></div>
-                <div class="bbox-obj b-obj-2"></div>
-                <div class="bbox-obj b-obj-3"></div>
-                <div class="corner-mark cm-tl"></div>
-                <div class="corner-mark cm-tr"></div>
-                <div class="corner-mark cm-bl"></div>
-                <div class="corner-mark cm-br"></div>
-                <div class="cross-hair ch-h"></div>
-                <div class="cross-hair ch-v"></div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <span class="proj-num">05</span>
-              <h3>Image Annotation</h3>
-              <p>150K+ images processed with bounding boxes, polygons, and semantic masks for autonomous vehicle perception — sub-pixel precision with multi-tier QA audits.</p>
-              <div class="proj-tags">
-                <span>Image</span><span>Segmentation</span><span>CV</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 6: Transcription + Audio -->
-          <div class="glass-card proj-card fade-in">
-            <div class="proj-visual audio-visual">
-              <div class="audio-eq">
-                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-                <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <span class="proj-num">06</span>
-              <h3>Transcription &amp; Audio Recording</h3>
-              <p>Multi-dialect English and Telugu speech datasets — scripted recordings, live transcription with speaker diarization, and noise-augmented corpora for ASR systems.</p>
-              <div class="proj-tags">
-                <span>ASR</span><span>Telugu</span><span>English</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
+    <section class="career-band">
+      <div class="shell career-band-grid reveal">
+        <div><p class="eyebrow">FREELANCER NETWORK</p><h2>Do your best work with us.</h2><p>We welcome skilled freelancers in annotation, RLHF, language, audio, LiDAR, QA and AI automation.</p></div>
+        <a class="button light" href="careers.html">View freelancer opportunities <span>↗</span></a>
       </div>
     </section>
 
+    <section class="section contact-section" id="contact">
+      <div class="shell contact-grid">
+        <div class="contact-copy reveal">
+          <p class="eyebrow">START A PROJECT</p>
+          <h2>Tell us what your AI needs to learn.</h2>
+          <p>Share the data type, volume, timeline and quality requirements. We’ll review the scope and respond with the next practical step.</p>
+          <div class="contact-list">
+            <a href="mailto:lydertronicsai@trainbot.in"><span>Email</span><strong>lydertronicsai@trainbot.in</strong></a>
+            <a href="tel:+917981520897"><span>Phone</span><strong>+91 7981520897</strong></a>
+            <div><span>Availability</span><strong>Mon–Sat · 9 AM–7 PM IST</strong></div>
+          </div>
+        </div>
 
-    <!-- =========================================
-         WHY CHOOSE US
-         ========================================= -->
-    <section id="why-us" class="section why-us">
-      <div class="container">
-        <div class="section-hd fade-in">
-          <span class="sec-tag">// WHY US</span>
-          <h2 class="sec-title">The Lydertronics <span class="accent">Advantage</span></h2>
-          <p class="sec-sub">Four pillars that make us the preferred AI data partner.</p>
-        </div>
-        <div class="why-grid">
-          <div class="glass-card why-card fade-in">
-            <div class="why-hex">⬡</div>
-            <div class="why-num">01</div>
-            <h3>High Accuracy</h3>
-            <p>Industry-leading 99.8% annotation accuracy with multi-tier quality verification and AI-assisted QA protocols.</p>
-            <div class="acc-bar-wrap">
-              <div class="acc-bar"><div class="acc-fill" style="--w:99.8%"></div></div>
-              <span>99.8%</span>
-            </div>
+        <form class="contact-form reveal" id="contactForm" novalidate>
+          <div class="form-row">
+            <label>Full name<input id="fname" name="name" type="text" autocomplete="name" required /></label>
+            <label>Email address<input id="femail" name="email" type="email" autocomplete="email" required /></label>
           </div>
-          <div class="glass-card why-card fade-in">
-            <div class="why-hex">◉</div>
-            <div class="why-num">02</div>
-            <h3>Skilled Annotators</h3>
-            <p>Domain-certified specialists with deep expertise across computer vision, NLP, audio, robotics, and multimodal data domains.</p>
-          </div>
-          <div class="glass-card why-card fade-in">
-            <div class="why-hex">⚡</div>
-            <div class="why-num">03</div>
-            <h3>Fast Delivery</h3>
-            <p>24-hour turnaround on standard projects. Agile sprint cycles for large-scale enterprise dataset requirements.</p>
-          </div>
-          <div class="glass-card why-card fade-in">
-            <div class="why-hex">∞</div>
-            <div class="why-num">04</div>
-            <h3>Scalable Solutions</h3>
-            <p>From 100 to 10 million data points — our infrastructure scales seamlessly with your AI roadmap and ambitions.</p>
-          </div>
-        </div>
+          <label>Service
+            <select id="fservice" name="service" required>
+              <option value="">Choose a service</option>
+              <option>RLHF / LLM Evaluation</option>
+              <option>Image & Video Annotation</option>
+              <option>LiDAR & 3D Point Cloud</option>
+              <option>Multimodal AI Annotation</option>
+              <option>Audio / Transcription / Data Collection</option>
+              <option>AI Automation</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Project details<textarea id="fmsg" name="message" rows="6" placeholder="Data type, approximate volume, timeline, target quality..." required></textarea></label>
+          <button class="button primary submit-button" type="submit">Send project brief <span>↗</span></button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </section>
-
-
-    <!-- =========================================
-         INDUSTRIES SERVED
-         ========================================= -->
-    <section id="industries" class="section industries">
-      <div class="container">
-        <div class="section-hd fade-in">
-          <span class="sec-tag">// INDUSTRIES</span>
-          <h2 class="sec-title">Who We <span class="accent">Serve</span></h2>
-          <p class="sec-sub">Partnering with innovators across the global AI ecosystem.</p>
-        </div>
-        <div class="ind-grid fade-in">
-          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">⬡</span></div><span>AI Companies</span></div>
-          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">⚙</span></div><span>Robotics Firms</span></div>
-          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">◈</span></div><span>Startups</span></div>
-          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">⊕</span></div><span>Research Labs</span></div>
-          <div class="glass-card ind-card"><div class="ind-icon-wrap"><span class="ind-glyph">⬚</span></div><span>Tech Firms</span></div>
-        </div>
-        <div class="geo-strip glass-card fade-in">
-          <span class="geo-label">GLOBAL REACH</span>
-          <div class="geo-flags">
-            <span class="geo-flag">🇺🇸 USA</span>
-            <span class="geo-sep">·</span>
-            <span class="geo-flag">🇪🇺 Europe</span>
-            <span class="geo-sep">·</span>
-            <span class="geo-flag">🇮🇳 India</span>
-            <span class="geo-sep">·</span>
-            <span class="geo-flag">🌐 Worldwide</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- =========================================
-         CONTACT SECTION
-         ========================================= -->
-    <section id="contact" class="section contact">
-      <div class="container">
-        <div class="section-hd fade-in">
-          <span class="sec-tag">// CONTACT</span>
-          <h2 class="sec-title">Start Your <span class="accent">Project</span></h2>
-          <p class="sec-sub">Ready to power your AI with precision data? Let's build together.</p>
-        </div>
-        <div class="contact-grid">
-          <div class="glass-card contact-info fade-in">
-            <h3>Get In Touch</h3>
-            <div class="contact-item">
-              <div class="ci-icon">✉</div>
-              <div class="ci-body">
-                <span class="ci-label">Email</span>
-                <a href="mailto:lydertronicsai@trainbot.in" class="ci-val">lydertronicsai@trainbot.in</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="ci-icon">☏</div>
-              <div class="ci-body">
-                <span class="ci-label">Phone</span>
-                <a href="tel:+917981520897" class="ci-val">+91 7981520897</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="ci-icon">◉</div>
-              <div class="ci-body">
-                <span class="ci-label">Response Time</span>
-                <span class="ci-val">Within 24 hours</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="ci-icon">⬡</div>
-              <div class="ci-body">
-                <span class="ci-label">Availability</span>
-                <span class="ci-val">Mon – Sat, 9 AM – 7 PM IST</span>
-              </div>
-            </div>
-          </div>
-
-          <form class="glass-card contact-form fade-in" id="contactForm" novalidate>
-            <div class="form-group">
-              <label for="fname">Full Name</label>
-              <input type="text" id="fname" name="name" placeholder="Your Full Name" autocomplete="name" required />
-              <span class="field-err" id="nameErr"></span>
-            </div>
-            <div class="form-group">
-              <label for="femail">Email Address</label>
-              <input type="email" id="femail" name="email" placeholder="your@email.com" autocomplete="email" required />
-              <span class="field-err" id="emailErr"></span>
-            </div>
-            <div class="form-group">
-              <label for="fservice">Service Required</label>
-              <select id="fservice" name="service">
-                <option value="">Select a service...</option>
-                <option>RLHF (Human Feedback Annotation)</option>
-                <option>AI Agents</option>
-                <option>Video Annotation — Robot Task Evaluation</option>
-                <option>LiDAR &amp; 3D Point Cloud Annotation</option>
-                <option>Multimodal AI Annotation</option>
-                <option>Image Annotation & Collection</option>
-                <option>Transcription</option>
-                <option>Audio Recording &amp; Dataset Collection</option>
-                <option>AI Dataset Preparation (Full Pipeline)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="fmsg">Project Details</label>
-              <textarea id="fmsg" name="message" rows="4" placeholder="Describe your project, data volume, timelines..." required></textarea>
-              <span class="field-err" id="msgErr"></span>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">
-              <span class="btn-bg"></span>
-              <span class="btn-label">Send Message</span>
-              <span class="btn-arr">&#8594;</span>
-            </button>
-            <div class="form-success" id="formSuccess" role="alert">
-              ✓ Message received! We'll respond within 24 hours.
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-
-  <!-- =========================================
-       FOOTER
-       ========================================= -->
-  <footer class="footer">
-    <div class="footer-glow"></div>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col footer-brand-col">
-          <div class="footer-logo">
-            <span class="logo-brk">[</span><span class="logo-main">LYDR</span><span class="logo-accent">TRONICS</span><span class="logo-brk">]</span>
-          </div>
-          <p>Powering the future of AI with precision data annotation and labeling services.</p>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-h">Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="careers.html">Careers</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-h">Services</h4>
-          <ul class="footer-links">
-            <li>AI Agents</li>
-            <li>RLHF Annotation</li>
-            <li>Video Annotation</li>
-            <li>LiDAR &amp; 3D Point Cloud</li>
-            <li>Multimodal AI</li>
-            <li>Image Annotation & Collection </li>
-            <li>Transcription</li>
-            <li>Audio Recording</li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4 class="footer-h">Contact</h4>
-          <ul class="footer-links">
-            <li><a href="mailto:lydertronicsai@trainbot
-                .in">lydertronicsai@trainbot.in</a></li>
-            <li><a href="tel:+917981520897">+91 7981520897</a></li>
-            <li>India | USA | Europe</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-rule"></div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Lydertronics. All rights reserved. | Precision AI Data Services.</p>
-      </div>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div><a class="brand footer-brand" href="#home"><span class="brand-mark">L</span><span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span></a><p>Precision data services for intelligent systems.</p></div>
+      <div><h4>Navigate</h4><a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="careers.html">Careers</a></div>
+      <div><h4>Contact</h4><a href="mailto:lydertronicsai@trainbot.in">Email us</a><a href="tel:+917981520897">+91 7981520897</a><span>India · Global delivery</span></div>
     </div>
+    <div class="shell footer-bottom"><span>© <span data-year></span> Lydertronics. All rights reserved.</span><a href="#home">Back to top ↑</a></div>
   </footer>
-
-  
-
-    <div class="chat-input-area">
-      <input 
-        type="text" 
-        id="messageInput" 
-        placeholder="Ask anything..." 
-        autocomplete="off" 
-        enterkeyhint="send"
-      >
-      <button class="send-btn" id="sendMessageBtn" aria-label="Send message">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="22" y1="2" x2="11" y2="13"></line>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-        </svg>
-      </button>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>
