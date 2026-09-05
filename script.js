@@ -1,823 +1,167 @@
-/* ============================================================
-   LYDERTRONICS — script.js
-   ============================================================ */
-
 'use strict';
 
-/* ─── SMOOTH SCROLL HELPER ───────────────────────────────── */
-window.smoothScrollTo = function (selector) {
-  const target = document.querySelector(selector);
-  if (!target) return;
-  const navH = document.getElementById('navbar')?.offsetHeight || 66;
-  const top  = target.getBoundingClientRect().top + window.scrollY - navH;
-  window.scrollTo({ top, behavior: 'smooth' });
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvzvbgwo';
+
+// Header state
+const siteHeader = document.getElementById('siteHeader');
+const updateHeader = () => {
+  if (!siteHeader) return;
+  siteHeader.classList.toggle('scrolled', window.scrollY > 18);
 };
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
 
-
-/* ─── TEAM MODAL ─────────────────────────────────────────── */
-(function initModal() {
-  const modal     = document.getElementById('teamModal');
-  const openBtn   = document.getElementById('openTeamModal');
-  const closeBtn  = document.getElementById('modalClose');
-  if (!modal) return;
-
-  function openModal() {
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  if (openBtn)  openBtn.addEventListener('click', openModal);
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-
-  modal.addEventListener('click', e => {
-    if (e.target === modal) closeModal();
+// Mobile navigation
+const navToggle = document.getElementById('navToggle');
+const mainNav = document.getElementById('mainNav');
+if (navToggle && mainNav) {
+  navToggle.addEventListener('click', () => {
+    const open = mainNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
   });
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
-  });
-})();
-
-
-/* ─── NAVBAR: scroll style + active link ─────────────────── */
-(function initNavbar() {
-  const navbar   = document.getElementById('navbar');
-  const toggle   = document.getElementById('navToggle');
-  const links    = document.getElementById('navLinks');
-  const allLinks = document.querySelectorAll('.nav-link');
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  function onScroll() {
-    if (!navbar) return;
-    navbar.classList.toggle('scrolled', window.scrollY > 30);
-    highlightActive();
-  }
-
-  function highlightActive() {
-    const sections = ['hero','about','services','projects','why-us','industries','contact'];
-    const navH = navbar ? navbar.offsetHeight : 66;
-    let current = sections[0];
-
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && el.getBoundingClientRect().top - navH - 10 <= 0) {
-        current = id;
-      }
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
     });
-
-    allLinks.forEach(a => {
-      a.classList.toggle('active', a.dataset.section === current);
-    });
-  }
-
-  if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      const isOpen = links.classList.toggle('open');
-      toggle.classList.toggle('open', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    allLinks.forEach(a => {
-      a.addEventListener('click', () => {
-        links.classList.remove('open');
-        toggle.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-})();
-
-
-/* ─── ENHANCED PARTICLE GENERATOR (Hero) ─────────────────── */
-(function initParticles() {
-  const field = document.getElementById('particlesField');
-  if (!field) return;
-
-  const COUNT = 40;
-  const frag  = document.createDocumentFragment();
-
-  for (let i = 0; i < COUNT; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-
-    const size  = (Math.random() * 4 + 2).toFixed(1);
-    const x     = (Math.random() * 100).toFixed(1);
-    const y     = (Math.random() * 100).toFixed(1);
-    const dur   = (Math.random() * 6 + 4).toFixed(1);
-    const delay = (Math.random() * 8).toFixed(1);
-    const alpha = (Math.random() * 0.6 + 0.2).toFixed(2);
-
-    p.style.cssText = [
-      `width:${size}px`,
-      `height:${size}px`,
-      `left:${x}%`,
-      `top:${y}%`,
-      `opacity:${alpha}`,
-      `animation-duration:${dur}s`,
-      `animation-delay:-${delay}s`,
-    ].join(';');
-
-    frag.appendChild(p);
-  }
-
-  field.appendChild(frag);
-})();
-
-
-/* ─── SCROLL FADE-IN WITH ENHANCED STAGGER ───────────────── */
-(function initFadeIn() {
-  const items = document.querySelectorAll('.fade-in');
-  if (!items.length) return;
-
-  const io = new IntersectionObserver(
-    entries => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, index * 100);
-          io.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
-  );
-
-  items.forEach(el => io.observe(el));
-})();
-
-
-/* ─── SERVICE CARDS SCROLL REVEAL ────────────────────────── */
-(function initServiceCardsReveal() {
-  const cards = document.querySelectorAll('.svc-card');
-  if (!cards.length) return;
-
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0) rotateX(0)';
-          }, index * 120);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2, rootMargin: '0px 0px -80px 0px' }
-  );
-
-  cards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(40px) rotateX(-10deg)';
-    card.style.transition = 'opacity .8s cubic-bezier(.23,1,.32,1), transform .8s cubic-bezier(.23,1,.32,1)';
-    observer.observe(card);
   });
-})();
-
-
-/* ─── PARALLAX EFFECT ON SCROLL ──────────────────────────── */
-(function initParallax() {
-  const hero = document.querySelector('.hero');
-  if (!hero) return;
-
-  const orbs  = hero.querySelectorAll('.orb');
-  const cubes = hero.querySelectorAll('.cube-3d');
-
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const limit = hero.offsetHeight;
-
-    if (scrolled < limit) {
-      orbs.forEach((orb, index) => {
-        const speed = 0.3 + (index * 0.1);
-        orb.style.transform = `translateY(${scrolled * speed}px)`;
-      });
-
-      cubes.forEach((cube, index) => {
-        const speed = 0.2 + (index * 0.15);
-        cube.style.transform = `translateY(${scrolled * speed}px)`;
-      });
-    }
-  }, { passive: true });
-})();
-
-
-/* ─── PARALLAX CARDS ON SCROLL ───────────────────────────── */
-(function initCardParallax() {
-  const cards = document.querySelectorAll('.glass-card');
-
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-  );
-
-  cards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity .8s ease, transform .8s ease';
-    observer.observe(card);
-  });
-})();
-
-
-/* ─── CONTACT FORM VALIDATION ────────────────────────────── */
-/* ─── CONTACT FORM — FORMSPREE ───────────────────────────── */
-(function initContactForm() {
-  const form       = document.getElementById('contactForm');
-  const successMsg = document.getElementById('formSuccess');
-  if (!form) return;
-
-  const fields = {
-    fname:  { errId: 'nameErr',  msg: 'Please enter your full name.' },
-    femail: { errId: 'emailErr', msg: 'Please enter a valid email address.' },
-    fmsg:   { errId: 'msgErr',   msg: 'Please describe your project.' },
-  };
-
-  function setErr(id, msg) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = msg;
-  }
-  function clearErrors() {
-    Object.values(fields).forEach(f => setErr(f.errId, ''));
-  }
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    clearErrors();
-
-    const name    = document.getElementById('fname')?.value.trim() || '';
-    const email   = document.getElementById('femail')?.value.trim() || '';
-    const service = document.getElementById('fservice')?.value || '';
-    const msg     = document.getElementById('fmsg')?.value.trim() || '';
-    const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    let valid = true;
-    if (name.length < 2)      { setErr('nameErr',  fields.fname.msg);  valid = false; }
-    if (!emailRx.test(email)) { setErr('emailErr', fields.femail.msg); valid = false; }
-    if (msg.length < 10)      { setErr('msgErr',   fields.fmsg.msg);   valid = false; }
-    if (!valid) return;
-
-    const btn   = form.querySelector('button[type="submit"]');
-    const label = btn?.querySelector('.btn-label');
-    if (btn)   btn.disabled = true;
-    if (label) label.textContent = 'Sending...';
-
-    try {
-
-      const res = await fetch('https://formspree.io/f/xvzvbgwo', {
-
-
-        method:  'POST',
-
-
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-
-
-        body: JSON.stringify({ name, email, service, message: msg }),
-
-      });
-
-
-      if (!res.ok) throw new Error(`Formspree error ${res.status}`);
-
-
-      form.reset();
-      if (successMsg) successMsg.classList.add('show');
-      setTimeout(() => successMsg?.classList.remove('show'), 5000);
-
-    } catch (err) {
-      setErr('msgErr', '⚠️ Failed to send. Please email us directly.');
-    } finally {
-      if (btn)   btn.disabled = false;
-      if (label) label.textContent = 'Send Message';
-    }
-  });
-
-  ['fname', 'femail', 'fmsg'].forEach(id => {
-    const el    = document.getElementById(id);
-    const errId = fields[id]?.errId;
-    if (el && errId) el.addEventListener('input', () => setErr(errId, ''));
-  });
-})();
-
-
-/* ─── NAV LINK SMOOTH SCROLL ─────────────────────────────── */
-document.querySelectorAll('.nav-link[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    window.smoothScrollTo(a.getAttribute('href'));
-  });
-});
-
-document.querySelectorAll('.footer-links a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    window.smoothScrollTo(a.getAttribute('href'));
-  });
-});
-
-
-/* ─── ENHANCED BUTTON MICRO-INTERACTIONS ─────────────────── */
-document.querySelectorAll('.btn').forEach(btn => {
-  btn.addEventListener('pointerdown', () => {
-    btn.style.transition = 'transform .1s ease';
-    btn.style.transform = 'scale(0.97)';
-  });
-
-  btn.addEventListener('pointerup', () => {
-    btn.style.transition = 'all .4s cubic-bezier(.34,1.56,.64,1)';
-    btn.style.transform = '';
-  });
-
-  btn.addEventListener('pointerleave', () => {
-    btn.style.transition = 'all .4s cubic-bezier(.34,1.56,.64,1)';
-    btn.style.transform = '';
-  });
-
-  if (btn.classList.contains('btn-primary')) {
-    btn.addEventListener('mousemove', e => {
-      const rect  = btn.getBoundingClientRect();
-      const moveX = (e.clientX - rect.left - rect.width  / 2) * 0.1;
-      const moveY = (e.clientY - rect.top  - rect.height / 2) * 0.1;
-      btn.style.transform = `translate(${moveX}px, ${moveY}px) translateY(-3px) scale(1.05)`;
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
-  }
-});
-
-
-/* ─── SUBTLE CLICK SOUND ─────────────────────────────────── */
-let audioCtx = null;
-
-function playClick() {
-  try {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc  = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.06);
-    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
-    osc.start(audioCtx.currentTime);
-    osc.stop(audioCtx.currentTime + 0.09);
-  } catch (_) { /* silent fail */ }
 }
 
-document.querySelectorAll('.btn, .nav-link').forEach(el => {
-  el.addEventListener('click', playClick, { passive: true });
+// Smooth in-page navigation with fixed header offset
+function scrollToTarget(hash) {
+  const target = document.querySelector(hash);
+  if (!target) return;
+  const offset = (siteHeader?.offsetHeight || 70) + 14;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  const href = link.getAttribute('href');
+  if (!href || href === '#') return;
+  link.addEventListener('click', event => {
+    if (!document.querySelector(href)) return;
+    event.preventDefault();
+    scrollToTarget(href);
+  });
 });
 
-
-/* ─── NUMBER COUNTER ANIMATION ───────────────────────────── */
-(function initCounters() {
-  const counters = document.querySelectorAll('.stat-n, .about-stat-n');
-
-  const animateCounter = (element) => {
-    const target   = parseFloat(element.textContent);
-    const duration = 2000;
-    const step     = target / (duration / 16);
-    let current    = 0;
-
-    const timer = setInterval(() => {
-      current += step;
-      if (current >= target) {
-        element.innerHTML = element.innerHTML.replace(/[\d.]+/, target.toFixed(1));
-        clearInterval(timer);
-      } else {
-        element.innerHTML = element.innerHTML.replace(/[\d.]+/, current.toFixed(1));
-      }
-    }, 16);
-  };
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  counters.forEach(counter => io.observe(counter));
-})();
-
-
-/* ─── PROGRESS BAR ANIMATION ─────────────────────────────── */
-(function initProgressBars() {
-  const bars = document.querySelectorAll('.acc-fill');
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bar   = entry.target;
-        const width = bar.style.getPropertyValue('--w') || '0%';
-        setTimeout(() => { bar.style.width = width; }, 200);
-        io.unobserve(bar);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  bars.forEach(bar => io.observe(bar));
-})();
-
-
-/* ─── CURSOR GLOW EFFECT ─────────────────────────────────── */
-(function initCursorGlow() {
-  const glow = document.createElement('div');
-  glow.style.cssText = `
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,212,255,0.4), transparent);
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease;
-    display: none;
-  `;
-  document.body.appendChild(glow);
-
-  document.addEventListener('mousemove', e => {
-    glow.style.display = 'block';
-    glow.style.left = e.clientX - 10 + 'px';
-    glow.style.top  = e.clientY - 10 + 'px';
-  });
-
-  document.addEventListener('mouseleave', () => {
-    glow.style.display = 'none';
-  });
-})();
-
-
-/* ============================================================
-   AI CHATBOT — API CONNECTED (single, clean version)
-   ============================================================ */
-(function initChatbot() {
-  const launcher   = document.getElementById('chatLauncher');
-  const chatWindow = document.getElementById('chatWindow');
-  const closeBtn   = document.getElementById('closeChatBtn');
-  const messages   = document.getElementById('chatMessages');
-  const input      = document.getElementById('messageInput');
-  const sendBtn    = document.getElementById('sendMessageBtn');
-
-  if (!launcher || !chatWindow || !messages || !input || !sendBtn) return;
-
-  /* ── open / close ── */
-  launcher.addEventListener('click', () => {
-    chatWindow.classList.remove('closed');
-    chatWindow.classList.add('open');
-    input.focus();
-  });
-
-  closeBtn.addEventListener('click', () => {
-    chatWindow.classList.add('closed');
-    chatWindow.classList.remove('open');
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !chatWindow.classList.contains('closed')) {
-      const teamModal = document.getElementById('teamModal');
-      if (!teamModal?.classList.contains('open')) {
-        chatWindow.classList.add('closed');
-        chatWindow.classList.remove('open');
-      }
-    }
-  });
-
-  /* ── send triggers ── */
-  sendBtn.addEventListener('click', sendMessage);
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
-
-  /* ── main send function ── */
-  async function sendMessage() {
-    const text = input.value.trim();
-    if (!text || sendBtn.disabled) return;
-
-    // Disable input while waiting
-    sendBtn.disabled = true;
-    input.disabled   = true;
-    input.value      = '';
-
-    // Show user bubble
-    appendMessage('user', escapeHtml(text));
-
-    // Show typing indicator
-    const typingEl = appendTyping();
-
-    try {
-      const res = await  fetch("https://ai-chatbot-2-qjpk.onrender.com/chat", {
-        
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ message: text }),
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-      const data = await res.json();
-      typingEl.remove();
-      appendMessage('bot', escapeHtml(data.reply || '⚠️ Empty response'));
-
-    } catch (err) {
-      console.error('Chatbot error:', err);
-      typingEl.remove();
-      appendMessage('bot', '⚠️ Could not reach server. Please try again.');
-    } finally {
-      sendBtn.disabled = false;
-      input.disabled   = false;
-      input.focus();
-    }
-  }
-
-  /* ── helpers ── */
-  function appendMessage(role, htmlContent) {
-    const div = document.createElement('div');
-    div.className = `message ${role}`;
-
-    if (role === 'bot') {
-      div.innerHTML = `
-        <div class="bubble">
-          <span class="bot-avatar-small">🤖</span>
-          <span>${htmlContent}</span>
-        </div>`;
-    } else {
-      div.innerHTML = `<div class="bubble">${htmlContent}</div>`;
-    }
-
-    messages.appendChild(div);
-    scrollBottom();
-    return div;
-  }
-
-  function appendTyping() {
-    const div = document.createElement('div');
-    div.className = 'message bot typing-indicator';
-    div.innerHTML = `
-      <div class="bubble">
-        <span class="bot-avatar-small">🤖</span>
-        <span class="dots"><span>.</span><span>.</span><span>.</span></span>
-      </div>`;
-    messages.appendChild(div);
-    scrollBottom();
-    return div;
-  }
-
-  function scrollBottom() {
-    requestAnimationFrame(() => {
-      messages.scrollTop = messages.scrollHeight;
-    });
-  }
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g,  '&amp;')
-      .replace(/</g,  '&lt;')
-      .replace(/>/g,  '&gt;')
-      .replace(/"/g,  '&quot;')
-      .replace(/'/g,  '&#039;')
-      .replace(/\n/g, '<br>');
-  }
-})();
-
-
-console.log('%c🚀 Lydertronics Website Loaded', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
-console.log('%cPowering AI with Precision Data', 'color: #7a8aaa; font-size: 12px;');
-
-/* ============================================================
-   LYDERTRONICS — JS ADDITIONS
-   Add this to the END of your existing script.js file
-   ============================================================ */
-
-
-/* ── Voice Waveform Generator ── */
-(function initVoiceWaveform() {
-  const container = document.getElementById('vwBars');
-  if (!container) return;
-
-  const BAR_COUNT = 32;
-  const phrases = [
-    'Processing audio stream...',
-    'Transcribing speech in real time...',
-    'Telugu dialect detected...',
-    'Speaker diarization active...',
-    'Confidence: 98.7%'
-  ];
-  let phraseIndex = 0;
-  let charIndex   = 0;
-  let phraseTimer;
-  const vtText = document.querySelector('.vt-text');
-
-  // Build bars
-  for (let i = 0; i < BAR_COUNT; i++) {
-    const bar = document.createElement('div');
-    bar.className = 'vw-bar';
-    const maxH = 8 + Math.round(Math.sin((i / BAR_COUNT) * Math.PI) * 28);
-    bar.style.setProperty('--ph', maxH + 'px');
-    bar.style.setProperty('--dur', (0.6 + Math.random() * 0.8).toFixed(2) + 's');
-    bar.style.setProperty('--del', (i * 0.04).toFixed(2) + 's');
-    bar.style.height = '4px';
-    container.appendChild(bar);
-  }
-
-  // Typewriter effect
-  function typePhrase() {
-    if (!vtText) return;
-    if (charIndex < phrases[phraseIndex].length) {
-      vtText.textContent += phrases[phraseIndex][charIndex++];
-      phraseTimer = setTimeout(typePhrase, 55);
-    } else {
-      setTimeout(() => {
-        vtText.textContent = '';
-        charIndex = 0;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        typePhrase();
-      }, 2000);
-    }
-  }
-  typePhrase();
-})();
-
-
-/* ── Chatbot Replay Animation ── */
-(function initChatbotAnim() {
-  const typing  = document.getElementById('cbTyping');
-  const reply   = document.getElementById('cbReply');
-  if (!typing || !reply) return;
-
-  // Show reply after typing animation delay
-  setTimeout(() => {
-    if (typing.parentElement) typing.parentElement.style.display = 'none';
-    reply.style.display = 'flex';
-    reply.style.opacity = '0';
-    reply.style.animation = 'cbMsgIn .4s ease forwards';
-  }, 3800);
-})();
-
-
-/* ── Dashboard Counter Animation ── */
-(function initDashCounters() {
-  const counters = document.querySelectorAll('.ds-n[data-target]');
-  if (!counters.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el     = entry.target;
-      const target = parseFloat(el.dataset.target);
-      const isFloat = String(target).includes('.');
-      const duration = 1500;
-      const start  = performance.now();
-
-      function tick(now) {
-        const elapsed  = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const ease     = 1 - Math.pow(1 - progress, 3);
-        const current  = target * ease;
-        el.textContent = isFloat ? current.toFixed(1) : Math.round(current).toLocaleString();
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      observer.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-
-  counters.forEach(el => observer.observe(el));
-})();
-
-
-/* ── Process Step Active State on Scroll ── */
-(function initProcessSteps() {
-  const steps = document.querySelectorAll('.proc-step');
-  if (!steps.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('ps-active');
-      }
-    });
-  }, { threshold: 0.4 });
-
-  steps.forEach(step => observer.observe(step));
-})();
-
-
-/* ── Why Lydertronics bar animation ── */
-(function initWLBars() {
-  const cards = document.querySelectorAll('.wl-card');
-  if (!cards.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
+// Gentle reveal animation
+const revealItems = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window && revealItems.length) {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.3 });
-
-  cards.forEach(card => observer.observe(card));
-})();
-
-
-/* ── Industries card expand on mobile (tap) ── */
-(function initIndustriesCards() {
-  const cards = document.querySelectorAll('.aii-card');
-  if (!cards.length) return;
-
-  // On touch devices, toggle expanded state
-  cards.forEach(card => {
-    card.addEventListener('click', function () {
-      if (window.innerWidth <= 768) {
-        this.classList.toggle('aii-expanded');
-      }
-    });
-  });
-})();
-
-
-/* ── CTA stats counter animation ── */
-(function initCTACounters() {
-  // Reuse same pattern for any .cta-stat-n elements
-  const els = document.querySelectorAll('.cta-stat-n');
-  if (!els.length) return;
-
-  const map = {
-    '1000': { val: 1000, suffix: '+' },
-    '97.8':  { val: 97.8, suffix: '%', float: true },
-    '24':    { val: 24,   suffix: 'hr' },
-    '60':    { val: 60,   suffix: '%' }
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el    = entry.target;
-      const em    = el.querySelector('em');
-      const suffix = em ? em.textContent : '';
-      const raw   = el.textContent.replace(suffix, '').trim();
-      const target = parseFloat(raw);
-      const isFloat = String(target).includes('.') || raw.includes('.');
-      const duration = 1200;
-      const start = performance.now();
-
-      function tick(now) {
-        const elapsed  = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const ease     = 1 - Math.pow(1 - progress, 3);
-        const current  = target * ease;
-        // Rebuild text
-        el.innerHTML = (isFloat ? current.toFixed(1) : Math.round(current)) +
-          (em ? `<em>${suffix}</em>` : '');
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      observer.unobserve(el);
-    });
-  }, { threshold: 0.6 });
-
-  els.forEach(el => observer.observe(el));
-})();
-
-
-/* ── Smooth scroll helper (if not already defined in script.js) ── */
-if (typeof smoothScrollTo === 'undefined') {
-  window.smoothScrollTo = function(selector) {
-    const el = document.querySelector(selector);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  }, { threshold: 0.12, rootMargin: '0px 0px -35px' });
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add('visible'));
 }
 
+// Footer year
+const currentYear = new Date().getFullYear();
+document.querySelectorAll('[data-year]').forEach(el => {
+  el.textContent = String(currentYear);
+});
 
-/* ── Add new nav sections to intersection observer ── */
-// If your script.js uses IntersectionObserver for active nav,
-// the new sections (ai-industries, process, cta) will be auto-detected
-// because they use the same data-section pattern.
-// Just make sure the nav links for these sections are added to the navbar.
+function setStatus(element, message, type = '') {
+  if (!element) return;
+  element.textContent = message;
+  element.className = `form-status${type ? ` ${type}` : ''}`;
+}
 
+async function submitToFormspree(payload) {
+  const response = await fetch(FORMSPREE_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+  if (!response.ok) throw new Error(`Form submission failed with ${response.status}`);
+  return response;
+}
 
+// Project contact form
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  const contactStatus = document.getElementById('formStatus');
+  contactForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    setStatus(contactStatus, '');
+
+    if (!contactForm.checkValidity()) {
+      contactForm.reportValidity();
+      return;
+    }
+
+    const button = contactForm.querySelector('button[type="submit"]');
+    const original = button?.innerHTML;
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Sending…';
+    }
+
+    try {
+      const payload = Object.fromEntries(new FormData(contactForm).entries());
+      payload.form_type = 'Project Enquiry';
+      payload.source = 'Lydertronics Website';
+      await submitToFormspree(payload);
+      contactForm.reset();
+      setStatus(contactStatus, 'Thanks — your project brief has been sent. We’ll review it and get back to you.', 'success');
+    } catch (error) {
+      console.error(error);
+      setStatus(contactStatus, 'We could not send the form right now. Please email lydertronicsai@trainbot.in directly.', 'error');
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.innerHTML = original || 'Send';
+      }
+    }
+  });
+}
+
+// Freelancer application form
+const freelancerForm = document.getElementById('freelancerForm');
+if (freelancerForm) {
+  const freelancerStatus = document.getElementById('freelancerStatus');
+  freelancerForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    setStatus(freelancerStatus, '');
+
+    if (!freelancerForm.checkValidity()) {
+      freelancerForm.reportValidity();
+      return;
+    }
+
+    const button = freelancerForm.querySelector('button[type="submit"]');
+    const original = button?.innerHTML;
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Submitting…';
+    }
+
+    try {
+      const payload = Object.fromEntries(new FormData(freelancerForm).entries());
+      payload.form_type = 'Freelancer Application';
+      payload.source = 'Lydertronics Careers';
+      await submitToFormspree(payload);
+      freelancerForm.reset();
+      setStatus(freelancerStatus, 'Application received. We’ll contact you if your profile matches a suitable project.', 'success');
+    } catch (error) {
+      console.error(error);
+      setStatus(freelancerStatus, 'We could not submit the application. Please try again or email lydertronicsai@trainbot.in.', 'error');
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.innerHTML = original || 'Submit application';
+      }
+    }
+  });
+}
