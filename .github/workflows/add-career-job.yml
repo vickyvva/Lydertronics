@@ -1,0 +1,95 @@
+name: Add Career Job
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: Job title shown on the Careers page
+        required: true
+        type: string
+      role:
+        description: Role name for this job
+        required: true
+        type: string
+      category:
+        description: Category such as Computer Vision or Language AI
+        required: true
+        default: AI Data Operations
+        type: string
+      location:
+        description: Location or working mode
+        required: true
+        default: Remote / Project-based
+        type: string
+      responsibilities:
+        description: Separate each responsibility with a vertical bar character
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  publish-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add job to jobs.json
+        env:
+          JOB_TITLE: ${{ inputs.title }}
+          JOB_ROLE: ${{ inputs.role }}
+          JOB_CATEGORY: ${{ inputs.category }}
+          JOB_LOCATION: ${{ inputs.location }}
+          JOB_RESPONSIBILITIES: ${{ inputs.responsibilities }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          path = Path('jobs.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          jobs = data.setdefault('jobs', [])
+
+          title = os.environ['JOB_TITLE'].strip()
+          role = os.environ['JOB_ROLE'].strip()
+          category = os.environ['JOB_CATEGORY'].strip() or 'AI Data Operations'
+          location = os.environ['JOB_LOCATION'].strip() or 'Remote / Project-based'
+          responsibilities = [item.strip() for item in os.environ['JOB_RESPONSIBILITIES'].split('|') if item.strip()]
+
+          if not responsibilities:
+              raise SystemExit('At least one responsibility is required.')
+
+          slug = re.sub(r'[^a-z0-9]+', '-', title.lower()).strip('-') or 'career-job'
+          existing_ids = {str(job.get('id', '')) for job in jobs}
+          base = slug
+          number = 2
+          while slug in existing_ids:
+              slug = f'{base}-{number}'
+              number += 1
+
+          jobs.insert(0, {
+              'id': slug,
+              'title': title,
+              'role': role,
+              'category': category,
+              'location': location,
+              'status': 'Open',
+              'responsibilities': responsibilities
+          })
+
+          path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+          PY
+
+      - name: Commit new job
+        env:
+          JOB_TITLE: ${{ inputs.title }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add jobs.json
+          git commit -m "Add career job: ${JOB_TITLE}"
+          git push
