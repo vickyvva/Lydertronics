@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Freelancer Careers | Lydertronics</title>
-  <meta name="description" content="Apply to join the Lydertronics freelancer network for AI data annotation, RLHF, LiDAR, transcription, QA, data collection and AI automation work." />
+  <title>Careers & AI Data Projects | Lydertronics</title>
+  <meta name="description" content="Explore project-based opportunities at Lydertronics across data annotation, data collection, RLHF, image labeling, video annotation and related AI data work." />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#07111f" />
   <link rel="canonical" href="https://lydertronicsai.com/careers.html" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="careers-jobs.css" />
 </head>
 <body data-page="careers">
   <div class="page-noise" aria-hidden="true"></div>
@@ -18,7 +19,13 @@
       <a class="brand" href="index.html" aria-label="Lydertronics home"><span class="brand-mark"><i></i><b>L</b></span><span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span></a>
       <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
       <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
-        <a href="index.html">Home</a><a href="index.html#services">Services</a><a href="index.html#process">Process</a><a href="index.html#work">Work</a><a href="index.html#about">About</a><a href="careers.html">Careers</a><a class="nav-cta" href="#apply">Apply now <span>↗</span></a>
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#process">Process</a>
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+        <a href="careers.html">Careers</a>
+        <a class="nav-cta" href="#open-jobs">Open jobs <span>↓</span></a>
       </nav>
     </div>
   </header>
@@ -27,29 +34,27 @@
     <section class="page-hero">
       <div class="shell page-hero-grid">
         <div class="reveal">
-          <div class="status-pill"><span></span> Freelancer network</div>
-          <p class="eyebrow light" style="margin-top:24px">CAREERS · PROJECT-BASED OPPORTUNITIES</p>
-          <h1>Bring your craft to <em>meaningful AI work.</em></h1>
-          <p>We collaborate with skilled independent professionals across data annotation, model evaluation, speech, QA, spatial data and automation. Apply once and we can consider your profile for suitable project opportunities.</p>
-          <a class="button primary magnetic" href="#apply">Submit your profile <span>↓</span></a>
+          <div class="status-pill"><span></span> Project-based AI opportunities</div>
+          <p class="eyebrow light" style="margin-top:24px">CAREERS · OPEN PROJECTS</p>
+          <h1>Work on <em>real AI data projects.</em></h1>
+          <p>Explore current opportunities across data annotation, data collection, RLHF, image labeling, video annotation and other AI data operations. Each opening clearly explains the role and what you will be responsible for.</p>
+          <a class="button primary magnetic" href="#open-jobs">Explore open jobs <span>↓</span></a>
         </div>
         <aside class="page-note reveal tilt-card">
-          <div class="form-head" style="border-color:rgba(255,255,255,.08)"><span style="color:#fff">How this works</span><b>Flexible · Remote-friendly</b></div>
-          <p>Applications are reviewed against current and upcoming project needs. Some roles may include a guideline test or sample task before onboarding. Submitting a profile does not guarantee immediate project allocation.</p>
+          <div class="form-head" style="border-color:rgba(255,255,255,.08)"><span style="color:#fff">How applications work</span><b>Remote-friendly projects</b></div>
+          <p>Choose a project that matches your skills, review its responsibilities, and apply using the form below. Some opportunities may include a short guideline assessment or sample task before onboarding.</p>
         </aside>
       </div>
     </section>
 
-    <section class="section light-section">
+    <section class="section jobs-section" id="open-jobs">
       <div class="shell">
-        <div class="section-head reveal"><div><p class="eyebrow">OPPORTUNITIES</p><h2>Skills we regularly look for.</h2></div><p>Project requirements change over time, but these are the disciplines that most often support our data and automation work.</p></div>
-        <div class="role-grid">
-          <article class="role-card reveal"><span>01 · LANGUAGE AI</span><h3>RLHF & LLM Evaluation</h3><p>Preference ranking, response review, safety evaluation, reasoning checks and structured human feedback.</p></article>
-          <article class="role-card reveal"><span>02 · COMPUTER VISION</span><h3>Image & Video Annotation</h3><p>Bounding boxes, polygons, segmentation, keypoints, tracking, scene labels and visual QA.</p></article>
-          <article class="role-card reveal"><span>03 · SPATIAL AI</span><h3>LiDAR & 3D Annotation</h3><p>Point-cloud cuboids, classification, semantic segmentation, tracking and 3D quality review.</p></article>
-          <article class="role-card reveal"><span>04 · SPEECH</span><h3>Transcription & Audio</h3><p>Speech recording, transcription, diarization, language review, pronunciation checks and audio QA.</p></article>
-          <article class="role-card reveal"><span>05 · QUALITY</span><h3>Annotation QA</h3><p>Guideline compliance, error analysis, reviewer feedback, acceptance sampling and delivery audits.</p></article>
-          <article class="role-card reveal"><span>06 · ENGINEERING</span><h3>AI Automation</h3><p>AI-agent workflows, integrations, scripting, testing, data tooling and practical automation delivery.</p></article>
+        <div class="section-head reveal">
+          <div class="jobs-intro"><p class="eyebrow">OPEN JOBS & PROJECTS</p><h2>Choose the work that matches your skills.</h2></div>
+          <p>Openings on this page are loaded from our job board, so new projects can be published without rebuilding this page.</p>
+        </div>
+        <div class="jobs-grid" id="jobsGrid" aria-live="polite">
+          <div class="jobs-loading">Loading current opportunities…</div>
         </div>
       </div>
     </section>
@@ -57,23 +62,61 @@
     <section class="section apply-section" id="apply">
       <div class="shell apply-grid">
         <div class="apply-copy reveal">
-          <p class="eyebrow light">FREELANCER APPLICATION</p>
-          <h2>Tell us what you do best.</h2>
-          <p>Give us enough detail to understand your strengths, experience and availability. A portfolio, LinkedIn, GitHub or résumé link is especially helpful.</p>
-          <ul><li>Remote-friendly opportunities depending on project needs.</li><li>Project-based work with varying workload and duration.</li><li>Selection may include a short assessment or sample task.</li><li>Rates and terms are discussed for suitable assignments.</li></ul>
+          <p class="eyebrow light">APPLICATION</p>
+          <h2>Apply for a project.</h2>
+          <p>Select the job you want to apply for and tell us about your relevant experience, tools and availability.</p>
+          <ul>
+            <li>Remote-friendly opportunities depending on project requirements.</li>
+            <li>Project scope, duration and workload vary by assignment.</li>
+            <li>Selection may include a short guideline assessment or sample task.</li>
+            <li>Applications are reviewed based on skills, experience and current project fit.</li>
+          </ul>
         </div>
+
         <form class="application-form reveal" id="freelancerForm" novalidate>
-          <div class="form-head"><span>Freelancer profile</span><b>Applications reviewed by project fit</b></div>
-          <div class="form-row"><label>Full name *<input name="name" type="text" autocomplete="name" required /></label><label>Email address *<input name="email" type="email" autocomplete="email" required /></label></div>
-          <div class="form-row"><label>Phone / WhatsApp<input name="phone" type="tel" autocomplete="tel" placeholder="Include country code" /></label><label>Country / location *<input name="location" type="text" autocomplete="country-name" required /></label></div>
-          <label>Primary specialization *<select name="role" required><option value="">Choose your specialization</option><option>RLHF / LLM Evaluator</option><option>Image Annotator</option><option>Video Annotator</option><option>LiDAR / 3D Point Cloud Annotator</option><option>Transcription / Audio Specialist</option><option>Data Collection Freelancer</option><option>Quality Assurance Reviewer</option><option>AI Automation Developer</option><option>Other</option></select></label>
-          <div class="form-row"><label>Relevant experience *<select name="experience" required><option value="">Choose experience</option><option>Less than 1 year</option><option>1–2 years</option><option>2–4 years</option><option>4+ years</option></select></label><label>Weekly availability *<select name="availability" required><option value="">Choose availability</option><option>Under 10 hours/week</option><option>10–20 hours/week</option><option>20–30 hours/week</option><option>30–40 hours/week</option><option>40+ hours/week</option></select></label></div>
-          <label>Key skills / tools *<input name="skills" type="text" placeholder="CVAT, Label Studio, RLHF, Python, LiDAR, languages..." required /></label>
+          <div class="form-head"><span>Project application</span><b>Choose an open job</b></div>
+          <p class="selected-job-note" id="selectedJobNote"></p>
+
+          <label>Applying for *
+            <select name="job" id="jobSelect" required>
+              <option value="">Choose an open job</option>
+            </select>
+          </label>
+
+          <div class="form-row">
+            <label>Full name *<input name="name" type="text" autocomplete="name" required /></label>
+            <label>Email address *<input name="email" type="email" autocomplete="email" required /></label>
+          </div>
+          <div class="form-row">
+            <label>Phone / WhatsApp<input name="phone" type="tel" autocomplete="tel" placeholder="Your contact number" /></label>
+            <label>Country / location *<input name="location" type="text" autocomplete="country-name" required /></label>
+          </div>
+          <div class="form-row">
+            <label>Relevant experience *
+              <select name="experience" required>
+                <option value="">Choose experience</option>
+                <option>Less than 1 year</option>
+                <option>1–2 years</option>
+                <option>2–4 years</option>
+                <option>4+ years</option>
+              </select>
+            </label>
+            <label>Weekly availability *
+              <select name="availability" required>
+                <option value="">Choose availability</option>
+                <option>Under 10 hours/week</option>
+                <option>10–20 hours/week</option>
+                <option>20–30 hours/week</option>
+                <option>30–40 hours/week</option>
+                <option>40+ hours/week</option>
+              </select>
+            </label>
+          </div>
+          <label>Key skills / tools *<input name="skills" type="text" placeholder="CVAT, Label Studio, RLHF, image labeling, video annotation, languages..." required /></label>
           <label>Portfolio / LinkedIn / GitHub / résumé link<input name="profile_url" type="url" placeholder="https://" /></label>
-          <label>Expected rate<input name="expected_rate" type="text" placeholder="Hourly or project-based expectation" /></label>
-          <label>Short introduction *<textarea name="message" rows="7" placeholder="Tell us about your experience, strengths, languages, domain knowledge and preferred project types." required></textarea></label>
-          <p class="form-note">By submitting this form, you agree that Lydertronics may use the information provided to evaluate you for freelance project opportunities and contact you about suitable work.</p>
-          <button class="button primary submit-button magnetic" type="submit">Submit freelancer application <span>↗</span></button>
+          <label>Short introduction *<textarea name="message" rows="7" placeholder="Tell us about your relevant experience, strengths, tools, languages and similar projects you have worked on." required></textarea></label>
+          <p class="form-note">By submitting this form, you agree that Lydertronics may use the information provided to evaluate you for project opportunities and contact you about suitable work.</p>
+          <button class="button primary submit-button magnetic" type="submit">Submit application <span>↗</span></button>
           <p class="form-status" id="freelancerStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -84,10 +127,11 @@
     <div class="shell footer-grid">
       <div><a class="brand footer-brand" href="index.html"><span class="brand-mark"><i></i><b>L</b></span><span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span></a><p>Precision data operations for intelligent systems.</p></div>
       <div><h4>Navigate</h4><a href="index.html#services">Services</a><a href="index.html#process">Process</a><a href="index.html#work">Work</a><a href="index.html#about">About</a><a href="careers.html">Careers</a></div>
-      <div><h4>Contact</h4><a href="mailto:lydertronicsai@trainbot.in">lydertronicsai@trainbot.in</a><a href="tel:+917981520897">+91 7981520897</a><span>India · Global delivery</span></div>
+      <div><h4>Contact</h4><a href="mailto:lydertronicsai@trainbot.in">lydertronicsai@trainbot.in</a><span>India · Global delivery</span></div>
     </div>
     <div class="shell footer-bottom"><span>© <span data-year></span> Lydertronics. All rights reserved.</span><a href="index.html">Back to home →</a></div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
