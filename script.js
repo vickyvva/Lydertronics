@@ -191,29 +191,107 @@ function renderJobs(jobs) {
   });
 }
 
+function getIssueSection(body, heading) {
+  if (!body) return '';
+  const marker = `### ${heading}`;
+  const start = body.indexOf(marker);
+  if (start === -1) return '';
+  const remainder = body.slice(start + marker.length).replace(/^\s*\n/, '');
+  const nextHeading = remainder.search(/\n###\s+/);
+  const value = (nextHeading === -1 ? remainder : remainder.slice(0, nextHeading)).trim();
+  return value === '_No response_' ? '' : value;
+}
+
+function issueToCareerJob(issue) {
+  if (!issue || issue.pull_request || !String(issue.title || '').startsWith('[CAREER JOB]')) return null;
+  const body = String(issue.body || '');
+  const title = getIssueSection(body, 'Job title') || String(issue.title || '').replace(/^\[CAREER JOB\]\s*/i, '').trim();
+  const role = getIssueSection(body, 'Role');
+  const category = getIssueSection(body, 'Category') || 'AI Data Operations';
+  const location = getIssueSection(body, 'Location / working mode') || 'Remote / Project-based';
+  const rawResponsibilities = getIssueSection(body, 'Responsibilities');
+  const responsibilities = rawResponsibilities
+    .split(/\r?\n/)
+    .map(line => line.trim().replace(/^[-*•]\s*/, ''))
+    .filter(line => line && line !== '_No response_');
+
+  if (!title || !role || !responsibilities.length) return null;
+  return {
+    id: `issue-${issue.number}`,
+    title,
+    role,
+    category,
+    location,
+    status: 'Open',
+    responsibilities,
+    source: 'github-issue',
+    issueNumber: issue.number
+  };
+}
+
+function mergeCareerJobs(staticJobs, issueJobs) {
+  const result = [];
+  const seen = new Set();
+  [...issueJobs, ...staticJobs].forEach(job => {
+    const key = String(job.title || '').trim().toLowerCase();
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    result.push(job);
+  });
+  return result;
+}
+
+function populateJobSelect(jobs) {
+  if (!jobSelect) return;
+  jobSelect.innerHTML = '<option value="">Choose an open job</option>';
+  jobs
+    .filter(job => String(job.status || 'Open').toLowerCase() === 'open')
+    .forEach(job => {
+      const option = document.createElement('option');
+      option.value = job.title;
+      option.textContent = `${job.title} — ${job.role}`;
+      jobSelect.appendChild(option);
+    });
+  jobSelect.addEventListener('change', updateSelectedJobNote, { once: false });
+}
+
+async function fetchStaticCareerJobs() {
+  const response = await fetch(`jobs.json?v=${Date.now()}`, { cache: 'no-store' });
+  if (!response.ok) throw new Error(`Could not load jobs.json (${response.status})`);
+  const data = await response.json();
+  return Array.isArray(data.jobs) ? data.jobs : [];
+}
+
+async function fetchIssueCareerJobs() {
+  const response = await fetch('https://api.github.com/repos/vickyvva/Lydertronics/issues?state=open&per_page=100', {
+    headers: { 'Accept': 'application/vnd.github+json' },
+    cache: 'no-store'
+  });
+  if (!response.ok) throw new Error(`Could not load GitHub career issues (${response.status})`);
+  const issues = await response.json();
+  return Array.isArray(issues) ? issues.map(issueToCareerJob).filter(Boolean) : [];
+}
+
 async function loadCareersJobs() {
   if (!jobsGrid && !jobSelect) return;
-  try {
-    const response = await fetch(`jobs.json?v=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`Could not load jobs.json (${response.status})`);
-    const data = await response.json();
-    careersJobs = Array.isArray(data.jobs) ? data.jobs : [];
-    renderJobs(careersJobs);
 
-    if (jobSelect) {
-      careersJobs
-        .filter(job => String(job.status || 'Open').toLowerCase() === 'open')
-        .forEach(job => {
-          const option = document.createElement('option');
-          option.value = job.title;
-          option.textContent = `${job.title} — ${job.role}`;
-          jobSelect.appendChild(option);
-        });
-      jobSelect.addEventListener('change', updateSelectedJobNote);
-    }
-  } catch (error) {
-    console.error(error);
-    if (jobsGrid) jobsGrid.innerHTML = '<div class="jobs-empty">Current opportunities could not be loaded. Please refresh the page or try again later.</div>';
+  const [staticResult, issueResult] = await Promise.allSettled([
+    fetchStaticCareerJobs(),
+    fetchIssueCareerJobs()
+  ]);
+
+  const staticJobs = staticResult.status === 'fulfilled' ? staticResult.value : [];
+  const issueJobs = issueResult.status === 'fulfilled' ? issueResult.value : [];
+
+  if (staticResult.status === 'rejected') console.warn(staticResult.reason);
+  if (issueResult.status === 'rejected') console.warn(issueResult.reason);
+
+  careersJobs = mergeCareerJobs(staticJobs, issueJobs);
+  renderJobs(careersJobs);
+  populateJobSelect(careersJobs);
+
+  if (!careersJobs.length && jobsGrid) {
+    jobsGrid.innerHTML = '<div class="jobs-empty">Current opportunities could not be loaded. Please refresh the page or try again later.</div>';
   }
 }
 loadCareersJobs();
