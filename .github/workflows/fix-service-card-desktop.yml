@@ -1,0 +1,67 @@
+name: Fix desktop service card layout
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-service-card-desktop.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-service-cards:
+    if: github.event.head_commit.message == 'Apply desktop service-card layout fix'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add desktop-only service card footer fix
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('style.css')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* DESKTOP SERVICE CARD FOOTER FIX */'
+          block = r'''
+
+/* DESKTOP SERVICE CARD FOOTER FIX */
+@media (min-width: 769px) {
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 390px;
+  }
+
+  .service-card p {
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  .service-card .tags {
+    margin-top: auto;
+    padding-top: 26px;
+  }
+
+  .service-card > a {
+    position: static;
+    left: auto;
+    bottom: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    align-self: flex-start;
+    margin-top: 16px;
+    line-height: 1.35;
+  }
+}
+'''
+          if marker not in s:
+              s += block
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit desktop layout fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add style.css
+          git diff --cached --quiet || git commit -m "Fix service card footer spacing on desktop"
+          git push
