@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers | Freelancer Applications | Lydertronics</title>
+  <meta name="description" content="Apply to work with Lydertronics as a freelancer across AI data annotation, RLHF, image and video annotation, LiDAR, transcription, QA, and AI automation." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://lydertronicsai.com/careers.html" />
+  <link rel="icon" type="image/png" sizes="32x32" href="https://lydertronicsai.com/favicon.png?v=2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .career-page{min-height:100vh;padding:110px 0 80px;position:relative;overflow:hidden}
+    .career-page:before,.career-page:after{content:"";position:fixed;border-radius:50%;filter:blur(90px);opacity:.18;pointer-events:none;z-index:-1}
+    .career-page:before{width:420px;height:420px;background:#00b4ff;top:8%;left:-140px}
+    .career-page:after{width:480px;height:480px;background:#7c3aff;right:-170px;bottom:3%}
+    .career-hero{text-align:center;max-width:880px;margin:0 auto 48px}
+    .career-hero h1{font-family:Orbitron,sans-serif;font-size:clamp(2.25rem,5vw,4.5rem);line-height:1.05;margin:14px 0 18px;color:#f6fbff}
+    .career-hero h1 span{background:linear-gradient(90deg,#00b4ff,#7c3aff,#00ffe0);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .career-hero p{font-size:1.15rem;line-height:1.7;color:#aab7cf;max-width:760px;margin:0 auto}
+    .career-eyebrow{font-family:Orbitron,sans-serif;letter-spacing:.16em;font-size:.76rem;color:#00b4ff}
+    .career-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:34px 0 54px}
+    .career-role{padding:25px;border:1px solid rgba(124,180,255,.15);border-radius:18px;background:rgba(8,14,32,.72);backdrop-filter:blur(16px)}
+    .career-role .ico{font-size:1.8rem;margin-bottom:14px}
+    .career-role h3{font-family:Orbitron,sans-serif;font-size:1rem;margin:0 0 9px;color:#edf7ff}
+    .career-role p{margin:0;color:#8fa1bd;line-height:1.55;font-size:.95rem}
+    .application-shell{display:grid;grid-template-columns:.85fr 1.35fr;gap:24px;align-items:start}
+    .application-info,.application-form{border:1px solid rgba(124,180,255,.16);border-radius:22px;background:rgba(7,12,29,.78);box-shadow:0 20px 60px rgba(0,0,0,.24);backdrop-filter:blur(18px)}
+    .application-info{padding:30px;position:sticky;top:92px}
+    .application-info h2,.application-form h2{font-family:Orbitron,sans-serif;color:#f2f8ff;margin:0 0 12px}
+    .application-info p{color:#9aabc4;line-height:1.65}
+    .career-points{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:15px}
+    .career-points li{display:flex;gap:12px;color:#bac7da;line-height:1.5}
+    .career-points b{color:#00d7ff;font-weight:700}
+    .application-form{padding:30px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .career-field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+    .career-field label{font-weight:600;color:#cad6e8}
+    .career-field input,.career-field select,.career-field textarea{width:100%;box-sizing:border-box;border:1px solid rgba(129,170,230,.18);background:rgba(3,9,23,.9);color:#f4f8ff;border-radius:12px;padding:13px 14px;font:inherit;outline:none;transition:.2s}
+    .career-field input:focus,.career-field select:focus,.career-field textarea:focus{border-color:#00b4ff;box-shadow:0 0 0 3px rgba(0,180,255,.08)}
+    .career-field textarea{resize:vertical;min-height:125px}
+    .career-note{font-size:.87rem;color:#7f91ad;line-height:1.5;margin:4px 0 18px}
+    .career-submit{width:100%;border:0;border-radius:12px;padding:14px 18px;cursor:pointer;font-family:Orbitron,sans-serif;font-weight:700;letter-spacing:.04em;color:#03111f;background:linear-gradient(90deg,#00b4ff,#00ffe0);transition:transform .2s,box-shadow .2s}
+    .career-submit:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,180,255,.22)}
+    .career-submit:disabled{opacity:.62;cursor:not-allowed;transform:none}
+    .career-status{display:none;margin-top:14px;padding:12px 14px;border-radius:10px;font-weight:600}
+    .career-status.ok{display:block;background:rgba(0,255,180,.08);border:1px solid rgba(0,255,180,.25);color:#7dffd8}
+    .career-status.err{display:block;background:rgba(255,70,110,.08);border:1px solid rgba(255,70,110,.25);color:#ff9eb5}
+    .career-topnav{position:fixed;inset:0 0 auto;z-index:20;background:rgba(4,8,20,.76);border-bottom:1px solid rgba(130,170,230,.12);backdrop-filter:blur(18px)}
+    .career-topnav .inner{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:17px 24px}
+    .career-brand{font-family:Orbitron,sans-serif;font-weight:800;color:#eef8ff;text-decoration:none;letter-spacing:.04em}.career-brand span{color:#00b4ff}
+    .back-home{color:#b8c8df;text-decoration:none;font-weight:600}.back-home:hover{color:#00d7ff}
+    .mini-footer{text-align:center;color:#7587a2;padding-top:52px;font-size:.92rem}
+    @media(max-width:900px){.career-grid{grid-template-columns:1fr 1fr}.application-shell{grid-template-columns:1fr}.application-info{position:static}}
+    @media(max-width:620px){.career-page{padding-top:92px}.career-grid,.form-row{grid-template-columns:1fr}.career-topnav .inner{padding:15px 18px}.application-info,.application-form{padding:22px}.career-hero{text-align:left}.career-hero p{font-size:1rem}}
+  </style>
+</head>
+<body>
+  <nav class="career-topnav" aria-label="Careers navigation">
+    <div class="inner">
+      <a class="career-brand" href="index.html#hero">[LYDR<span>TRONICS</span>]</a>
+      <a class="back-home" href="index.html">← Back to Home</a>
+    </div>
+  </nav>
+
+  <main class="career-page">
+    <div class="container">
+      <header class="career-hero">
+        <div class="career-eyebrow">// CAREERS · FREELANCER NETWORK</div>
+        <h1>Build the Future of AI <span>With Us</span></h1>
+        <p>We collaborate with skilled freelancers who care about accuracy, reliability, and high-quality AI data. Submit your profile to be considered for suitable project-based opportunities with Lydertronics.</p>
+      </header>
+
+      <section aria-label="Freelance opportunities">
+        <div class="career-grid">
+          <article class="career-role"><div class="ico">🧠</div><h3>RLHF & LLM Evaluation</h3><p>Preference ranking, response evaluation, reasoning review, and human-feedback tasks for language models.</p></article>
+          <article class="career-role"><div class="ico">◫</div><h3>Image & Video Annotation</h3><p>Bounding boxes, polygons, segmentation, keypoints, frame-level labeling, and quality review.</p></article>
+          <article class="career-role"><div class="ico">📡</div><h3>LiDAR & 3D Annotation</h3><p>Point-cloud classification, cuboids, semantic segmentation, tracking, and spatial data QA.</p></article>
+          <article class="career-role"><div class="ico">🎙</div><h3>Transcription & Audio</h3><p>Speech transcription, diarization, language review, audio validation, and dataset collection.</p></article>
+          <article class="career-role"><div class="ico">✓</div><h3>Quality Assurance</h3><p>Annotation auditing, guideline compliance, error analysis, reviewer feedback, and delivery checks.</p></article>
+          <article class="career-role"><div class="ico">⚙</div><h3>AI Automation</h3><p>Workflow automation, integrations, AI-agent development, testing, and technical implementation.</p></article>
+        </div>
+      </section>
+
+      <section class="application-shell" id="apply">
+        <aside class="application-info">
+          <div class="career-eyebrow">// JOIN THE NETWORK</div>
+          <h2>Freelancer Application</h2>
+          <p>Tell us what you do best. Applications are reviewed against current and upcoming project needs.</p>
+          <ul class="career-points">
+            <li><b>01</b><span>Project-based freelance opportunities across AI data and automation services.</span></li>
+            <li><b>02</b><span>Remote-friendly collaboration depending on project requirements.</span></li>
+            <li><b>03</b><span>Selection may include a skill assessment or sample task before onboarding.</span></li>
+            <li><b>04</b><span>Submitting an application does not guarantee immediate project allocation.</span></li>
+          </ul>
+        </aside>
+
+        <form class="application-form" id="freelancerForm" novalidate>
+          <div class="career-eyebrow">// APPLY NOW</div>
+          <h2>Your Profile</h2>
+
+          <div class="form-row">
+            <div class="career-field"><label for="fullName">Full Name *</label><input id="fullName" name="name" type="text" autocomplete="name" required /></div>
+            <div class="career-field"><label for="email">Email Address *</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+          </div>
+
+          <div class="form-row">
+            <div class="career-field"><label for="phone">Phone / WhatsApp</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Include country code" /></div>
+            <div class="career-field"><label for="country">Country / Location *</label><input id="country" name="location" type="text" autocomplete="country-name" required /></div>
+          </div>
+
+          <div class="career-field">
+            <label for="role">Primary Freelance Role *</label>
+            <select id="role" name="role" required>
+              <option value="">Select your specialization...</option>
+              <option>RLHF / LLM Evaluator</option>
+              <option>Image Annotator</option>
+              <option>Video Annotator</option>
+              <option>LiDAR / 3D Point Cloud Annotator</option>
+              <option>Transcription / Audio Specialist</option>
+              <option>Data Collection Freelancer</option>
+              <option>Quality Assurance Reviewer</option>
+              <option>AI Automation Developer</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="career-field"><label for="experience">Relevant Experience *</label><select id="experience" name="experience" required><option value="">Select...</option><option>Beginner / Less than 1 year</option><option>1–2 years</option><option>2–4 years</option><option>4+ years</option></select></div>
+            <div class="career-field"><label for="availability">Weekly Availability *</label><select id="availability" name="availability" required><option value="">Select...</option><option>Under 10 hours/week</option><option>10–20 hours/week</option><option>20–30 hours/week</option><option>30–40 hours/week</option><option>40+ hours/week</option></select></div>
+          </div>
+
+          <div class="career-field"><label for="skills">Key Skills / Tools *</label><input id="skills" name="skills" type="text" placeholder="Example: CVAT, Label Studio, RLHF, Python, LiDAR..." required /></div>
+          <div class="career-field"><label for="profileUrl">Portfolio / LinkedIn / GitHub / Resume Link</label><input id="profileUrl" name="profile_url" type="url" placeholder="https://..." /></div>
+          <div class="career-field"><label for="rate">Expected Rate</label><input id="rate" name="expected_rate" type="text" placeholder="Example: ₹500/hour or project-based" /></div>
+          <div class="career-field"><label for="intro">Why would you be a good fit? *</label><textarea id="intro" name="message" placeholder="Briefly describe your experience, strengths, languages, domain knowledge, and the kind of projects you prefer." required></textarea></div>
+
+          <p class="career-note">By submitting this form, you agree that Lydertronics may use the information provided to evaluate you for freelance project opportunities and contact you regarding suitable work.</p>
+          <button class="career-submit" type="submit">Submit Freelancer Application →</button>
+          <div class="career-status" id="careerStatus" role="alert" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <footer class="mini-footer">© 2026 Lydertronics · AI Data Intelligence & Automation</footer>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const form = document.getElementById('freelancerForm');
+      const status = document.getElementById('careerStatus');
+      const button = form.querySelector('button[type="submit"]');
+      const endpoint = 'https://formspree.io/f/xvzvbgwo';
+
+      function show(message, type) {
+        status.textContent = message;
+        status.className = 'career-status ' + type;
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        status.className = 'career-status';
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const original = button.textContent;
+        button.disabled = true;
+        button.textContent = 'Submitting...';
+
+        const data = Object.fromEntries(new FormData(form).entries());
+        data.form_type = 'Freelancer Application';
+        data.source = 'Lydertronics Careers Page';
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (!response.ok) throw new Error('Submission failed');
+          form.reset();
+          show('Application submitted successfully. Thank you — we will contact you if your profile matches a suitable project.', 'ok');
+        } catch (error) {
+          show('We could not submit your application right now. Please try again or contact Lydertronics directly by email.', 'err');
+        } finally {
+          button.disabled = false;
+          button.textContent = original;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
