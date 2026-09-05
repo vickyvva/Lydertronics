@@ -8,149 +8,191 @@
   <meta name="keywords" content="AI data annotation, RLHF, image annotation, video annotation, LiDAR annotation, multimodal AI, transcription, AI automation, Lydertronics" />
   <meta name="author" content="Lydertronics" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#f4f2eb" />
+  <meta name="theme-color" content="#07111f" />
   <link rel="canonical" href="https://lydertronicsai.com/" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-page="home">
+  <div class="page-noise" aria-hidden="true"></div>
   <header class="site-header" id="siteHeader">
     <div class="shell nav-shell">
       <a class="brand" href="#home" aria-label="Lydertronics home">
-        <span class="brand-mark">L</span>
+        <span class="brand-mark"><i></i><b>L</b></span>
         <span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span>
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">
-        <span></span><span></span>
-      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
       <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
-        <a href="#home">Home</a>
         <a href="#services">Services</a>
+        <a href="#process">Process</a>
         <a href="#work">Work</a>
         <a href="#about">About</a>
         <a href="careers.html">Careers</a>
-        <a class="nav-cta" href="#contact">Start a project</a>
+        <a class="nav-cta" href="#contact">Start a project <span>↗</span></a>
       </nav>
     </div>
   </header>
 
   <main>
     <section class="hero" id="home">
-      <div class="shell hero-grid">
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <div class="hero-orb orb-a" aria-hidden="true"></div>
+      <div class="hero-orb orb-b" aria-hidden="true"></div>
+      <div class="shell hero-layout">
         <div class="hero-copy reveal">
-          <p class="eyebrow">AI DATA SERVICES · HUMAN PRECISION · GLOBAL DELIVERY</p>
-          <h1>Human precision for <em>intelligent systems.</em></h1>
-          <p class="hero-lede">We help AI teams turn complex raw data into dependable training datasets, evaluation signals and production-ready workflows.</p>
+          <div class="status-pill"><span></span> AI data operations for production systems</div>
+          <h1>Precision data for <em>serious AI.</em></h1>
+          <p class="hero-lede">Human-reviewed datasets, evaluation signals and automation workflows built for teams that need quality they can measure and delivery they can trust.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#contact">Discuss your project <span>↗</span></a>
-            <a class="button text-button" href="#services">Explore services <span>↓</span></a>
+            <a class="button primary magnetic" href="#contact">Start a project <span>↗</span></a>
+            <a class="button ghost" href="#services">Explore capabilities <span>↓</span></a>
           </div>
-          <div class="hero-proof" aria-label="Company highlights">
-            <div><strong>97.8%</strong><span>reported accuracy</span></div>
-            <div><strong>1000+</strong><span>datasets delivered</span></div>
-            <div><strong>24 hr</strong><span>fast-turnaround capability</span></div>
+          <div class="hero-metrics">
+            <div><strong data-counter="97.8" data-suffix="%">0%</strong><span>reported accuracy</span></div>
+            <div><strong data-counter="1000" data-suffix="+">0+</strong><span>datasets delivered</span></div>
+            <div><strong data-counter="24" data-suffix="hr">0hr</strong><span>fast turnaround</span></div>
           </div>
         </div>
 
-        <div class="hero-visual reveal" aria-hidden="true">
-          <div class="visual-window">
-            <div class="visual-topbar"><span></span><span></span><span></span><b>precision.pipeline</b></div>
-            <div class="visual-body">
-              <div class="signal-card signal-main">
-                <span class="signal-kicker">DATA QUALITY</span>
-                <strong>Human-in-the-loop</strong>
-                <div class="quality-line"><i style="--w:94%"></i></div>
-                <small>Review → Verify → Deliver</small>
+        <div class="hero-stage reveal" id="heroStage" aria-label="Animated AI data workflow visualization">
+          <div class="stage-glow"></div>
+          <div class="data-console tilt-card">
+            <div class="console-head">
+              <div class="console-dots"><span></span><span></span><span></span></div>
+              <span class="console-label">LYDR / QUALITY ENGINE</span>
+              <span class="live-badge">LIVE</span>
+            </div>
+            <div class="console-body">
+              <div class="quality-core">
+                <div class="quality-ring">
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <circle cx="60" cy="60" r="48" class="ring-track"></circle>
+                    <circle cx="60" cy="60" r="48" class="ring-value"></circle>
+                  </svg>
+                  <div><strong>99.8</strong><span>QA SCORE</span></div>
+                </div>
+                <div class="pipeline-list">
+                  <div><span>01</span><b>Ingest</b><i class="ok-dot"></i></div>
+                  <div><span>02</span><b>Annotate</b><i class="ok-dot"></i></div>
+                  <div><span>03</span><b>Verify</b><i class="pulse-dot"></i></div>
+                  <div><span>04</span><b>Deliver</b><i></i></div>
+                </div>
               </div>
-              <div class="mini-grid">
-                <div class="signal-card"><span>Vision</span><strong>01</strong><small>Image · Video</small></div>
-                <div class="signal-card"><span>Language</span><strong>02</strong><small>RLHF · NLP</small></div>
-                <div class="signal-card"><span>Spatial</span><strong>03</strong><small>LiDAR · 3D</small></div>
-                <div class="signal-card"><span>Audio</span><strong>04</strong><small>Speech · ASR</small></div>
+              <div class="signal-panel">
+                <div class="signal-top"><span>Throughput signal</span><b>+18.4%</b></div>
+                <div class="signal-chart" aria-hidden="true">
+                  <span style="--h:38%"></span><span style="--h:54%"></span><span style="--h:46%"></span><span style="--h:67%"></span><span style="--h:60%"></span><span style="--h:82%"></span><span style="--h:72%"></span><span style="--h:91%"></span><span style="--h:84%"></span><span style="--h:96%"></span>
+                  <div class="scan-line"></div>
+                </div>
+                <div class="signal-foot"><span>Human review active</span><span>Quality gate 3/4</span></div>
               </div>
             </div>
           </div>
+          <div class="float-chip chip-1"><span>◉</span> RLHF</div>
+          <div class="float-chip chip-2"><span>⌁</span> LiDAR</div>
+          <div class="float-chip chip-3"><span>◫</span> Vision</div>
+          <div class="float-chip chip-4"><span>≋</span> Audio</div>
         </div>
       </div>
-      <div class="shell client-strip reveal">
-        <span>Built for</span>
-        <b>AI product teams</b><i></i><b>robotics</b><i></i><b>research labs</b><i></i><b>enterprise automation</b>
+
+      <div class="ticker-wrap" aria-label="Capabilities">
+        <div class="ticker-track">
+          <span>RLHF & LLM Evaluation</span><i></i><span>Image Annotation</span><i></i><span>Video Annotation</span><i></i><span>LiDAR & 3D</span><i></i><span>Multimodal AI</span><i></i><span>Audio & Transcription</span><i></i><span>AI Automation</span><i></i>
+          <span>RLHF & LLM Evaluation</span><i></i><span>Image Annotation</span><i></i><span>Video Annotation</span><i></i><span>LiDAR & 3D</span><i></i><span>Multimodal AI</span><i></i><span>Audio & Transcription</span><i></i><span>AI Automation</span><i></i>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="services">
+    <section class="section light-section" id="services">
       <div class="shell">
         <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">SERVICES</p>
-            <h2>One partner for the data behind your AI.</h2>
-          </div>
-          <p>From carefully reviewed human feedback to high-volume multimodal annotation, our workflows are built around clear guidelines, measurable quality and reliable delivery.</p>
+          <div><p class="eyebrow">CAPABILITIES</p><h2>Data operations built for modern AI teams.</h2></div>
+          <p>High-accuracy human workflows, practical automation and clear QA systems across language, vision, spatial and audio data.</p>
         </div>
-
         <div class="service-grid">
-          <article class="service-card reveal"><span class="card-index">01</span><h3>RLHF & LLM Evaluation</h3><p>Preference ranking, response comparison, safety review and structured human feedback for language-model training and evaluation.</p><div class="tags"><span>Preference data</span><span>Evaluation</span></div></article>
-          <article class="service-card reveal"><span class="card-index">02</span><h3>Image & Video Annotation</h3><p>Bounding boxes, polygons, segmentation, keypoints and frame-level labels for computer vision and robotics systems.</p><div class="tags"><span>Computer vision</span><span>Robotics</span></div></article>
-          <article class="service-card reveal"><span class="card-index">03</span><h3>LiDAR & 3D Point Cloud</h3><p>Cuboids, tracking, classification and semantic segmentation for autonomous systems, mapping and spatial intelligence.</p><div class="tags"><span>3D sensing</span><span>Autonomy</span></div></article>
-          <article class="service-card reveal"><span class="card-index">04</span><h3>Multimodal AI Annotation</h3><p>Aligned text, image, audio and video labels for vision-language models, generative systems and multimodal evaluation.</p><div class="tags"><span>VLM</span><span>Generative AI</span></div></article>
-          <article class="service-card reveal"><span class="card-index">05</span><h3>Audio & Transcription</h3><p>Speech collection, transcription, diarization, language review and quality-controlled audio datasets for ASR and TTS.</p><div class="tags"><span>ASR</span><span>Speech data</span></div></article>
-          <article class="service-card reveal"><span class="card-index">06</span><h3>AI Automation</h3><p>Practical AI workflows, agents and integrations that reduce repetitive operations and connect existing business systems.</p><div class="tags"><span>Agents</span><span>Workflow design</span></div></article>
+          <article class="service-card reveal"><div class="service-icon">01</div><div class="service-line"></div><h3>RLHF & LLM Evaluation</h3><p>Preference ranking, response comparison, safety review and structured human feedback for model training and evaluation.</p><div class="tags"><span>Alignment</span><span>Human feedback</span></div><a href="#contact" aria-label="Ask about RLHF">Discuss service <b>↗</b></a></article>
+          <article class="service-card reveal"><div class="service-icon">02</div><div class="service-line"></div><h3>Image & Video Annotation</h3><p>Bounding boxes, polygons, segmentation, keypoints, tracking and frame-level labels for vision and robotics systems.</p><div class="tags"><span>Computer vision</span><span>Robotics</span></div><a href="#contact" aria-label="Ask about image and video annotation">Discuss service <b>↗</b></a></article>
+          <article class="service-card reveal"><div class="service-icon">03</div><div class="service-line"></div><h3>LiDAR & 3D Point Cloud</h3><p>Cuboids, object tracking, classification and semantic segmentation for autonomous and spatial intelligence systems.</p><div class="tags"><span>3D sensing</span><span>Autonomy</span></div><a href="#contact" aria-label="Ask about LiDAR">Discuss service <b>↗</b></a></article>
+          <article class="service-card reveal"><div class="service-icon">04</div><div class="service-line"></div><h3>Multimodal AI Annotation</h3><p>Aligned text, image, audio and video labels for vision-language models, multimodal evaluation and generative AI.</p><div class="tags"><span>VLM</span><span>Generative AI</span></div><a href="#contact" aria-label="Ask about multimodal AI">Discuss service <b>↗</b></a></article>
+          <article class="service-card reveal"><div class="service-icon">05</div><div class="service-line"></div><h3>Audio & Transcription</h3><p>Speech collection, transcription, diarization, language review and quality-controlled datasets for ASR and TTS.</p><div class="tags"><span>Speech data</span><span>ASR / TTS</span></div><a href="#contact" aria-label="Ask about audio and transcription">Discuss service <b>↗</b></a></article>
+          <article class="service-card reveal"><div class="service-icon">06</div><div class="service-line"></div><h3>AI Automation</h3><p>AI agents, operational workflows and integrations that reduce repetitive work and connect business systems.</p><div class="tags"><span>Agents</span><span>Workflow design</span></div><a href="#contact" aria-label="Ask about AI automation">Discuss service <b>↗</b></a></article>
         </div>
       </div>
     </section>
 
-    <section class="section soft-section" id="process">
-      <div class="shell process-grid">
-        <div class="process-intro reveal">
-          <p class="eyebrow">HOW WE WORK</p>
-          <h2>Simple process. Visible quality.</h2>
-          <p>Every engagement begins with the dataset, the acceptance criteria and the outcome you need. We build the workflow around those constraints—not the other way around.</p>
-          <a class="inline-link" href="#contact">Plan a pilot project <span>↗</span></a>
+    <section class="section dark-section performance-section">
+      <div class="performance-grid-bg" aria-hidden="true"></div>
+      <div class="shell performance-grid">
+        <div class="performance-copy reveal">
+          <p class="eyebrow light">QUALITY SYSTEM</p>
+          <h2>Scale without losing the details.</h2>
+          <p>We structure every workflow around explicit acceptance criteria, layered review and visible quality signals—so volume can grow without turning accuracy into guesswork.</p>
+          <div class="quality-points">
+            <div><span>01</span><strong>Guideline-first execution</strong><p>Clear taxonomy, edge cases and examples before scale.</p></div>
+            <div><span>02</span><strong>Layered quality review</strong><p>Operator review, QA sampling and targeted rework loops.</p></div>
+            <div><span>03</span><strong>Continuous calibration</strong><p>Error analysis feeds back into training and instructions.</p></div>
+          </div>
         </div>
-        <ol class="steps">
-          <li class="reveal"><span>01</span><div><h3>Define</h3><p>Scope, sample data, taxonomy, edge cases and target quality metrics.</p></div></li>
-          <li class="reveal"><span>02</span><div><h3>Pilot</h3><p>A small production-like batch validates instructions, tooling and review criteria.</p></div></li>
-          <li class="reveal"><span>03</span><div><h3>Scale</h3><p>Trained operators, layered QA and throughput planning expand the workflow safely.</p></div></li>
-          <li class="reveal"><span>04</span><div><h3>Improve</h3><p>Error analysis and guideline feedback continuously sharpen the process.</p></div></li>
-        </ol>
+        <div class="performance-visual reveal">
+          <div class="orbit-ui tilt-card">
+            <div class="orbit-ring ring-1"></div><div class="orbit-ring ring-2"></div><div class="orbit-ring ring-3"></div>
+            <div class="orbit-core"><span>QA</span><strong>99.8%</strong><small>target quality</small></div>
+            <div class="orbit-node node-a"><b>Human</b><span>Review</span></div>
+            <div class="orbit-node node-b"><b>AI</b><span>Assist</span></div>
+            <div class="orbit-node node-c"><b>QA</b><span>Audit</span></div>
+            <div class="orbit-node node-d"><b>Data</b><span>Delivery</span></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="work">
+    <section class="section light-section" id="process">
       <div class="shell">
         <div class="section-head reveal">
-          <div><p class="eyebrow">SELECTED WORK</p><h2>Built around real AI workflows.</h2></div>
-          <p>A snapshot of the kinds of data operations Lydertronics supports across language, vision, robotics and speech.</p>
+          <div><p class="eyebrow">PROCESS</p><h2>A production workflow you can actually see.</h2></div>
+          <p>From first sample to sustained delivery, each phase has a clear purpose, quality gate and owner.</p>
+        </div>
+        <div class="process-wrap">
+          <div class="process-progress" aria-hidden="true"><span id="processFill"></span></div>
+          <div class="process-cards">
+            <article class="process-card reveal"><span class="process-num">01</span><div class="process-icon">⌕</div><h3>Discover</h3><p>Understand data, taxonomy, edge cases, throughput and acceptance criteria.</p></article>
+            <article class="process-card reveal"><span class="process-num">02</span><div class="process-icon">◇</div><h3>Pilot</h3><p>Run a production-like sample and calibrate instructions, tooling and QA.</p></article>
+            <article class="process-card reveal"><span class="process-num">03</span><div class="process-icon">↗</div><h3>Scale</h3><p>Expand trained capacity, monitoring and delivery cadence without losing control.</p></article>
+            <article class="process-card reveal"><span class="process-num">04</span><div class="process-icon">∞</div><h3>Improve</h3><p>Use error analysis and feedback loops to sharpen the workflow over time.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section work-section" id="work">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><p class="eyebrow light">SELECTED WORK</p><h2>Built around real AI workflows.</h2></div>
+          <p>Representative data operations across language, vision, robotics, spatial intelligence and speech.</p>
         </div>
         <div class="work-grid">
-          <article class="work-card reveal"><div class="work-art art-one"><span>Response A</span><b>↔</b><span>Response B</span></div><div class="work-copy"><small>LANGUAGE AI</small><h3>RLHF preference evaluation</h3><p>Human comparison and structured ranking for model-alignment workflows.</p></div></article>
-          <article class="work-card reveal"><div class="work-art art-two"><div class="bbox b1"></div><div class="bbox b2"></div><div class="scan-line"></div></div><div class="work-copy"><small>VISION & ROBOTICS</small><h3>Video and image annotation</h3><p>Object, action and scene labels designed for machine perception systems.</p></div></article>
-          <article class="work-card reveal"><div class="work-art art-three"><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div></div><div class="work-copy"><small>SPEECH AI</small><h3>Audio collection & transcription</h3><p>Quality-controlled multilingual speech data for ASR and evaluation.</p></div></article>
+          <article class="work-card reveal tilt-card"><div class="work-visual visual-rlhf"><div class="compare-card left">Response A</div><div class="compare-card right">Response B</div><div class="compare-score"><span>Preference</span><strong>0.86</strong></div></div><div class="work-copy"><span>LANGUAGE AI</span><h3>RLHF preference evaluation</h3><p>Human comparison and ranking designed for model alignment and evaluation pipelines.</p></div></article>
+          <article class="work-card reveal tilt-card"><div class="work-visual visual-vision"><div class="vision-box vb1"><span>car</span></div><div class="vision-box vb2"><span>person</span></div><div class="vision-cross"></div><div class="vision-scan"></div></div><div class="work-copy"><span>VISION & ROBOTICS</span><h3>Image and video annotation</h3><p>Object, action and scene labels for computer vision and robotic perception systems.</p></div></article>
+          <article class="work-card reveal tilt-card"><div class="work-visual visual-audio"><div class="audio-bars"> <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="audio-label"><span>Speech detected</span><b>98.7%</b></div></div><div class="work-copy"><span>SPEECH AI</span><h3>Audio collection & transcription</h3><p>Multilingual speech data, diarization and quality control for ASR and evaluation.</p></div></article>
         </div>
       </div>
     </section>
 
     <section class="section about-section" id="about">
+      <div class="about-glow" aria-hidden="true"></div>
       <div class="shell about-grid">
         <div class="about-copy reveal">
-          <p class="eyebrow">ABOUT LYDERTRONICS</p>
-          <h2>Data work that respects the details.</h2>
-          <p>Lydertronics is an AI data intelligence company focused on high-quality annotation, labeling, evaluation, collection and automation. We combine trained human judgment with disciplined quality control to help teams build dependable AI systems.</p>
-          <p>Our operating model is designed for distributed delivery, clear communication and flexible project sizes—from focused pilots to ongoing production programs.</p>
+          <p class="eyebrow light">ABOUT LYDERTRONICS</p>
+          <h2>Human judgment, engineered into the data pipeline.</h2>
+          <p>Lydertronics is an AI data intelligence company focused on annotation, evaluation, collection, quality assurance and automation. We combine trained human judgment with disciplined operations to support dependable AI systems.</p>
+          <a class="button ghost light-ghost" href="#contact">Talk to our team <span>↗</span></a>
         </div>
-        <div class="principles reveal">
-          <div><strong>01</strong><h3>Precision first</h3><p>Guidelines and QA are treated as core product requirements.</p></div>
-          <div><strong>02</strong><h3>Clear ownership</h3><p>Every workflow has accountable review and delivery checkpoints.</p></div>
-          <div><strong>03</strong><h3>Flexible scale</h3><p>Teams and throughput can expand as project demand changes.</p></div>
-          <div><strong>04</strong><h3>Human judgment</h3><p>Complex edge cases receive thoughtful review, not blind throughput.</p></div>
+        <div class="about-stats reveal">
+          <div><strong data-counter="6" data-suffix="+">0+</strong><span>core capability areas</span></div>
+          <div><strong data-counter="4" data-suffix="">0</strong><span>quality stages per workflow</span></div>
+          <div><strong data-counter="24" data-suffix="hr">0hr</strong><span>fast-response capability</span></div>
+          <div><strong data-counter="100" data-suffix="%">0%</strong><span>human review where it matters</span></div>
         </div>
-      </div>
-    </section>
-
-    <section class="career-band">
-      <div class="shell career-band-grid reveal">
-        <div><p class="eyebrow">FREELANCER NETWORK</p><h2>Do your best work with us.</h2><p>We welcome skilled freelancers in annotation, RLHF, language, audio, LiDAR, QA and AI automation.</p></div>
-        <a class="button light" href="careers.html">View freelancer opportunities <span>↗</span></a>
       </div>
     </section>
 
@@ -158,34 +200,20 @@
       <div class="shell contact-grid">
         <div class="contact-copy reveal">
           <p class="eyebrow">START A PROJECT</p>
-          <h2>Tell us what your AI needs to learn.</h2>
-          <p>Share the data type, volume, timeline and quality requirements. We’ll review the scope and respond with the next practical step.</p>
+          <h2>Bring us the messy data.</h2>
+          <p>Share your data type, volume, timeline and quality requirements. We’ll help shape a practical pilot and delivery plan.</p>
           <div class="contact-list">
             <a href="mailto:lydertronicsai@trainbot.in"><span>Email</span><strong>lydertronicsai@trainbot.in</strong></a>
             <a href="tel:+917981520897"><span>Phone</span><strong>+91 7981520897</strong></a>
             <div><span>Availability</span><strong>Mon–Sat · 9 AM–7 PM IST</strong></div>
           </div>
         </div>
-
         <form class="contact-form reveal" id="contactForm" novalidate>
-          <div class="form-row">
-            <label>Full name<input id="fname" name="name" type="text" autocomplete="name" required /></label>
-            <label>Email address<input id="femail" name="email" type="email" autocomplete="email" required /></label>
-          </div>
-          <label>Service
-            <select id="fservice" name="service" required>
-              <option value="">Choose a service</option>
-              <option>RLHF / LLM Evaluation</option>
-              <option>Image & Video Annotation</option>
-              <option>LiDAR & 3D Point Cloud</option>
-              <option>Multimodal AI Annotation</option>
-              <option>Audio / Transcription / Data Collection</option>
-              <option>AI Automation</option>
-              <option>Other</option>
-            </select>
-          </label>
+          <div class="form-head"><span>Project brief</span><b>Usually replies within 24 hours</b></div>
+          <div class="form-row"><label>Full name<input id="fname" name="name" type="text" autocomplete="name" required /></label><label>Email address<input id="femail" name="email" type="email" autocomplete="email" required /></label></div>
+          <label>Service<select id="fservice" name="service" required><option value="">Choose a service</option><option>RLHF / LLM Evaluation</option><option>Image & Video Annotation</option><option>LiDAR & 3D Point Cloud</option><option>Multimodal AI Annotation</option><option>Audio / Transcription / Data Collection</option><option>AI Automation</option><option>Other</option></select></label>
           <label>Project details<textarea id="fmsg" name="message" rows="6" placeholder="Data type, approximate volume, timeline, target quality..." required></textarea></label>
-          <button class="button primary submit-button" type="submit">Send project brief <span>↗</span></button>
+          <button class="button primary submit-button magnetic" type="submit">Send project brief <span>↗</span></button>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -194,9 +222,9 @@
 
   <footer class="site-footer">
     <div class="shell footer-grid">
-      <div><a class="brand footer-brand" href="#home"><span class="brand-mark">L</span><span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span></a><p>Precision data services for intelligent systems.</p></div>
-      <div><h4>Navigate</h4><a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="careers.html">Careers</a></div>
-      <div><h4>Contact</h4><a href="mailto:lydertronicsai@trainbot.in">Email us</a><a href="tel:+917981520897">+91 7981520897</a><span>India · Global delivery</span></div>
+      <div><a class="brand footer-brand" href="#home"><span class="brand-mark"><i></i><b>L</b></span><span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span></a><p>Precision data operations for intelligent systems.</p></div>
+      <div><h4>Navigate</h4><a href="#services">Services</a><a href="#process">Process</a><a href="#work">Work</a><a href="#about">About</a><a href="careers.html">Careers</a></div>
+      <div><h4>Contact</h4><a href="mailto:lydertronicsai@trainbot.in">lydertronicsai@trainbot.in</a><a href="tel:+917981520897">+91 7981520897</a><span>India · Global delivery</span></div>
     </div>
     <div class="shell footer-bottom"><span>© <span data-year></span> Lydertronics. All rights reserved.</span><a href="#home">Back to top ↑</a></div>
   </footer>
