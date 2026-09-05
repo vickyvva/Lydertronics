@@ -126,6 +126,98 @@ updateProcessFill();
 
 document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
 
+// Do not display the company phone number publicly.
+document.querySelectorAll('a[href^="tel:+917981520897"]').forEach(link => link.remove());
+
+function escapeHtml(value = '') {
+  return String(value).replace(/[&<>'"]/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+  }[char]));
+}
+
+const jobsGrid = document.getElementById('jobsGrid');
+const jobSelect = document.getElementById('jobSelect');
+const selectedJobNote = document.getElementById('selectedJobNote');
+let careersJobs = [];
+
+function updateSelectedJobNote() {
+  if (!jobSelect || !selectedJobNote) return;
+  const job = careersJobs.find(item => item.title === jobSelect.value);
+  if (!job) {
+    selectedJobNote.textContent = '';
+    selectedJobNote.classList.remove('visible');
+    return;
+  }
+  selectedJobNote.textContent = `Selected project: ${job.title} — ${job.role}`;
+  selectedJobNote.classList.add('visible');
+}
+
+function chooseJob(title) {
+  if (!jobSelect) return;
+  jobSelect.value = title;
+  updateSelectedJobNote();
+  scrollToTarget('#apply');
+  window.setTimeout(() => jobSelect.focus({ preventScroll: true }), prefersReducedMotion ? 0 : 550);
+}
+
+function renderJobs(jobs) {
+  if (!jobsGrid) return;
+  const openJobs = jobs.filter(job => String(job.status || 'Open').toLowerCase() === 'open');
+  if (!openJobs.length) {
+    jobsGrid.innerHTML = '<div class="jobs-empty">There are no open projects at the moment. Please check back later.</div>';
+    return;
+  }
+
+  jobsGrid.innerHTML = openJobs.map((job, index) => {
+    const responsibilities = Array.isArray(job.responsibilities) ? job.responsibilities : [];
+    return `<article class="job-card" style="animation-delay:${Math.min(index * 70, 350)}ms">
+      <div class="job-meta">
+        <span class="job-category">${escapeHtml(job.category || 'AI Data Project')}</span>
+        <span class="job-status">${escapeHtml(job.status || 'Open')}</span>
+      </div>
+      <h3>${escapeHtml(job.title)}</h3>
+      <div class="job-role"><span>Role</span><strong>${escapeHtml(job.role)}</strong></div>
+      <p class="job-location">${escapeHtml(job.location || 'Remote / Project-based')}</p>
+      <div class="job-responsibilities">
+        <span>Responsibilities</span>
+        <ul>${responsibilities.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+      </div>
+      <button class="job-apply" type="button" data-job="${escapeHtml(job.title)}">Apply for this job <b>↗</b></button>
+    </article>`;
+  }).join('');
+
+  jobsGrid.querySelectorAll('.job-apply').forEach(button => {
+    button.addEventListener('click', () => chooseJob(button.dataset.job || ''));
+  });
+}
+
+async function loadCareersJobs() {
+  if (!jobsGrid && !jobSelect) return;
+  try {
+    const response = await fetch(`jobs.json?v=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Could not load jobs.json (${response.status})`);
+    const data = await response.json();
+    careersJobs = Array.isArray(data.jobs) ? data.jobs : [];
+    renderJobs(careersJobs);
+
+    if (jobSelect) {
+      careersJobs
+        .filter(job => String(job.status || 'Open').toLowerCase() === 'open')
+        .forEach(job => {
+          const option = document.createElement('option');
+          option.value = job.title;
+          option.textContent = `${job.title} — ${job.role}`;
+          jobSelect.appendChild(option);
+        });
+      jobSelect.addEventListener('change', updateSelectedJobNote);
+    }
+  } catch (error) {
+    console.error(error);
+    if (jobsGrid) jobsGrid.innerHTML = '<div class="jobs-empty">Current opportunities could not be loaded. Please refresh the page or try again later.</div>';
+  }
+}
+loadCareersJobs();
+
 function setStatus(element, message, type = '') {
   if (!element) return;
   element.textContent = message;
@@ -176,15 +268,16 @@ if (freelancerForm) {
     setStatus(status, '');
     if (!freelancerForm.checkValidity()) { freelancerForm.reportValidity(); return; }
     const button = freelancerForm.querySelector('button[type="submit"]');
-    const original = button?.innerHTML || 'Submit freelancer application';
+    const original = button?.innerHTML || 'Submit application';
     if (button) { button.disabled = true; button.textContent = 'Submitting…'; }
     try {
       const payload = Object.fromEntries(new FormData(freelancerForm).entries());
-      payload.form_type = 'Freelancer Application';
+      payload.form_type = 'Career Project Application';
       payload.source = 'Lydertronics Careers';
       await submitToFormspree(payload);
       freelancerForm.reset();
-      setStatus(status, 'Application received. We’ll contact you if your profile matches a suitable project.', 'success');
+      updateSelectedJobNote();
+      setStatus(status, 'Application received. We’ll contact you if your profile matches the selected project.', 'success');
     } catch (error) {
       console.error(error);
       setStatus(status, 'We could not submit the application. Please try again or email lydertronicsai@trainbot.in.', 'error');
