@@ -1,40 +1,34 @@
 'use strict';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvzvbgwo';
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Header state
 const siteHeader = document.getElementById('siteHeader');
-const updateHeader = () => {
-  if (!siteHeader) return;
-  siteHeader.classList.toggle('scrolled', window.scrollY > 18);
-};
+const updateHeader = () => siteHeader?.classList.toggle('scrolled', window.scrollY > 18);
 window.addEventListener('scroll', updateHeader, { passive: true });
 updateHeader();
 
-// Mobile navigation
 const navToggle = document.getElementById('navToggle');
 const mainNav = document.getElementById('mainNav');
 if (navToggle && mainNav) {
   navToggle.addEventListener('click', () => {
     const open = mainNav.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.classList.toggle('open', open);
   });
-
-  mainNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mainNav.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
+  mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    mainNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.classList.remove('open');
+  }));
 }
 
-// Smooth in-page navigation with fixed header offset
 function scrollToTarget(hash) {
   const target = document.querySelector(hash);
   if (!target) return;
-  const offset = (siteHeader?.offsetHeight || 70) + 14;
+  const offset = (siteHeader?.offsetHeight || 72) + 12;
   const top = target.getBoundingClientRect().top + window.scrollY - offset;
-  window.scrollTo({ top, behavior: 'smooth' });
+  window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -47,27 +41,90 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-// Gentle reveal animation
 const revealItems = document.querySelectorAll('.reveal');
-if ('IntersectionObserver' in window && revealItems.length) {
-  const observer = new IntersectionObserver(entries => {
+if (!prefersReducedMotion && 'IntersectionObserver' in window && revealItems.length) {
+  const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -35px' });
-  revealItems.forEach(item => observer.observe(item));
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+  revealItems.forEach(item => revealObserver.observe(item));
 } else {
   revealItems.forEach(item => item.classList.add('visible'));
 }
 
-// Footer year
-const currentYear = new Date().getFullYear();
-document.querySelectorAll('[data-year]').forEach(el => {
-  el.textContent = String(currentYear);
-});
+function animateCounter(el) {
+  if (el.dataset.counted === 'true') return;
+  el.dataset.counted = 'true';
+  const target = Number(el.dataset.counter || 0);
+  const suffix = el.dataset.suffix || '';
+  const decimals = String(target).includes('.') ? 1 : 0;
+  if (prefersReducedMotion) {
+    el.textContent = target.toFixed(decimals) + suffix;
+    return;
+  }
+  const duration = 1450;
+  const start = performance.now();
+  const tick = now => {
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = (target * eased).toFixed(decimals) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+const counters = document.querySelectorAll('[data-counter]');
+if ('IntersectionObserver' in window) {
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    });
+  }, { threshold: .55 });
+  counters.forEach(el => counterObserver.observe(el));
+} else counters.forEach(animateCounter);
+
+if (!prefersReducedMotion && window.matchMedia('(pointer:fine)').matches) {
+  document.querySelectorAll('.tilt-card').forEach(card => {
+    card.addEventListener('mousemove', event => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - .5;
+      const y = (event.clientY - rect.top) / rect.height - .5;
+      card.style.transform = `perspective(1000px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-3px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+
+  document.querySelectorAll('.magnetic').forEach(button => {
+    button.addEventListener('mousemove', event => {
+      const rect = button.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+      button.style.transform = `translate(${(x * .08).toFixed(1)}px, ${(y * .08).toFixed(1)}px) translateY(-2px)`;
+    });
+    button.addEventListener('mouseleave', () => { button.style.transform = ''; });
+  });
+}
+
+const processSection = document.getElementById('process');
+const processFill = document.getElementById('processFill');
+function updateProcessFill() {
+  if (!processSection || !processFill) return;
+  const rect = processSection.getBoundingClientRect();
+  const viewport = window.innerHeight;
+  const total = rect.height + viewport;
+  const progressed = viewport - rect.top;
+  const pct = Math.max(0, Math.min(1, progressed / total));
+  processFill.style.width = `${(pct * 100).toFixed(1)}%`;
+}
+window.addEventListener('scroll', updateProcessFill, { passive: true });
+updateProcessFill();
+
+document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
 
 function setStatus(element, message, type = '') {
   if (!element) return;
@@ -78,90 +135,61 @@ function setStatus(element, message, type = '') {
 async function submitToFormspree(payload) {
   const response = await fetch(FORMSPREE_ENDPOINT, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify(payload)
   });
   if (!response.ok) throw new Error(`Form submission failed with ${response.status}`);
   return response;
 }
 
-// Project contact form
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-  const contactStatus = document.getElementById('formStatus');
+  const status = document.getElementById('formStatus');
   contactForm.addEventListener('submit', async event => {
     event.preventDefault();
-    setStatus(contactStatus, '');
-
-    if (!contactForm.checkValidity()) {
-      contactForm.reportValidity();
-      return;
-    }
-
+    setStatus(status, '');
+    if (!contactForm.checkValidity()) { contactForm.reportValidity(); return; }
     const button = contactForm.querySelector('button[type="submit"]');
-    const original = button?.innerHTML;
-    if (button) {
-      button.disabled = true;
-      button.textContent = 'Sending…';
-    }
-
+    const original = button?.innerHTML || 'Send project brief';
+    if (button) { button.disabled = true; button.textContent = 'Sending…'; }
     try {
       const payload = Object.fromEntries(new FormData(contactForm).entries());
       payload.form_type = 'Project Enquiry';
       payload.source = 'Lydertronics Website';
       await submitToFormspree(payload);
       contactForm.reset();
-      setStatus(contactStatus, 'Thanks — your project brief has been sent. We’ll review it and get back to you.', 'success');
+      setStatus(status, 'Thanks — your project brief has been sent. We’ll review it and get back to you.', 'success');
     } catch (error) {
       console.error(error);
-      setStatus(contactStatus, 'We could not send the form right now. Please email lydertronicsai@trainbot.in directly.', 'error');
+      setStatus(status, 'We could not send the form right now. Please email lydertronicsai@trainbot.in directly.', 'error');
     } finally {
-      if (button) {
-        button.disabled = false;
-        button.innerHTML = original || 'Send';
-      }
+      if (button) { button.disabled = false; button.innerHTML = original; }
     }
   });
 }
 
-// Freelancer application form
 const freelancerForm = document.getElementById('freelancerForm');
 if (freelancerForm) {
-  const freelancerStatus = document.getElementById('freelancerStatus');
+  const status = document.getElementById('freelancerStatus');
   freelancerForm.addEventListener('submit', async event => {
     event.preventDefault();
-    setStatus(freelancerStatus, '');
-
-    if (!freelancerForm.checkValidity()) {
-      freelancerForm.reportValidity();
-      return;
-    }
-
+    setStatus(status, '');
+    if (!freelancerForm.checkValidity()) { freelancerForm.reportValidity(); return; }
     const button = freelancerForm.querySelector('button[type="submit"]');
-    const original = button?.innerHTML;
-    if (button) {
-      button.disabled = true;
-      button.textContent = 'Submitting…';
-    }
-
+    const original = button?.innerHTML || 'Submit freelancer application';
+    if (button) { button.disabled = true; button.textContent = 'Submitting…'; }
     try {
       const payload = Object.fromEntries(new FormData(freelancerForm).entries());
       payload.form_type = 'Freelancer Application';
       payload.source = 'Lydertronics Careers';
       await submitToFormspree(payload);
       freelancerForm.reset();
-      setStatus(freelancerStatus, 'Application received. We’ll contact you if your profile matches a suitable project.', 'success');
+      setStatus(status, 'Application received. We’ll contact you if your profile matches a suitable project.', 'success');
     } catch (error) {
       console.error(error);
-      setStatus(freelancerStatus, 'We could not submit the application. Please try again or email lydertronicsai@trainbot.in.', 'error');
+      setStatus(status, 'We could not submit the application. Please try again or email lydertronicsai@trainbot.in.', 'error');
     } finally {
-      if (button) {
-        button.disabled = false;
-        button.innerHTML = original || 'Submit application';
-      }
+      if (button) { button.disabled = false; button.innerHTML = original; }
     }
   });
 }
