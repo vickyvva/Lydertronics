@@ -1,0 +1,79 @@
+{
+  "jobs": [
+    {
+      "id": "data-annotation",
+      "title": "Data Annotation",
+      "role": "Data Annotation Specialist",
+      "category": "AI Data Operations",
+      "location": "Remote / Project-based",
+      "status": "Open",
+      "responsibilities": [
+        "Review project guidelines and understand annotation rules before starting production work.",
+        "Label, classify, tag or validate structured and unstructured data accurately.",
+        "Identify unclear examples and escalate edge cases for reviewer guidance.",
+        "Maintain consistent quality across assigned batches and complete corrections when requested.",
+        "Follow confidentiality, data-handling and project-specific quality requirements."
+      ]
+    },
+    {
+      "id": "data-collection",
+      "title": "Data Collection",
+      "role": "Data Collection Contributor",
+      "category": "Dataset Collection",
+      "location": "Remote / Project-based",
+      "status": "Open",
+      "responsibilities": [
+        "Collect project-specific text, image, audio, video or other requested data according to instructions.",
+        "Verify that submitted samples meet format, quality and diversity requirements.",
+        "Record required metadata accurately and avoid duplicate or invalid submissions.",
+        "Follow consent, privacy and data-collection guidelines provided for each project.",
+        "Respond to quality feedback and replace rejected samples when needed."
+      ]
+    },
+    {
+      "id": "rlhf",
+      "title": "RLHF / LLM Evaluation",
+      "role": "RLHF & LLM Evaluator",
+      "category": "Language AI",
+      "location": "Remote / Project-based",
+      "status": "Open",
+      "responsibilities": [
+        "Compare AI-generated responses and select the stronger answer using project guidelines.",
+        "Evaluate helpfulness, correctness, relevance, reasoning quality and instruction following.",
+        "Write concise justifications when a task requires ranking or reviewer comments.",
+        "Identify unsafe, misleading or low-quality model behavior and classify it correctly.",
+        "Maintain consistent judgment across repeated evaluation tasks and calibration reviews."
+      ]
+    },
+    {
+      "id": "image-labeling",
+      "title": "Image Labeling",
+      "role": "Image Annotation Specialist",
+      "category": "Computer Vision",
+      "location": "Remote / Project-based",
+      "status": "Open",
+      "responsibilities": [
+        "Label objects and attributes in images using bounding boxes, polygons, segmentation or classification tools.",
+        "Apply class labels consistently according to taxonomy and annotation guidelines.",
+        "Check object boundaries, occlusion, visibility and difficult edge cases carefully.",
+        "Review completed annotations for missing objects and incorrect labels before submission.",
+        "Complete reviewer corrections and follow updated guidelines during project calibration."
+      ]
+    },
+    {
+      "id": "video-annotation",
+      "title": "Video Annotation",
+      "role": "Video Annotation Specialist",
+      "category": "Computer Vision",
+      "location": "Remote / Project-based",
+      "status": "Open",
+      "responsibilities": [
+        "Annotate objects, actions, events or scenes across video frames according to project guidelines.",
+        "Track objects consistently across frames and maintain stable labels through movement and occlusion.",
+        "Mark frame ranges, timestamps, key events or activity segments when required.",
+        "Review video sequences for missed labels, ID switches and inconsistent annotations.",
+        "Apply reviewer feedback and maintain accuracy across long or complex sequences."
+      ]
+    }
+  ]
+}
