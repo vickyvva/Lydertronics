@@ -40,3 +40,31 @@ h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{font-family:var(--bookman);letter-spacing
 @media(max-width:780px){.section{padding:82px 0}.site-header{padding:10px 0}.nav-toggle{display:block}.main-nav{position:absolute;top:70px;left:20px;right:20px;display:none;flex-direction:column;align-items:stretch;gap:0;padding:10px;border-radius:20px;background:rgba(8,19,33,.96);border:1px solid rgba(255,255,255,.09);box-shadow:0 25px 55px rgba(0,0,0,.3);backdrop-filter:blur(20px)}.main-nav.open{display:flex}.main-nav a{padding:13px 12px}.main-nav .nav-cta{text-align:center;margin-top:4px}.hero{padding-top:125px}.hero-layout{gap:35px}.hero-metrics{grid-template-columns:1fr 1fr}.hero-stage{min-height:460px}.float-chip{font-size:.65rem}.quality-core{grid-template-columns:1fr}.pipeline-list{gap:7px}.console-body{padding:13px}.quality-ring{min-height:185px}.service-grid,.role-grid,.process-cards,.about-stats{grid-template-columns:1fr}.service-card{min-height:auto;padding-bottom:72px}.work-card{display:block}.work-visual{height:250px}.footer-grid{grid-template-columns:1fr;gap:35px}.footer-bottom{flex-direction:column}.page-hero{padding-top:130px}.form-row{grid-template-columns:1fr}.contact-form,.application-form{padding:22px}.form-head{flex-direction:column}.ticker-wrap{margin-top:45px}}
 @media(max-width:520px){.shell{width:min(100% - 28px,1180px)}h1{font-size:clamp(3rem,16vw,4.7rem)}h2{font-size:clamp(2.25rem,11vw,3.5rem)}.brand-copy small{display:none}.hero-metrics{grid-template-columns:1fr}.hero-stage{min-height:400px}.data-console{border-radius:22px}.quality-ring svg{width:135px}.quality-ring strong{font-size:1.8rem}.float-chip{display:none}.orbit-ui{border-radius:24px}.orbit-node{width:78px;height:78px}.orbit-core{width:125px;height:125px}.node-a{left:5%;top:7%}.node-b{right:4%;top:13%}.node-c{left:8%;bottom:7%}.node-d{right:5%;bottom:9%}.performance-visual{min-height:430px}.contact-list>a,.contact-list>div{flex-direction:column;gap:3px}.page-hero h1{font-size:clamp(3rem,15vw,4.8rem)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.ticker-track{transform:none}}
+
+/* DESKTOP SERVICE CARD FOOTER FIX */
+@media (min-width: 781px) {
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 390px;
+  }
+  .service-card p {
+    min-height: 0;
+    margin-bottom: 0;
+  }
+  .service-card .tags {
+    margin-top: auto;
+    padding-top: 26px;
+  }
+  .service-card > a {
+    position: static;
+    left: auto;
+    bottom: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    align-self: flex-start;
+    margin-top: 16px;
+    line-height: 1.35;
+  }
+}
