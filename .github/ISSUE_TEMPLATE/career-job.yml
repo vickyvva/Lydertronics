@@ -1,0 +1,57 @@
+name: Career Job
+description: Publish a new job card on the Lydertronics Careers page
+title: "[CAREER JOB] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in the fields below and submit this issue. While this issue remains open, the job will be shown on the Careers page. Close the issue when the job is no longer available.
+
+  - type: input
+    id: job_title
+    attributes:
+      label: Job title
+      description: The title displayed on the Careers page.
+      placeholder: e.g. LiDAR Annotation
+    validations:
+      required: true
+
+  - type: input
+    id: role
+    attributes:
+      label: Role
+      description: The role name for applicants.
+      placeholder: e.g. LiDAR Annotation Specialist
+    validations:
+      required: true
+
+  - type: input
+    id: category
+    attributes:
+      label: Category
+      description: The job category.
+      placeholder: e.g. Spatial AI
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Location / working mode
+      description: Where or how the work is performed.
+      value: Remote / Project-based
+    validations:
+      required: true
+
+  - type: textarea
+    id: responsibilities
+    attributes:
+      label: Responsibilities
+      description: Put one responsibility on each line. You can also use bullet points.
+      placeholder: |
+        Review project guidelines carefully
+        Annotate assigned data accurately
+        Complete reviewer corrections
+        Maintain consistent quality
+    validations:
+      required: true
