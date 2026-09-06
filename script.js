@@ -14,11 +14,19 @@ if (navToggle && mainNav) {
   navToggle.addEventListener('click', () => {
     const open = mainNav.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
     navToggle.classList.toggle('open', open);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && mainNav.classList.contains('open')) {
+      navToggle.click();
+      navToggle.focus();
+    }
   });
   mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
     mainNav.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open navigation');
     navToggle.classList.remove('open');
   }));
 }
@@ -46,11 +54,15 @@ if (!prefersReducedMotion && 'IntersectionObserver' in window && revealItems.len
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
+      entry.target.classList.remove('reveal-pending');
       entry.target.classList.add('visible');
       revealObserver.unobserve(entry.target);
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
-  revealItems.forEach(item => revealObserver.observe(item));
+  revealItems.forEach(item => {
+    item.classList.add('reveal-pending');
+    revealObserver.observe(item);
+  });
 } else {
   revealItems.forEach(item => item.classList.add('visible'));
 }
@@ -88,26 +100,22 @@ if ('IntersectionObserver' in window) {
   counters.forEach(el => counterObserver.observe(el));
 } else counters.forEach(animateCounter);
 
-if (!prefersReducedMotion && window.matchMedia('(pointer:fine)').matches) {
-  document.querySelectorAll('.tilt-card').forEach(card => {
-    card.addEventListener('mousemove', event => {
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - .5;
-      const y = (event.clientY - rect.top) / rect.height - .5;
-      card.style.transform = `perspective(1000px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg) translateY(-3px)`;
-    });
-    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+// Pause decorative loops off screen and while the tab is hidden.
+const motionSections = [...document.querySelectorAll('.hero, .performance-section, .work-section, .page-hero')];
+if ('IntersectionObserver' in window) {
+  const visibleSections = new Set();
+  const syncMotion = () => motionSections.forEach(section => {
+    section.classList.toggle('motion-paused', document.hidden || !visibleSections.has(section));
   });
-
-  document.querySelectorAll('.magnetic').forEach(button => {
-    button.addEventListener('mousemove', event => {
-      const rect = button.getBoundingClientRect();
-      const x = event.clientX - rect.left - rect.width / 2;
-      const y = event.clientY - rect.top - rect.height / 2;
-      button.style.transform = `translate(${(x * .08).toFixed(1)}px, ${(y * .08).toFixed(1)}px) translateY(-2px)`;
+  const motionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) visibleSections.add(entry.target);
+      else visibleSections.delete(entry.target);
     });
-    button.addEventListener('mouseleave', () => { button.style.transform = ''; });
+    syncMotion();
   });
+  motionSections.forEach(section => motionObserver.observe(section));
+  document.addEventListener('visibilitychange', syncMotion);
 }
 
 const processSection = document.getElementById('process');
@@ -119,9 +127,18 @@ function updateProcessFill() {
   const total = rect.height + viewport;
   const progressed = viewport - rect.top;
   const pct = Math.max(0, Math.min(1, progressed / total));
-  processFill.style.width = `${(pct * 100).toFixed(1)}%`;
+  processFill.style.transform = `scaleX(${prefersReducedMotion ? 1 : pct.toFixed(3)})`;
 }
-window.addEventListener('scroll', updateProcessFill, { passive: true });
+let processFrame = 0;
+function scheduleProcessFill() {
+  if (processFrame || !processFill) return;
+  processFrame = requestAnimationFrame(() => {
+    processFrame = 0;
+    updateProcessFill();
+  });
+}
+window.addEventListener('scroll', scheduleProcessFill, { passive: true });
+window.addEventListener('resize', scheduleProcessFill, { passive: true });
 updateProcessFill();
 
 document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
@@ -331,7 +348,7 @@ if (contactForm) {
       setStatus(status, 'Thanks — your project brief has been sent. We’ll review it and get back to you.', 'success');
     } catch (error) {
       console.error(error);
-      setStatus(status, 'We could not send the form right now. Please email lydertronicsai@trainbot.in directly.', 'error');
+      setStatus(status, 'We could not send the form right now. Please try again or use the “Email our team” link below.', 'error');
     } finally {
       if (button) { button.disabled = false; button.innerHTML = original; }
     }
@@ -358,7 +375,7 @@ if (freelancerForm) {
       setStatus(status, 'Application received. We’ll contact you if your profile matches the selected project.', 'success');
     } catch (error) {
       console.error(error);
-      setStatus(status, 'We could not submit the application. Please try again or email lydertronicsai@trainbot.in.', 'error');
+      setStatus(status, 'We could not submit the application. Please try again or use the “Email our team” link below.', 'error');
     } finally {
       if (button) { button.disabled = false; button.innerHTML = original; }
     }
