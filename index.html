@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#07111f" />
   <link rel="canonical" href="https://lydertronicsai.com/" />
   <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260906-polish" />
 </head>
 <body data-page="home">
   <div class="page-noise" aria-hidden="true"></div>
@@ -21,7 +21,7 @@
         <span class="brand-mark"><i></i><b>L</b></span>
         <span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span>
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
       <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
         <a href="#services">Services</a>
         <a href="#process">Process</a>
@@ -171,9 +171,33 @@
           <p>Representative data operations across language, vision, robotics, spatial intelligence and speech.</p>
         </div>
         <div class="work-grid">
-          <article class="work-card reveal tilt-card"><div class="work-visual visual-rlhf"><div class="compare-card left">Response A</div><div class="compare-card right">Response B</div><div class="compare-score"><span>Preference</span><strong>0.86</strong></div></div><div class="work-copy"><span>LANGUAGE AI</span><h3>RLHF preference evaluation</h3><p>Human comparison and ranking designed for model alignment and evaluation pipelines.</p></div></article>
-          <article class="work-card reveal tilt-card"><div class="work-visual visual-vision"><div class="vision-box vb1"><span>car</span></div><div class="vision-box vb2"><span>person</span></div><div class="vision-cross"></div><div class="vision-scan"></div></div><div class="work-copy"><span>VISION & ROBOTICS</span><h3>Image and video annotation</h3><p>Object, action and scene labels for computer vision and robotic perception systems.</p></div></article>
-          <article class="work-card reveal tilt-card"><div class="work-visual visual-audio"><div class="audio-bars"> <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="audio-label"><span>Speech detected</span><b>98.7%</b></div></div><div class="work-copy"><span>SPEECH AI</span><h3>Audio collection & transcription</h3><p>Multilingual speech data, diarization and quality control for ASR and evaluation.</p></div></article>
+          <article class="work-card reveal">
+            <div class="work-visual visual-rlhf" role="img" aria-label="Example evaluation comparing two model responses for clarity and relevance">
+              <div class="demo-head"><span>01 / EVALUATION</span><span>EXAMPLE</span></div>
+              <div class="evaluation-row"><span class="response-id">A</span><div><strong>Response A</strong><span>Clear, relevant, complete</span></div><span class="review-choice">Selected</span></div>
+              <div class="evaluation-row secondary"><span class="response-id">B</span><div><strong>Response B</strong><span>Needs more context</span></div></div>
+              <div class="demo-foot"><span>Compare → Rank → Review</span><span class="demo-accent">Human feedback</span></div>
+            </div>
+            <div class="work-copy"><span>LANGUAGE AI</span><h3>RLHF preference evaluation</h3><p>Human comparison and ranking designed for model alignment and evaluation pipelines.</p><div class="work-tags"><span>Response ranking</span><span>Quality review</span></div></div>
+          </article>
+          <article class="work-card reveal">
+            <div class="work-visual visual-vision" role="img" aria-label="Example annotation interface with object regions, a frame timeline, and reviewed labels">
+              <div class="demo-head"><span>02 / ANNOTATION</span><span>EXAMPLE</span></div>
+              <div class="annotation-canvas"><div class="vision-box vb1"><span>Object 01</span></div><div class="vision-box vb2"><span>Object 02</span></div><div class="vision-scan"></div></div>
+              <div class="frame-timeline" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="demo-foot"><span>Label → Track → Verify</span><span class="demo-accent">Frame review</span></div>
+            </div>
+            <div class="work-copy"><span>VISION &amp; ROBOTICS</span><h3>Image and video annotation</h3><p>Object, action and scene labels for computer vision and robotic perception systems.</p><div class="work-tags"><span>Object tracking</span><span>Scene labels</span></div></div>
+          </article>
+          <article class="work-card reveal">
+            <div class="work-visual visual-audio" role="img" aria-label="Example speech waveform aligned with a speaker transcript">
+              <div class="demo-head"><span>03 / TRANSCRIPTION</span><span>EXAMPLE</span></div>
+              <div class="audio-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="transcript-line"><span>Speaker 01 · 00:04</span><p>“Let’s begin with the next sample.”</p></div>
+              <div class="demo-foot"><span>Listen → Align → Check</span><span class="demo-accent">Speech review</span></div>
+            </div>
+            <div class="work-copy"><span>SPEECH AI</span><h3>Audio collection &amp; transcription</h3><p>Multilingual speech data, diarization and quality control for ASR and evaluation.</p><div class="work-tags"><span>Speaker labels</span><span>Transcription</span></div></div>
+          </article>
         </div>
       </div>
     </section>
@@ -203,8 +227,8 @@
           <h2>Bring us the messy data.</h2>
           <p>Share your data type, volume, timeline and quality requirements. We’ll help shape a practical pilot and delivery plan.</p>
           <div class="contact-list">
-            <a href="mailto:lydertronicsai@trainbot.in"><span>Email</span><strong>lydertronicsai@trainbot.in</strong></a>
-            <a href="tel:+917981520897"><span>Phone</span><strong>+91 7981520897</strong></a>
+            <a href="mailto:lydertronicsai@trainbot.in"><span>Contact</span><strong>Email our team ↗</strong></a>
+            <a href="https://www.linkedin.com/company/lydertronics-ai/" target="_blank" rel="noopener noreferrer"><span>Connect</span><strong>LinkedIn ↗</strong></a>
             <div><span>Availability</span><strong>Mon–Sat · 9 AM–7 PM IST</strong></div>
           </div>
         </div>
@@ -224,11 +248,11 @@
     <div class="shell footer-grid">
       <div><a class="brand footer-brand" href="#home"><span class="brand-mark"><i></i><b>L</b></span><span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span></a><p>Precision data operations for intelligent systems.</p></div>
       <div><h4>Navigate</h4><a href="#services">Services</a><a href="#process">Process</a><a href="#work">Work</a><a href="#about">About</a><a href="careers.html">Careers</a></div>
-      <div><h4>Contact</h4><a href="mailto:lydertronicsai@trainbot.in">lydertronicsai@trainbot.in</a><a href="tel:+917981520897">+91 7981520897</a><span>India · Global delivery</span></div>
+      <div><h4>Contact</h4><a href="mailto:lydertronicsai@trainbot.in">Email our team ↗</a><a href="https://www.linkedin.com/company/lydertronics-ai/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><span>India · Global delivery</span></div>
     </div>
     <div class="shell footer-bottom"><span>© <span data-year></span> Lydertronics. All rights reserved.</span><a href="#home">Back to top ↑</a></div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260906-polish"></script>
 </body>
 </html>
