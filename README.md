@@ -7,3 +7,7 @@ Founded in 2026, Lydertronics specializes in custom electronic design, prototypi
 The Lydertronics project aims to revolutionize the way electronics are integrated into everyday applications. We are leveraging the latest advancements in technology, including IoT, AI, and machine learning, to create smart devices that can connect, learn, and operate independently. Our flagship products include smart sensors, automation systems, and advanced communication devices.
 
 At Lydertronics, we believe in sustainability and are committed to utilizing eco-friendly materials and practices in all our processes. Join us in transforming the future of technology!
+
+### Regression checks
+
+With Node.js 18 or newer, run `node --test tests/careers.test.cjs`. These checks use simulated job sources and require no external requests.

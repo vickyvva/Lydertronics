@@ -126,9 +126,6 @@ updateProcessFill();
 
 document.querySelectorAll('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
 
-// Do not display the company phone number publicly.
-document.querySelectorAll('a[href^="tel:+917981520897"]').forEach(link => link.remove());
-
 function escapeHtml(value = '') {
   return String(value).replace(/[&<>'"]/g, char => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
@@ -255,20 +252,28 @@ function populateJobSelect(jobs) {
   jobSelect.addEventListener('change', updateSelectedJobNote, { once: false });
 }
 
+async function fetchCareerJson(url, options = {}) {
+  const controller = new AbortController();
+  // A stalled source must not leave the whole board waiting indefinitely.
+  const timeout = window.setTimeout(() => controller.abort(), 8000);
+  try {
+    const response = await fetch(url, { ...options, cache: 'no-store', signal: controller.signal });
+    if (!response.ok) throw new Error(`Could not load career jobs (${response.status})`);
+    return await response.json();
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
 async function fetchStaticCareerJobs() {
-  const response = await fetch(`jobs.json?v=${Date.now()}`, { cache: 'no-store' });
-  if (!response.ok) throw new Error(`Could not load jobs.json (${response.status})`);
-  const data = await response.json();
+  const data = await fetchCareerJson(`jobs.json?v=${Date.now()}`);
   return Array.isArray(data.jobs) ? data.jobs : [];
 }
 
 async function fetchIssueCareerJobs() {
-  const response = await fetch('https://api.github.com/repos/vickyvva/Lydertronics/issues?state=open&per_page=100', {
-    headers: { 'Accept': 'application/vnd.github+json' },
-    cache: 'no-store'
+  const issues = await fetchCareerJson('https://api.github.com/repos/vickyvva/Lydertronics/issues?state=open&per_page=100', {
+    headers: { 'Accept': 'application/vnd.github+json' }
   });
-  if (!response.ok) throw new Error(`Could not load GitHub career issues (${response.status})`);
-  const issues = await response.json();
   return Array.isArray(issues) ? issues.map(issueToCareerJob).filter(Boolean) : [];
 }
 
@@ -290,7 +295,7 @@ async function loadCareersJobs() {
   renderJobs(careersJobs);
   populateJobSelect(careersJobs);
 
-  if (!careersJobs.length && jobsGrid) {
+  if (staticResult.status === 'rejected' && issueResult.status === 'rejected' && jobsGrid) {
     jobsGrid.innerHTML = '<div class="jobs-empty">Current opportunities could not be loaded. Please refresh the page or try again later.</div>';
   }
 }
