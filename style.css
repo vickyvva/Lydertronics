@@ -123,3 +123,9 @@ section[id]{scroll-margin-top:100px}
 @media(max-width:1020px) and (min-width:781px){.work-visual{border-bottom:0;border-right:1px solid #29394e}.work-copy{justify-content:center}}
 @media(max-width:780px){.work-grid{gap:24px}.work-copy{padding:24px}.service-card{padding-bottom:28px}}
 @media(prefers-reduced-motion:reduce){.reveal.reveal-pending{opacity:1;transform:none}.work-card:hover,.work-card.reveal.visible:hover,.tilt-card:hover{transform:none}}
+
+/* Supplied company artwork: keep its full proportions and white background. */
+.brand-mark--logo{width:52px;height:48px;flex-shrink:0;border-radius:11px;background:#fff;border:1px solid #ffffff33;box-shadow:0 4px 16px #0002}
+.brand-mark--logo img{display:block;width:100%;height:100%;object-fit:contain}
+.footer-brand .brand-mark--logo{width:62px;height:56px;border-radius:12px}
+@media(max-width:520px){.brand-mark--logo{width:46px;height:42px}.brand{gap:10px}}
