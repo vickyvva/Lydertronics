@@ -31,6 +31,21 @@
       ]
     },
     {
+      "id": "face-data-collection",
+      "title": "Face Data Collection",
+      "role": "Face Data Collection Contributor",
+      "category": "Image Data Collection",
+      "location": "Remote / Project-based",
+      "status": "Open",
+      "responsibilities": [
+        "Submit 4 clear selfies with a neutral facial expression.",
+        "Submit 4 photos showing the required head poses, following the project instructions.",
+        "Submit 16 historical (older, pre-existing) photos.",
+        "Provide all 24 photos in the required format and ensure they meet the project's quality guidelines.",
+        "Submit only your own photos or images you have explicit permission to share, with consent for their use in AI data projects."
+      ]
+    },
+    {
       "id": "rlhf",
       "title": "RLHF / LLM Evaluation",
       "role": "RLHF & LLM Evaluator",
