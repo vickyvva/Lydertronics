@@ -18,6 +18,23 @@ header{position:sticky;top:0;z-index:20;background:#07111feF;border-bottom:1px s
 @media(max-width:560px){.wrap{width:min(100% - 30px,1160px)}.links{gap:12px;font-size:11px}.links a:nth-child(2),.links a:nth-child(3){display:none}.nav{height:68px}.brand img{width:40px;height:40px}.hero{padding:65px 0}.hero h1{letter-spacing:-1.5px}.hero-image{height:235px}.section{padding:60px 0}.cards,.division,.steps,.bullets{grid-template-columns:1fr}.profile{padding:24px}.profile-facts{grid-template-columns:1fr 1fr}}
 @media print{header,.hero-actions,.contact,.print-hide,footer{display:none!important}body{background:#fff;color:#111}.hero,.section,.section.light{background:#fff!important;color:#111!important;padding:28px 0}.hero h1{font-size:34px;color:#111}.hero h1 em{color:#087f99}.lead,.dark-copy,.division p,.profile p{color:#333}.hero-grid,.split{grid-template-columns:1fr 1fr}.hero-image,.split img{height:190px}.cards,.division,.steps{break-inside:avoid}.card{box-shadow:none}.profile{background:#f1f5f8;color:#111}.profile-facts div,.division article{background:#f6f8fa;border-color:#ddd}.profile-facts span,.profile-facts b{color:#111}.section{break-inside:avoid}}
 </style>
+
+<style>
+/* Matching motion language for the company profile page. */
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+header{transition:box-shadow .35s ease,background .35s ease}
+header.is-scrolled{box-shadow:0 12px 35px #0004}
+.btn,.card,.division article,.step,.brand,.links a{transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s cubic-bezier(.22,1,.36,1),border-color .3s ease,color .2s ease,background .3s ease}
+.card:hover,.division article:hover,.step:hover{transform:translateY(-6px);box-shadow:0 22px 48px #06111f1c}
+.card img{transition:transform .8s cubic-bezier(.22,1,.36,1),filter .5s ease}
+.card:hover img{transform:scale(1.045);filter:saturate(1.08)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px #45c8df38}
+.hero-image,.split img{animation:profile-image-in .9s cubic-bezier(.22,1,.36,1) both}
+@keyframes profile-image-in{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.motion-reveal{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.motion-reveal.in-view{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.card,.division article,.step,.brand,.links a,.card img,.hero-image,.split img,.motion-reveal{transition:none!important;animation:none!important;transform:none!important;opacity:1!important}}
+</style>
 </head>
 <body>
 <header><div class="wrap nav"><a class="brand" href="index.html"><img src="image/lydertronics-logo.png" alt="Lydertronics AI logo"><span>Lydertronics<small>AI Data Intelligence</small></span></a><nav class="links" aria-label="Main navigation"><a href="index.html">Home</a><a href="#divisions">Capabilities</a><a href="#use-cases">Use cases</a><a href="#quality">Quality</a><a href="careers.html">Careers</a></nav><button class="btn print-hide" onclick="window.print()">Download profile ↗</button></div></header>
@@ -40,4 +57,20 @@ header{position:sticky;top:0;z-index:20;background:#07111feF;border-bottom:1px s
 </main>
 <footer><div class="wrap foot"><span>© <span id="year"></span> Lydertronics AI. All rights reserved.</span><span>Hyderabad, Telangana, India · lydertronicsai.com</span></div></footer>
 <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+
+<script>
+(() => {
+ const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const header = document.querySelector('header');
+ const syncHeader = () => header && header.classList.toggle('is-scrolled', window.scrollY > 12);
+ window.addEventListener('scroll', syncHeader, {passive:true}); syncHeader();
+ if (reduce || !('IntersectionObserver' in window)) return;
+ const targets = document.querySelectorAll('.section .head,.section > .wrap > .eyebrow,.card,.division article,.split,.step,.profile,.contact .wrap');
+ targets.forEach((el,i) => {el.classList.add('motion-reveal');el.style.transitionDelay = (i%3)*75+'ms';});
+ const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+   if(entry.isIntersecting){entry.target.classList.add('in-view');observer.unobserve(entry.target);}
+ }),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
+ targets.forEach(el=>observer.observe(el));
+})();
+</script>
 </body></html>
