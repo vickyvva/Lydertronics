@@ -3,49 +3,11 @@
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xvzvbgwo';
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const siteHeader = document.getElementById('siteHeader');
-const updateHeader = () => siteHeader?.classList.toggle('scrolled', window.scrollY > 18);
-window.addEventListener('scroll', updateHeader, { passive: true });
-updateHeader();
-
-const navToggle = document.getElementById('navToggle');
-const mainNav = document.getElementById('mainNav');
-if (navToggle && mainNav) {
-  navToggle.addEventListener('click', () => {
-    const open = mainNav.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', String(open));
-    navToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-    navToggle.classList.toggle('open', open);
-  });
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && mainNav.classList.contains('open')) {
-      navToggle.click();
-      navToggle.focus();
-    }
-  });
-  mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-    mainNav.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.setAttribute('aria-label', 'Open navigation');
-    navToggle.classList.remove('open');
-  }));
-}
-
-function scrollToTarget(hash) {
-  const target = document.querySelector(hash);
-  if (!target) return;
-  const offset = (siteHeader?.offsetHeight || 72) + 12;
-  const top = target.getBoundingClientRect().top + window.scrollY - offset;
-  window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-}
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  const href = link.getAttribute('href');
-  if (!href || href === '#') return;
+const serviceSelect = document.getElementById('fservice');
+document.querySelectorAll('[data-service]').forEach(link => {
   link.addEventListener('click', event => {
-    if (!document.querySelector(href)) return;
-    event.preventDefault();
-    scrollToTarget(href);
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    if (serviceSelect) serviceSelect.value = link.dataset.service;
   });
 });
 
@@ -66,39 +28,6 @@ if (!prefersReducedMotion && 'IntersectionObserver' in window && revealItems.len
 } else {
   revealItems.forEach(item => item.classList.add('visible'));
 }
-
-function animateCounter(el) {
-  if (el.dataset.counted === 'true') return;
-  el.dataset.counted = 'true';
-  const target = Number(el.dataset.counter || 0);
-  const suffix = el.dataset.suffix || '';
-  const decimals = String(target).includes('.') ? 1 : 0;
-  if (prefersReducedMotion) {
-    el.textContent = target.toFixed(decimals) + suffix;
-    return;
-  }
-  const duration = 1450;
-  const start = performance.now();
-  const tick = now => {
-    const p = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    el.textContent = (target * eased).toFixed(decimals) + suffix;
-    if (p < 1) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-}
-
-const counters = document.querySelectorAll('[data-counter]');
-if ('IntersectionObserver' in window) {
-  const counterObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      animateCounter(entry.target);
-      counterObserver.unobserve(entry.target);
-    });
-  }, { threshold: .55 });
-  counters.forEach(el => counterObserver.observe(el));
-} else counters.forEach(animateCounter);
 
 // Pause decorative loops off screen and while the tab is hidden.
 const motionSections = [...document.querySelectorAll('.hero, .performance-section, .work-section, .page-hero')];
@@ -173,8 +102,9 @@ function chooseJob(title) {
   if (!jobSelect) return;
   jobSelect.value = title;
   updateSelectedJobNote();
-  scrollToTarget('#apply');
-  window.setTimeout(() => jobSelect.focus({ preventScroll: true }), prefersReducedMotion ? 0 : 550);
+  window.location.hash = 'apply';
+  jobSelect.focus({ preventScroll: true });
+  document.getElementById('apply').scrollIntoView({ block: 'start' });
 }
 
 function renderJobs(jobs) {
@@ -199,7 +129,7 @@ function renderJobs(jobs) {
         <span>Responsibilities</span>
         <ul>${responsibilities.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
       </div>
-      <button class="job-apply" type="button" data-job="${escapeHtml(job.title)}">Apply for this job <b>↗</b></button>
+      <button class="job-apply" type="button" data-job="${escapeHtml(job.title)}">Apply for this job <span class="arrow-up" aria-hidden="true"></span></button>
     </article>`;
   }).join('');
 
@@ -221,6 +151,9 @@ function getIssueSection(body, heading) {
 
 function issueToCareerJob(issue) {
   if (!issue || issue.pull_request || !String(issue.title || '').startsWith('[CAREER JOB]')) return null;
+  const maintainer = ['OWNER', 'MEMBER', 'COLLABORATOR'].includes(issue.author_association);
+  const approved = issue.labels?.some(label => label.name === 'career-approved');
+  if (!maintainer && !approved) return null;
   const body = String(issue.body || '');
   const title = getIssueSection(body, 'Job title') || String(issue.title || '').replace(/^\[CAREER JOB\]\s*/i, '').trim();
   const role = getIssueSection(body, 'Role');
@@ -260,6 +193,7 @@ function mergeCareerJobs(staticJobs, issueJobs) {
 
 function populateJobSelect(jobs) {
   if (!jobSelect) return;
+  const previous = jobSelect.value;
   jobSelect.innerHTML = '<option value="">Choose an open job</option>';
   jobs
     .filter(job => String(job.status || 'Open').toLowerCase() === 'open')
@@ -269,11 +203,12 @@ function populateJobSelect(jobs) {
       option.textContent = `${job.title} — ${job.role}`;
       jobSelect.appendChild(option);
     });
-  jobSelect.addEventListener('change', updateSelectedJobNote, { once: false });
+  jobSelect.value = jobs.some(job => job.title === previous) ? previous : '';
+  updateSelectedJobNote();
 }
 
 async function fetchStaticCareerJobs() {
-  const response = await fetch(`jobs.json?v=${Date.now()}`, { cache: 'no-store' });
+  const response = await fetch('jobs.json', { cache: 'no-cache' });
   if (!response.ok) throw new Error(`Could not load jobs.json (${response.status})`);
   const data = await response.json();
   return Array.isArray(data.jobs) ? data.jobs : [];
@@ -292,24 +227,36 @@ async function fetchIssueCareerJobs() {
 async function loadCareersJobs() {
   if (!jobsGrid && !jobSelect) return;
 
-  const [staticResult, issueResult] = await Promise.allSettled([
-    fetchStaticCareerJobs(),
-    fetchIssueCareerJobs()
-  ]);
+  jobSelect?.addEventListener('change', updateSelectedJobNote);
+  const staticRequest = fetchStaticCareerJobs();
+  const issueRequest = fetchIssueCareerJobs();
+  let localJobs = [];
+  let issueJobs = [];
+  let rendered = false;
 
-  const staticJobs = staticResult.status === 'fulfilled' ? staticResult.value : [];
-  const issueJobs = issueResult.status === 'fulfilled' ? issueResult.value : [];
-
-  if (staticResult.status === 'rejected') console.warn(staticResult.reason);
-  if (issueResult.status === 'rejected') console.warn(issueResult.reason);
-
-  careersJobs = mergeCareerJobs(staticJobs, issueJobs);
-  renderJobs(careersJobs);
-  populateJobSelect(careersJobs);
-
-  if (!careersJobs.length && jobsGrid) {
-    jobsGrid.innerHTML = '<div class="jobs-empty">Current opportunities could not be loaded. Please refresh the page or try again later.</div>';
+  function displayJobs() {
+    const merged = mergeCareerJobs(localJobs, issueJobs);
+    if (rendered && merged.length === careersJobs.length && merged.every((job, i) => job === careersJobs[i])) return;
+    const focusedJob = jobsGrid?.contains(document.activeElement) ? document.activeElement.dataset.job : '';
+    careersJobs = merged;
+    renderJobs(merged);
+    populateJobSelect(merged);
+    if (focusedJob) {
+      const buttons = jobsGrid.querySelectorAll('[data-job]');
+      Array.from(buttons).find(button => button.dataset.job === focusedJob)?.focus({ preventScroll: true });
+    }
+    rendered = true;
   }
+
+  const results = await Promise.allSettled([
+    staticRequest.then(jobs => { localJobs = jobs; if (jobs.length) displayJobs(); }),
+    issueRequest.then(jobs => { issueJobs = jobs; if (jobs.length) displayJobs(); })
+  ]);
+  if (results.every(result => result.status === 'rejected') && jobsGrid) {
+    jobsGrid.innerHTML = '<p class="jobs-empty">Current opportunities could not be loaded. Refresh this page or <a href="mailto:contact@lydertronicsai.com">email our team</a>.</p>';
+    return;
+  }
+  displayJobs();
 }
 loadCareersJobs();
 
@@ -348,7 +295,7 @@ if (contactForm) {
       setStatus(status, 'Thanks — your project brief has been sent. We’ll review it and get back to you.', 'success');
     } catch (error) {
       console.error(error);
-      setStatus(status, 'We could not send the form right now. Please try again or use the “Email our team” link below.', 'error');
+      setStatus(status, 'We could not send the form right now. Please try again or email contact@lydertronicsai.com.', 'error');
     } finally {
       if (button) { button.disabled = false; button.innerHTML = original; }
     }
@@ -375,7 +322,7 @@ if (freelancerForm) {
       setStatus(status, 'Application received. We’ll contact you if your profile matches the selected project.', 'success');
     } catch (error) {
       console.error(error);
-      setStatus(status, 'We could not submit the application. Please try again or use the “Email our team” link below.', 'error');
+      setStatus(status, 'We could not submit the application. Please try again or email contact@lydertronicsai.com.', 'error');
     } finally {
       if (button) { button.disabled = false; button.innerHTML = original; }
     }
