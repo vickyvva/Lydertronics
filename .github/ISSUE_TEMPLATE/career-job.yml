@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Fill in the fields below and submit this issue. While this issue remains open, the job will be shown on the Careers page. Close the issue when the job is no longer available.
+        Fill in the fields below and submit this issue. Open job issues from repository maintainers appear on the Careers page. A maintainer can publish another contributor’s opening by adding the career-approved label. Close the issue when the job is no longer available.
 
   - type: input
     id: job_title

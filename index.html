@@ -11,10 +11,12 @@
   <meta name="theme-color" content="#07111f" />
   <link rel="canonical" href="https://lydertronicsai.com/" />
   <link rel="icon" type="image/png" href="image/lydertronics-logo.png" />
-  <link rel="stylesheet" href="style.css?v=20260906-logo" />
+  <link rel="stylesheet" href="style.css?v=20261125" />
+  <link rel="stylesheet" href="navigation.css?v=20261125">
+  <script defer src="navigation.js?v=20261125"></script>
 </head>
 <body data-page="home">
-  <div class="page-noise" aria-hidden="true"></div>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header" id="siteHeader">
     <div class="shell nav-shell">
       <a class="brand" href="#home" aria-label="Lydertronics home">
@@ -29,77 +31,58 @@
         <a href="#work">Work</a>
         <a href="#about">About</a>
         <a href="careers.html">Careers</a>
-        <a class="nav-cta" href="#contact">Start a project <span>↗</span></a>
+        <a class="nav-cta" href="#contact">Start a project <span class="arrow-up" aria-hidden="true"></span></a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="hero" id="home">
       <div class="hero-grid-bg" aria-hidden="true"></div>
       <div class="hero-orb orb-a" aria-hidden="true"></div>
       <div class="hero-orb orb-b" aria-hidden="true"></div>
       <div class="shell hero-layout">
-        <div class="hero-copy reveal">
-          <div class="status-pill"><span></span> AI data infrastructure &amp; technology services</div>
-          <h1>Building the data infrastructure for <em>intelligent systems.</em></h1>
-          <p class="hero-lede">Human expertise, structured data operations and AI evaluation for research teams and enterprises advancing generative AI, physical AI and intelligent automation.</p>
+        <div class="hero-copy">
+          <p class="hero-kicker">Lydertronics AI <span aria-hidden="true">/</span> Data operations</p>
+          <h1>Data infrastructure for <em>intelligent systems.</em></h1>
+          <p class="hero-lede">We collect and annotate data, evaluate robot behavior and review model responses for AI research teams and enterprises.</p>
           <div class="hero-actions">
-            <a class="button primary magnetic" href="#contact">Start a project <span>↗</span></a>
+            <a class="button primary magnetic" href="#contact">Start a project <span class="arrow-up" aria-hidden="true"></span></a>
             <a class="button ghost" href="#services">Explore capabilities <span>↓</span></a>
           </div>
           <div class="hero-metrics">
-            <div><strong data-counter="97.8" data-suffix="%">0%</strong><span>reported accuracy</span></div>
-            <div><strong data-counter="1000" data-suffix="+">0+</strong><span>datasets delivered</span></div>
-            <div><strong data-counter="24" data-suffix="hr">0hr</strong><span>fast turnaround</span></div>
+            <div><strong>97.8%</strong><span>reported accuracy</span></div>
+            <div><strong>1,000+</strong><span>datasets delivered</span></div>
+            <div><strong>24hr</strong><span>fast turnaround</span></div>
           </div>
         </div>
 
-        <div class="hero-stage reveal" id="heroStage" aria-label="Animated AI data workflow visualization">
-          <div class="stage-glow"></div>
-          <div class="data-console tilt-card">
-            <div class="console-head">
-              <div class="console-dots"><span></span><span></span><span></span></div>
-              <span class="console-label">LYDR / QUALITY ENGINE</span>
-              <span class="live-badge">LIVE</span>
-            </div>
-            <div class="console-body">
-              <div class="quality-core">
-                <div class="quality-ring">
-                  <svg viewBox="0 0 120 120" aria-hidden="true">
-                    <circle cx="60" cy="60" r="48" class="ring-track"></circle>
-                    <circle cx="60" cy="60" r="48" class="ring-value"></circle>
-                  </svg>
-                  <div><strong>99.8</strong><span>QA SCORE</span></div>
-                </div>
-                <div class="pipeline-list">
-                  <div><span>01</span><b>Ingest</b><i class="ok-dot"></i></div>
-                  <div><span>02</span><b>Annotate</b><i class="ok-dot"></i></div>
-                  <div><span>03</span><b>Verify</b><i class="pulse-dot"></i></div>
-                  <div><span>04</span><b>Deliver</b><i></i></div>
-                </div>
-              </div>
-              <div class="signal-panel">
-                <div class="signal-top"><span>Throughput signal</span><b>+18.4%</b></div>
-                <div class="signal-chart" aria-hidden="true">
-                  <span style="--h:38%"></span><span style="--h:54%"></span><span style="--h:46%"></span><span style="--h:67%"></span><span style="--h:60%"></span><span style="--h:82%"></span><span style="--h:72%"></span><span style="--h:91%"></span><span style="--h:84%"></span><span style="--h:96%"></span>
-                  <div class="scan-line"></div>
-                </div>
-                <div class="signal-foot"><span>Human review active</span><span>Quality gate 3/4</span></div>
-              </div>
+        <figure class="frame-demo">
+          <div class="frame-toolbar">
+            <span class="frame-title"><i aria-hidden="true"></i> Frame inspection</span>
+            <fieldset class="frame-modes">
+              <legend class="visually-hidden">Annotation view</legend>
+              <label><input type="radio" name="frame-view" value="source"><span>Source</span></label>
+              <label><input type="radio" name="frame-view" value="labels" checked><span>Labels</span></label>
+            </fieldset>
+          </div>
+          <!-- Workcell photograph by Freek Wolsink, Pexels photo 34207359. -->
+          <div class="inspection-frame">
+            <img src="image/robot-arm.webp" width="1000" height="750" fetchpriority="high" alt="Yellow industrial robot reaching over a workbench with a gripper.">
+            <div class="frame-overlay" role="img" aria-label="Boxes identify the gripper and the base joint">
+              <div class="object-box gripper"><span>Gripper</span></div>
+              <div class="object-box joint"><span>Base joint</span></div>
+              <div class="frame-sweep"></div>
             </div>
           </div>
-          <div class="float-chip chip-1"><span>◉</span> RLHF</div>
-          <div class="float-chip chip-2"><span>⌁</span> LiDAR</div>
-          <div class="float-chip chip-3"><span>◫</span> Vision</div>
-          <div class="float-chip chip-4"><span>≋</span> Audio</div>
-        </div>
+          <figcaption><span>Robotics <i aria-hidden="true">/</i> Object detection</span><small>Example frame</small></figcaption>
+        </figure>
       </div>
 
       <div class="ticker-wrap" aria-label="Capabilities">
         <div class="ticker-track">
-          <span>Physical AI &amp; Robotics</span><i></i><span>RLHF &amp; LLM Evaluation</span><i></i><span>Image &amp; Video Annotation</span><i></i><span>LiDAR &amp; 3D</span><i></i><span>Multimodal Data</span><i></i><span>Audio &amp; Transcription</span><i></i><span>Enterprise AI &amp; Automation</span><i></i>
-          <span>Physical AI &amp; Robotics</span><i></i><span>RLHF &amp; LLM Evaluation</span><i></i><span>Image &amp; Video Annotation</span><i></i><span>LiDAR &amp; 3D</span><i></i><span>Multimodal Data</span><i></i><span>Audio &amp; Transcription</span><i></i><span>Enterprise AI &amp; Automation</span><i></i>
+          <div class="ticker-group"><span>Physical AI &amp; Robotics</span><i></i><span>RLHF &amp; LLM Evaluation</span><i></i><span>Image &amp; Video Annotation</span><i></i><span>LiDAR &amp; 3D</span><i></i><span>Multimodal Data</span><i></i><span>Audio &amp; Transcription</span><i></i><span>Enterprise AI &amp; Automation</span><i></i></div>
+          <div class="ticker-group" aria-hidden="true"><span>Physical AI &amp; Robotics</span><i></i><span>RLHF &amp; LLM Evaluation</span><i></i><span>Image &amp; Video Annotation</span><i></i><span>LiDAR &amp; 3D</span><i></i><span>Multimodal Data</span><i></i><span>Audio &amp; Transcription</span><i></i><span>Enterprise AI &amp; Automation</span><i></i></div>
         </div>
       </div>
     </section>
@@ -111,12 +94,12 @@
           <p>Explore our core delivery services, scoped enterprise solutions and future technology development roadmap.</p>
         </div>
         <div class="service-grid">
-          <article class="service-card reveal"><div class="service-icon">01</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Core services</p><h3>AI Data Solutions</h3><p>Multilingual document, image, audio and video collection; image and video annotation, LiDAR and 3D point clouds, transcription and quality-controlled dataset preparation.</p><div class="tags"><span>Multimodal data</span><span>Annotation &amp; QA</span></div><a href="#contact" aria-label="Discuss AI Data Solutions">Discuss a project <b>↗</b></a></article>
-          <article class="service-card reveal"><div class="service-icon">02</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Core services</p><h3>Physical AI &amp; Robotics</h3><p>Robot task evaluation, pick-and-place assessment, unwanted contact detection, action segmentation and scoped egocentric human-demonstration datasets for embodied AI.</p><div class="tags"><span>Robot evaluation</span><span>Egocentric data</span></div><a href="#contact" aria-label="Discuss Physical AI &amp; Robotics">Discuss a project <b>↗</b></a></article>
-          <article class="service-card reveal"><div class="service-icon">03</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Core services</p><h3>Generative AI &amp; Post-Training</h3><p>RLHF, response ranking, LLM evaluation, instruction-following, structured human feedback and scoped coding, reasoning and agentic evaluation tasks.</p><div class="tags"><span>RLHF &amp; LLMs</span><span>Model evaluation</span></div><a href="#contact" aria-label="Discuss Generative AI &amp; Post-Training">Discuss a project <b>↗</b></a></article>
-          <article class="service-card reveal"><div class="service-icon">04</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Expansion area</p><h3>Software &amp; AI Engineering</h3><p>Project-scoped exploration of software development, AI model integration, data pipelines, APIs and custom tools. Delivery depends on technical requirements and available expertise.</p><div class="tags"><span>AI integration</span><span>Custom software</span></div><a href="#contact" aria-label="Discuss Software &amp; AI Engineering">Discuss a project <b>↗</b></a></article>
-          <article class="service-card reveal"><div class="service-icon">05</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Scoped solutions</p><h3>Enterprise AI &amp; Automation</h3><p>RAG-based knowledge assistants, chatbots, AI agents and workflow automation, with integrations and delivery requirements agreed during discovery.</p><div class="tags"><span>RAG &amp; agents</span><span>Workflow automation</span></div><a href="#contact" aria-label="Discuss Enterprise AI &amp; Automation">Discuss a project <b>↗</b></a></article>
-          <article class="service-card reveal"><div class="service-icon">06</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Future direction</p><h3>AI Research &amp; Infrastructure</h3><p>Our roadmap includes evaluation platforms, reinforcement learning environments, benchmark development and independently licensed datasets. These are planned capabilities, not established products.</p><div class="tags"><span>Research roadmap</span><span>Evaluation tooling</span></div><a href="#contact" aria-label="Discuss AI Research &amp; Infrastructure">Discuss collaboration <b>↗</b></a></article>
+          <article class="service-card reveal"><div class="service-icon">01</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Core services</p><h3>AI Data Solutions</h3><p>Multilingual document, image, audio and video collection; image and video annotation, LiDAR and 3D point clouds, transcription and quality-controlled dataset preparation.</p><div class="tags"><span>Multimodal data</span><span>Annotation &amp; QA</span></div><a href="#contact" data-service="AI Data Solutions" aria-label="Discuss AI Data Solutions">Discuss a project <span class="arrow-up" aria-hidden="true"></span></a></article>
+          <article class="service-card reveal"><div class="service-icon">02</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Core services</p><h3>Physical AI &amp; Robotics</h3><p>Robot task evaluation, pick-and-place assessment, unwanted contact detection, action segmentation and scoped egocentric human-demonstration datasets for embodied AI.</p><div class="tags"><span>Robot evaluation</span><span>Egocentric data</span></div><a href="#contact" data-service="Physical AI &amp; Robotics" aria-label="Discuss Physical AI &amp; Robotics">Discuss a project <span class="arrow-up" aria-hidden="true"></span></a></article>
+          <article class="service-card reveal"><div class="service-icon">03</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Core services</p><h3>Generative AI &amp; Post-Training</h3><p>RLHF, response ranking, LLM evaluation, instruction-following, structured human feedback and scoped coding, reasoning and agentic evaluation tasks.</p><div class="tags"><span>RLHF &amp; LLMs</span><span>Model evaluation</span></div><a href="#contact" data-service="Generative AI &amp; Post-Training" aria-label="Discuss Generative AI &amp; Post-Training">Discuss a project <span class="arrow-up" aria-hidden="true"></span></a></article>
+          <article class="service-card reveal"><div class="service-icon">04</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Expansion area</p><h3>Software &amp; AI Engineering</h3><p>Project-scoped exploration of software development, AI model integration, data pipelines, APIs and custom tools. Delivery depends on technical requirements and available expertise.</p><div class="tags"><span>AI integration</span><span>Custom software</span></div><a href="#contact" data-service="Software &amp; AI Engineering (scope discussion)" aria-label="Discuss Software &amp; AI Engineering">Discuss a project <span class="arrow-up" aria-hidden="true"></span></a></article>
+          <article class="service-card reveal"><div class="service-icon">05</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Scoped solutions</p><h3>Enterprise AI &amp; Automation</h3><p>RAG-based knowledge assistants, chatbots, AI agents and workflow automation, with integrations and delivery requirements agreed during discovery.</p><div class="tags"><span>RAG &amp; agents</span><span>Workflow automation</span></div><a href="#contact" data-service="Enterprise AI &amp; Automation" aria-label="Discuss Enterprise AI &amp; Automation">Discuss a project <span class="arrow-up" aria-hidden="true"></span></a></article>
+          <article class="service-card reveal"><div class="service-icon">06</div><div class="service-line"></div><p class="eyebrow" style="font-size:.67rem;margin:0 0 8px">Future direction</p><h3>AI Research &amp; Infrastructure</h3><p>Our roadmap includes evaluation platforms, reinforcement learning environments, benchmark development and independently licensed datasets. These are planned capabilities, not established products.</p><div class="tags"><span>Research roadmap</span><span>Evaluation tooling</span></div><a href="#contact" data-service="AI Research &amp; Infrastructure (roadmap collaboration)" aria-label="Discuss AI Research &amp; Infrastructure">Discuss collaboration <span class="arrow-up" aria-hidden="true"></span></a></article>
         </div>
       </div>
     </section>
@@ -158,7 +141,7 @@
           <div class="process-cards">
             <article class="process-card reveal"><span class="process-num">01</span><div class="process-icon">⌕</div><h3>Discover</h3><p>Understand data, taxonomy, edge cases, throughput and acceptance criteria.</p></article>
             <article class="process-card reveal"><span class="process-num">02</span><div class="process-icon">◇</div><h3>Pilot</h3><p>Run a production-like sample and calibrate instructions, tooling and QA.</p></article>
-            <article class="process-card reveal"><span class="process-num">03</span><div class="process-icon">↗</div><h3>Scale</h3><p>Expand trained capacity, monitoring and delivery cadence without losing control.</p></article>
+            <article class="process-card reveal"><span class="process-num">03</span><div class="process-icon" aria-hidden="true">↑</div><h3>Scale</h3><p>Expand trained capacity, monitoring and delivery cadence without losing control.</p></article>
             <article class="process-card reveal"><span class="process-num">04</span><div class="process-icon">∞</div><h3>Improve</h3><p>Use error analysis and feedback loops to sharpen the workflow over time.</p></article>
           </div>
         </div>
@@ -220,13 +203,13 @@
           <p class="eyebrow light">ABOUT LYDERTRONICS</p>
           <h2>Human judgment, engineered into the data pipeline.</h2>
           <p>Lydertronics AI is an artificial intelligence, data infrastructure and technology services company based in Hyderabad, India. Our core work spans AI data solutions, physical AI and robotics evaluation, and generative AI post-training. We also scope applied AI solutions and aim to develop our own research and evaluation infrastructure as we grow.</p>
-          <a class="button ghost light-ghost" href="#contact">Talk to our team <span>↗</span></a>
+          <a class="button ghost light-ghost" href="#contact">Talk to our team <span class="arrow-up" aria-hidden="true"></span></a>
         </div>
         <div class="about-stats reveal">
-          <div><strong data-counter="6" data-suffix="+">0+</strong><span>service and growth areas</span></div>
-          <div><strong data-counter="4" data-suffix="">0</strong><span>quality stages per workflow</span></div>
-          <div><strong data-counter="24" data-suffix="hr">0hr</strong><span>fast-response capability</span></div>
-          <div><strong data-counter="100" data-suffix="%">0%</strong><span>human review where it matters</span></div>
+          <div><strong>6+</strong><span>service and growth areas</span></div>
+          <div><strong>4</strong><span>quality stages per workflow</span></div>
+          <div><strong>24hr</strong><span>fast-response capability</span></div>
+          <div><strong>100%</strong><span>human review where it matters</span></div>
         </div>
       </div>
     </section>
@@ -238,17 +221,19 @@
           <h2>Build your next AI project with us.</h2>
           <p>Share your data type, volume, timeline and quality requirements. We’ll help shape a practical pilot and delivery plan.</p>
           <div class="contact-list">
-            <a href="mailto:contact@lydertronicsai.com"><span>Contact</span><strong>Email our team ↗</strong></a>
-            <a href="https://www.linkedin.com/company/lydertronics-ai/" target="_blank" rel="noopener noreferrer"><span>Connect</span><strong>LinkedIn ↗</strong></a>
+            <a href="mailto:contact@lydertronicsai.com"><span>Contact</span><strong>Email our team <span class="arrow-up" aria-hidden="true"></span></strong></a>
+            <a href="https://www.linkedin.com/company/lydertronics-ai/" target="_blank" rel="noopener noreferrer"><span>Connect</span><strong>LinkedIn <span class="arrow-up" aria-hidden="true"></span></strong></a>
             <div><span>Availability</span><strong>Mon–Sat · 9 AM–7 PM IST</strong></div>
           </div>
         </div>
-        <form class="contact-form reveal" id="contactForm" novalidate>
+        <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/xvzvbgwo" method="post">
+          <input type="hidden" name="form_type" value="Project Enquiry">
+          <input type="hidden" name="source" value="Lydertronics Website">
           <div class="form-head"><span>Project brief</span><b>Usually replies within 24 hours</b></div>
           <div class="form-row"><label>Full name<input id="fname" name="name" type="text" autocomplete="name" required /></label><label>Email address<input id="femail" name="email" type="email" autocomplete="email" required /></label></div>
           <label>Service<select id="fservice" name="service" required><option value="">Choose a service</option><option>AI Data Solutions</option><option>Physical AI &amp; Robotics</option><option>Generative AI &amp; Post-Training</option><option>Software &amp; AI Engineering (scope discussion)</option><option>Enterprise AI &amp; Automation</option><option>AI Research &amp; Infrastructure (roadmap collaboration)</option><option>Other</option></select></label>
           <label>Project details<textarea id="fmsg" name="message" rows="6" placeholder="Data type, approximate volume, timeline, target quality..." required></textarea></label>
-          <button class="button primary submit-button magnetic" type="submit">Send project brief <span>↗</span></button>
+          <button class="button primary submit-button magnetic" type="submit">Send project brief <span class="arrow-up" aria-hidden="true"></span></button>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -259,11 +244,11 @@
     <div class="shell footer-grid">
       <div><a class="brand footer-brand" href="#home"><span class="brand-mark brand-mark--logo"><img src="image/lydertronics-logo.png" alt="" width="528" height="480" decoding="async" /></span><span class="brand-copy"><strong>Lydertronics</strong><small>AI Data Intelligence</small></span></a><p>Human expertise. Intelligent infrastructure. Reliable AI.</p></div>
       <div><h4>Navigate</h4><a href="#services">Services</a><a href="#process">Process</a><a href="#work">Work</a><a href="#about">About</a><a href="company-profile.html">Company Profile</a><a href="careers.html">Careers</a></div>
-      <div><h4>Contact</h4><a href="mailto:contact@lydertronicsai.com">Email our team ↗</a><a href="https://www.linkedin.com/company/lydertronics-ai/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><span>India · Global delivery</span></div>
+      <div><h4>Contact</h4><a href="mailto:contact@lydertronicsai.com">Email our team <span class="arrow-up" aria-hidden="true"></span></a><a href="https://www.linkedin.com/company/lydertronics-ai/" target="_blank" rel="noopener noreferrer">LinkedIn <span class="arrow-up" aria-hidden="true"></span></a><span>India · Global delivery</span></div>
     </div>
     <div class="shell footer-bottom"><span>© <span data-year></span> Lydertronics. All rights reserved.</span><a href="#home">Back to top ↑</a></div>
   </footer>
 
-  <script src="script.js?v=20260906-polish"></script>
+  <script src="script.js?v=20261125"></script>
 </body>
 </html>
